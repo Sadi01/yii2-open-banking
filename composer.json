@@ -1,0 +1,14 @@
+{
+  "name": "vendor_name/yii2-open-banking",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "mobithamrah",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  }
+}
