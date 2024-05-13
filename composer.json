@@ -3,12 +3,28 @@
   "description": "description",
   "minimum-stability": "stable",
   "license": "proprietary",
+  "autoload": {
+    "psr-4": { "sadi01\\openbanking\\": "src" }
+  },
   "authors": [
     {
       "name": "mobithamrah",
       "email": "email@example.com"
     }
   ],
+  "config": {
+    "process-timeout": 1800,
+    "fxp-asset": {
+      "enabled": false
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  },
   "require": {
+    "yiisoft/yii2": "~2.0.14",
+  },
+  "extra": {
+    "bootstrap": "sadi01\\openbanking\\Bootstrap"
   }
 }

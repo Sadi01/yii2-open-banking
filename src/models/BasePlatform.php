@@ -33,12 +33,12 @@ class BasePlatform extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('main', 'ID'),
-            'name' => Yii::t('main', 'Name'),
-            'base_url' => Yii::t('main', 'Base Url'),
-            'api_key' => Yii::t('main', 'Api Key'),
-            'file' => Yii::t('main', 'File'),
-            'provider' => Yii::t('main', 'Provider'),
+            'id' => Yii::t('openBanking', 'ID'),
+            'name' => Yii::t('openBanking', 'Name'),
+            'base_url' => Yii::t('openBanking', 'Base Url'),
+            'api_key' => Yii::t('openBanking', 'Api Key'),
+            'file' => Yii::t('openBanking', 'File'),
+            'provider' => Yii::t('openBanking', 'Provider'),
         ];
 
 
@@ -49,10 +49,10 @@ class BasePlatform extends \yii\db\ActiveRecord
     {
         $_items = [
             'Provider' => [
-                self::PROVIDER_FINNOTECH => Yii::t('main', 'Finnotech'),
-                self::PROVIDER_FARABOOM=> Yii::t('main', 'Faraboom'),
-                self::PROVIDER_SHAHIN=> Yii::t('main', 'Shahin'),
-                self::PROVIDER_SHAHKAR=> Yii::t('main', 'Shahkar')
+                self::PROVIDER_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
+                self::PROVIDER_FARABOOM=> Yii::t('openBanking', 'Faraboom'),
+                self::PROVIDER_SHAHIN=> Yii::t('openBanking', 'Shahin'),
+                self::PROVIDER_SHAHKAR=> Yii::t('openBanking', 'Shahkar')
             ],
         ];
 

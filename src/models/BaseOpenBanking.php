@@ -19,15 +19,14 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
 
         ];
 
-
     }
 
     public function attributeLabels()
     {
         return [
-            'platform' => Yii::t('message', 'Platform'),
-            'service' => Yii::t('message', 'Servive'),
-            'object' => Yii::t('message', 'Object'),
+            'platform' => Yii::t('openBanking', 'Platform'),
+            'service' => Yii::t('openBanking', 'Servive'),
+            'object' => Yii::t('openBanking', 'Object'),
         ];
 
 
