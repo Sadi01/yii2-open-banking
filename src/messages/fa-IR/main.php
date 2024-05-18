@@ -1,4 +1,4 @@
 <?php
-[
-'Ob Oauth Clients' => 'کلاینت'
+return [
+    'Ob Oauth Clients' => 'کلاینت'
 ];

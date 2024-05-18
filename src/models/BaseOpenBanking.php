@@ -5,7 +5,6 @@ namespace sadi01\openbanking\models;
 
 class BaseOpenBanking extends \yii\db\ActiveRecord
 {
-
     public $platform;
     public $service;
     public $object;
@@ -18,7 +17,6 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             [['platform', 'service'], 'string'],
 
         ];
-
     }
 
     public function attributeLabels()
@@ -28,8 +26,6 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             'service' => Yii::t('openBanking', 'Servive'),
             'object' => Yii::t('openBanking', 'Object'),
         ];
-
-
     }
 
 }

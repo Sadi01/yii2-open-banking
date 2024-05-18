@@ -19,7 +19,7 @@ class OpenBanking extends Component implements OpenBankingInterface
     {
         if (Yii::$app->has($platform) && method_exists(Yii::$app->$platform, $service)) {
 
-            Yii::$app->$platform->$service();
+            Yii::$app->$platform->$service($body);
 
         } else {
             throw new NotSupportedException('Operation not suported');
