@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 
+
 /**
  * This is the model class for table "{{%ob_request_log}}".
  *
@@ -17,6 +18,7 @@ use yii\behaviors\BlameableBehavior;
  * @property string|null $message
  * @property string|null $transaction_id
  * @property string $request_info
+ * @property string $url
  * @property string $response_info
  * @property int $created_at
  * @property int $created_by
@@ -34,18 +36,18 @@ class ObRequestLog extends \yii\db\ActiveRecord
     const SERVICE_SHABA_TO_DEPOSIT = 2;
     const SERVICE_MATCH_NATIONAL_CODE_ACCOUNT = 3;
     const SERVICE_DEPOSIT_HOLDER = 4;
-    const SERVICE_PAYA= 5;
-    const SERVICE_SATNA= 6;
+    const SERVICE_PAYA = 5;
+    const SERVICE_SATNA = 6;
     const SERVICE_CHECK_INQUIRY_RECEIVER = 7;
     const SERVICE_SHABA_INQUIRY = 8;
     const SERVICE_MATCH_NATIONAL_CODE_MOBILE = 9;
     const SERVICE_CART_TO_SHABA = 10;
-    const SERVICE_BATCH_PAYA  = 11;
+    const SERVICE_BATCH_PAYA = 11;
     const SERVICE_REPORT_PAYA_TRANSACTIONS = 12;
-    const SERVICE_PAYA_TRANSFER  = 13;
-    const SERVICE_CANCLE_PAYA  = 14;
-    const SERVICE_REPORT_SATNA_TRANSFER  = 15;
-    const SERVICE_BATCH_SATNA  = 16;
+    const SERVICE_PAYA_TRANSFER = 13;
+    const SERVICE_CANCLE_PAYA = 14;
+    const SERVICE_REPORT_SATNA_TRANSFER = 15;
+    const SERVICE_BATCH_SATNA = 16;
 
     const SCENARIO_DELETE = 'delete';
 
@@ -63,10 +65,11 @@ class ObRequestLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'service_type', 'status', 'request_info', 'response_info', 'created_at', 'created_by'], 'required'],
+            [['client_id', 'service_type', 'status', 'request_info', 'response_info', 'created_at', 'created_by', 'url'], 'required'],
             [['client_id', 'service_type', 'status', 'created_at', 'created_by'], 'integer'],
             [['request_info', 'response_info'], 'safe'],
             [['message'], 'string', 'max' => 100],
+            [['url'], 'string', 'max' => 255],
             [['transaction_id'], 'string', 'max' => 30],
         ];
     }
@@ -91,6 +94,7 @@ class ObRequestLog extends \yii\db\ActiveRecord
             'status' => Yii::t('openBanking', 'Status'),
             'message' => Yii::t('openBanking', 'Message'),
             'transaction_id' => Yii::t('openBanking', 'Transaction ID'),
+            'url' => Yii::t('openBanking', 'Url'),
             'request_info' => Yii::t('openBanking', 'Request Info'),
             'response_info' => Yii::t('openBanking', 'Response Info'),
             'created_at' => Yii::t('openBanking', 'Created At'),

@@ -24,6 +24,8 @@ use sadi01\openbanking\models\ObRequestLog;
 
     <?= $form->field($model, 'transaction_id')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'url')->textInput() ?>
+
     <?= $form->field($model, 'request_info')->textInput() ?>
 
     <?= $form->field($model, 'response_info')->textInput() ?>

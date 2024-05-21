@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\components\faraboom;
 
+use sadi01\openbanking\models\ObOauthClients;
 use Yii;
 use sadi01\openbanking\components\OpenBanking;
 use sadi01\openbanking\models\Faraboom as FaraboomBaseModel;
@@ -12,10 +13,16 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public $baseUrl = 'https://api.sandbox.faraboom.co/v1/';
     private $model;
 
+    private $client;
+
     public function init()
     {
         parent::init();
         $this->model = new FaraboomBaseModel();
+
+        $this->client = ObOauthClients::find()
+            ->byClient('FARABOOM')
+            ->one();
     }
 
     /*CLIENT-IP-ADDRESS
@@ -26,6 +33,8 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function depositToShaba($data)
     {
+        Authentication::getToken($this->client);
+
         if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
             return Yii::$app->apiClient->get($this->baseUrl . 'deposits', $data, null);
         } else return $this->model->errors;

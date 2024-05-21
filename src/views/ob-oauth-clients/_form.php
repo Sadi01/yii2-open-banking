@@ -51,11 +51,77 @@ use sadi01\openbanking\models\ObOauthClients;
 
             <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
         </div>
+    </div>
+
+    <?php
+
+    if ($platform == ObOauthClients::PLATFORM_FARABOOM) { ?>
+    <div class="row">
+
         <div class="col-sm-4">
 
-            <?= $form->field($model, 'add_on')->textInput() ?>
+            <?= $form->field($model, 'app_key')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'authorization')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'bank_id')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+    <div class="row">
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'client_device_id')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'client_ip_address')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'client_platform_type')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'client_user_agent')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'client_user_id')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'content_type')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'device_id')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class="col-sm-4">
+
+            <?= $form->field($model, 'token_id')->passwordInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+
+
+    <?php } ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('openBanking', 'Save'), ['class' => 'btn btn-success']) ?>

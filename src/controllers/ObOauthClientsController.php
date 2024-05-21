@@ -80,20 +80,19 @@ class ObOauthClientsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($platform)
     {
-        $model = new ObOauthClients();
+        $model = new ObOauthClients(['scenario' => $platform == ObOauthClients::PLATFORM_FARABOOM ? ObOauthClients::SCENARIO_FARABOOM : ObOauthClients::SCENARIO_FINNOTECH]);
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
+
 
         return $this->render('create', [
             'model' => $model,
+            'platform' => $platform,
+
         ]);
     }
 

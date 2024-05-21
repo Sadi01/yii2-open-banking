@@ -27,6 +27,24 @@ class ObOauthClients extends \yii\db\ActiveRecord
     const STATUS_DELETED = 0;
 
     const SCENARIO_DELETE = 'delete';
+    const SCENARIO_FARABOOM = 'faraboom';
+    const SCENARIO_FINNOTECH = 'finnotech';
+
+    const PLATFORM_FARABOOM = 1;
+    const PLATFORM_FINNOTECH = 2;
+
+
+    public ?string $app_key = null;
+    public ?string $authorization = null;
+    public ?string $client_device_id = null;
+    public ?string $bank_id = null;
+    public ?string $client_ip_address = null;
+    public ?string $client_platform_type = null;
+    public ?string $client_user_agent = null;
+    public ?string $client_user_id = null;
+    public ?string $content_type = null;
+    public ?string $device_id = null;
+    public ?string $token_id = null;
 
     /**
      * {@inheritdoc}
@@ -55,6 +73,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
+        $scenarios[self::SCENARIO_FARABOOM] = ['app_key','authorization','bank_id','client_device_id','client_ip_address','client_platform_type','client_user_agent','client_user_id','content_type','device_id','token_id'];
+        $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
 
         return $scenarios;
     }
@@ -75,6 +95,17 @@ class ObOauthClients extends \yii\db\ActiveRecord
             'username' => Yii::t('openBanking', 'Username'),
             'password' => Yii::t('openBanking', 'Password'),
             'add_on' => Yii::t('openBanking', 'Add On'),
+            'app_key' => Yii::t('openBanking', 'App Key'),
+            'authorization' => Yii::t('openBanking', 'Authorization'),
+            'client_device_id' => Yii::t('openBanking', 'Client Device ID'),
+            'bank_id' => Yii::t('openBanking', 'Bank ID'),
+            'client_ip_address' => Yii::t('openBanking', 'Client Ip Address'),
+            'client_platform_type' => Yii::t('openBanking', 'Client Platform Type'),
+            'client_user_agent' => Yii::t('openBanking', 'Client User Agent'),
+            'client_user_id' => Yii::t('openBanking', 'Client User ID'),
+            'content_type' => Yii::t('openBanking', 'Content Type'),
+            'device_id' => Yii::t('openBanking', 'Device ID'),
+            'token_id' => Yii::t('openBanking', 'Token ID'),
         ];
     }
 
@@ -118,7 +149,17 @@ class ObOauthClients extends \yii\db\ActiveRecord
                 'class' => Jsonable::class,
                 'jsonAttributes' => [
                     'add_on' => [
-                        // Your json attributes
+                        'app_key',
+                        'authorization',
+                        'client_device_id',
+                        'bank_id',
+                        'client_ip_address',
+                        'client_platform_type',
+                        'client_user_agent',
+                        'client_user_id',
+                        'content_type',
+                        'device_id',
+                        'token_id',
                     ],
                 ],
             ],

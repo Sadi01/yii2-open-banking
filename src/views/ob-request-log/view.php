@@ -41,6 +41,7 @@ YiiAsset::register($this);
             'status',
             'message',
             'transaction_id',
+            'url',
             'request_info',
             'response_info',
             'created_at:date',

@@ -18,7 +18,7 @@ class ObRequestLogSearch extends ObRequestLog
     {
         return [
             [['id', 'client_id', 'service_type', 'status', 'created_at', 'created_by'], 'integer'],
-            [['message', 'transaction_id', 'request_info', 'response_info'], 'safe'],
+            [['url','message', 'transaction_id', 'request_info', 'response_info'], 'safe'],
         ];
     }
 
@@ -68,6 +68,7 @@ class ObRequestLogSearch extends ObRequestLog
 
         $query->andFilterWhere(['like', 'message', $this->message])
             ->andFilterWhere(['like', 'transaction_id', $this->transaction_id])
+            ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'request_info', $this->request_info])
             ->andFilterWhere(['like', 'response_info', $this->response_info]);
 

@@ -20,9 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="ob-oauth-clients-index card">
     <div class="card-header d-flex justify-content-between">
         <h3><?= Html::encode($this->title) ?></h3>
-        <p>
-            <?= Html::a(Yii::t('openBanking', 'Create Ob Oauth Clients'), ['create'], ['class' => 'btn btn-success']) ?>
-        </p>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+                ثبت خدمات دهنده
+            </button>
+            <ul class="dropdown-menu" style="">
+                <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM] )?>">فرابوم</a></li>
+                <li><a class="dropdown-item" href="">فینوتک</a></li>
+            </ul>
+        </div>
+
     </div>
     <div class="card-body">
         <?php Pjax::begin(); ?>

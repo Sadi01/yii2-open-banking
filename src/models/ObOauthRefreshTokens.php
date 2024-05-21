@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\models;
 
+use common\models\User;
 use Yii;
 use common\behaviors\Jsonable;
 
@@ -11,6 +12,7 @@ use common\behaviors\Jsonable;
  * @property string $refresh_token
  * @property string $client_id
  * @property string $expires
+ * @property int $user_id
  * @property string|null $scope
  * @property string|null $add_on
  *
@@ -37,12 +39,14 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['refresh_token', 'client_id'], 'required'],
+            [['refresh_token', 'client_id','user_id'], 'required'],
             [['expires', 'add_on'], 'safe'],
+            [['user_id'], 'integer'],
             [['refresh_token'], 'string', 'max' => 40],
             [['client_id'], 'string', 'max' => 32],
             [['scope'], 'string', 'max' => 2000],
             [['refresh_token'], 'unique'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -64,6 +68,7 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
             'client_id' => Yii::t('openBanking', 'Client ID'),
             'expires' => Yii::t('openBanking', 'Expires'),
             'scope' => Yii::t('openBanking', 'Scope'),
+            'user_id' => Yii::t('openBanking', 'User ID'),
             'add_on' => Yii::t('openBanking', 'Add On'),
         ];
     }
