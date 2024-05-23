@@ -21,7 +21,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         $this->model = new FaraboomBaseModel();
 
         $this->client = ObOauthClients::find()
-            ->byClient('FARABOOM')
+            ->byClient(ObOauthClients::PLATFORM_FARABOOM)
             ->one();
     }
 
@@ -35,9 +35,23 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     {
         Authentication::getToken($this->client);
 
+        $headers = [];
+        $headers['App-Key'] = $this->client->app_key;
+        $headers['session'] = $this->client->authorization;
+        $headers['Authorization'] = $this->client->authorization;
+        $headers['Bank-Id'] = $this->client->bank_id;
+        $headers['CLIENT-DEVICE-ID'] = $this->client->client_device_id;
+        $headers['CLIENT-IP-ADDRESS'] = $this->client->client_ip_address;
+        $headers['CLIENT-PLATFORM-TYPE'] = $this->client->client_platform_type;
+        $headers['CLIENT-USER-AGENT'] = $this->client->client_user_agent;
+        $headers['CLIENT-USER-ID'] = $this->client->client_user_id;
+        $headers['Content-Type'] = $this->client->content_type;
+        $headers['Device-Id'] = $this->client->device_id;
+        $headers['Token-Id'] = $this->client->token_id;
+
         if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
-            return Yii::$app->apiClient->get($this->baseUrl . 'deposits', $data, null);
-        } else return $this->model->errors;
+            print_r(Yii::$app->apiClient->get($this->client->base_url . '/v1/deposits'. '/'. $data['deposit_id'], $data, $headers));die;
+        } else die('eee');
     }
 
     //$iban

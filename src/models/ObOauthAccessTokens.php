@@ -15,7 +15,7 @@ use common\behaviors\Jsonable;
  * @property string $expires
  * @property int $user_id
  * @property string|null $scope
- * @property string|null $ad_on
+ * @property string|null $add_on
  *
  * @mixin Jsonable;
  */
@@ -25,6 +25,8 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
     const STATUS_DELETED = 0;
 
     const SCENARIO_DELETE = 'delete';
+
+    public ?string $test = null;
 
     /**
      * {@inheritdoc}
@@ -41,7 +43,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
     {
         return [
             [['access_token', 'client_id', 'user_id'], 'required'],
-            [['expires', 'ad_on'], 'safe'],
+            [['expires', 'add_on'], 'safe'],
             [['user_id'], 'integer'],
             [['access_token'], 'string', 'max' => 2048],
             [['client_id'], 'string', 'max' => 32],
@@ -70,7 +72,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
             'expires' => Yii::t('openBanking', 'Expires'),
             'scope' => Yii::t('openBanking', 'Scope'),
             'user_id' => Yii::t('openBanking', 'User ID'),
-            'ad_on' => Yii::t('openBanking', 'Ad On'),
+            'add_on' => Yii::t('openBanking', 'Ad On'),
         ];
     }
 
@@ -81,7 +83,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
     public static function find()
     {
         $query = new ObOauthAccessTokensQuery(get_called_class());
-        return $query->active();
+        return $query;
     }
 
     public static function itemAlias($type, $code = NULL)
@@ -114,6 +116,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
                 'class' => Jsonable::class,
                 'jsonAttributes' => [
                     'add_on' => [
+                        'test'
                         // Your json attributes
                     ],
                 ],

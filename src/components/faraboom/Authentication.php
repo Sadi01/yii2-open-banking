@@ -2,22 +2,25 @@
 
 namespace sadi01\openbanking\components\faraboom;
 
-use common\models\OauthAccessTokens;
+use Yii;
+use sadi01\openbanking\models\ObOauthAccessTokens;
+use sadi01\openbanking\models\ObOauthRefreshTokens;
 use sadi01\openbanking\components\BaseAuthentication;
 use sadi01\openbanking\models\ObOauthClients;
 
 class Authentication extends BaseAuthentication
 {
+    const OAUTH_URL = '/oauth/token';
+
     /**
      * @var ObOauthClients $client
      * */
     public static function getToken($client)
     {
-        $scopes = is_array($scopes) ? implode(',', $scopes) : $scopes;
-        $accessToken = ObOauthAccessTokens::find()->notExpire()->byClientId($client->client_id)->byScope($scopes)->one();
-        $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byClientId($client->client_id)->byScope($scopes)->one();
+        $accessToken = ObOauthAccessTokens::find()->notExpire()->byClientId($client->client_id)->one();
+        $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byClientId($client->client_id)->one();
 
-        if (!$accessToken instanceof OauthAccessTokens && !$refreshToken instanceof OauthRefreshTokens) {
+        if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
 
             $body = array(
                 'grant_type' => 'password',
@@ -25,50 +28,59 @@ class Authentication extends BaseAuthentication
                 'password' => $client->password,
             );
 
-            $headers['App-Key'] = $client->add_on;
-            $headers['Authorization'] = $client->add_on;
-            $headers['Bank-Id'] = $client->add_on;
-            $headers['CLIENT-DEVICE-ID'] = $client->add_on;
-            $headers['CLIENT-IP-ADDRESS'] = $client->add_on;
-            $headers['CLIENT-PLATFORM-TYPE'] = $client->add_on;
-            $headers['CLIENT-USER-AGENT'] = $client->add_on;
-            $headers['CLIENT-USER-ID'] = $client->add_on;
-            $headers['Content-Type'] = $client->add_on;
-            $headers['Device-Id'] = $client->add_on;
-            $headers['Token-Id'] = $client->add_on;
+           // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            $headers['App-Key'] = $client->app_key;
+            $headers['Authorization'] = $client->authorization;
+            $headers['Bank-Id'] = $client->bank_id;
+            $headers['CLIENT-DEVICE-ID'] = $client->client_device_id;
+            $headers['CLIENT-IP-ADDRESS'] = $client->client_ip_address;
+            $headers['CLIENT-PLATFORM-TYPE'] = $client->client_platform_type;
+            $headers['CLIENT-USER-AGENT'] = $client->client_user_agent;
+            $headers['CLIENT-USER-ID'] = $client->client_user_id;
+            $headers['Content-Type'] = $client->content_type;
+            $headers['Device-Id'] = $client->device_id;
+            $headers['Token-Id'] = $client->token_id;
 
-            $response = \Yii::$app->apiClient->post($url,$param,$headers);
-           // $response = $this->execute($path, $params, $headers);
-            if ($response['status'] === 200) {
-                $result = $response['body']->result;
-                $accessToken = new OauthAccessTokens([
-                    'access_token' => $result->access_token,
-                    'token_type' => $result->token_type,
-                    'expires_in' => time() + $result->expires_in,
-                    'scope' => $result->scopes,
+            $response = Yii::$app->apiClient->post(self::getUrl($client->base_url,self::OAUTH_URL), $body, $headers);
+
+            if ($response['status'] == 200) {
+                $result = $response['data'];
+            //    print_r($result);die;
+                $accessToken = new ObOauthAccessTokens([
+                    'access_token' => $result['access_token'],
+                    'client_id' => (string)ObOauthClients::PLATFORM_FARABOOM,
+                    'user_id' => Yii::$app->user->id,
+                    //'token_type' => $result->token_type,
+                    'expires' => date('Y-m-d H:i:s', time() + $result['expires_in']),
+                    'scope' => $result['scope'],
                 ]);
-                $accessToken->save();
+                if(!$accessToken->save()){
+                    print_r($accessToken->errors);
+                    die;
+                }
 
-                $refreshToken = new OauthRefreshTokens([
-                    'refresh_token' => $result->refresh_token,
-                    'expires_in' => time() + $result->expires_in,
-                    'scope' => $result->scopes,
+                $refreshToken = new ObOauthRefreshTokens([
+                    'refresh_token' => $result['refresh_token'],
+                    'user_id' => Yii::$app->user->id,
+                    'client_id' => (string)ObOauthClients::PLATFORM_FARABOOM,
+                    'expires' => date('Y-m-d H:i:s', time() + $result['expires_in']),
+                    'scope' => $result['scope'],
                 ]);
 
                 $refreshToken->save();
 
                 return $accessToken->access_token;
             }
-        } else if ($accessToken instanceof OauthAccessTokens) {
+        } else if ($accessToken instanceof ObOauthAccessTokens) {
             return $accessToken->access_token;
-        } else if ($refreshToken instanceof OauthRefreshTokens) {
-            return $client->refreshToken($refreshToken);
+        } else if ($refreshToken instanceof ObOauthRefreshTokens) {
+            return self::refreshToken($refreshToken, $client);
         }
 
         return null;
     }
 
-    public function refreshToken($refresh_token)
+    public function refreshToken($refresh_token, ObOauthClients $client)
     {
         $path = $this->get_token_path('token');
         $params = array(
@@ -78,18 +90,18 @@ class Authentication extends BaseAuthentication
 
         );
 
-        $headers['Authorization'] = $refresh_token->add_on;
-        $headers['Device-Id'] = $refresh_token->add_on;
-        $headers['CLIENT-IP-ADDRESS'] = $refresh_token->add_on;
-        $headers['CLIENT-PLATFORM-TYPE'] = $refresh_token->add_on;
-        $headers['CLIENT-DEVICE-ID'] = $refresh_token->add_on;
-        $headers['CLIENT-USER-ID'] = $refresh_token->add_on;
-        $headers['CLIENT-USER-AGENT'] = $refresh_token->add_on;
+        $headers['Authorization'] = $client->authorization;
+        $headers['Device-Id'] = $client->device_id;
+        $headers['CLIENT-IP-ADDRESS'] = $client->client_ip_address;
+        $headers['CLIENT-PLATFORM-TYPE'] = $client->client_platform_type;
+        $headers['CLIENT-DEVICE-ID'] = $client->client_device_id;
+        $headers['CLIENT-USER-ID'] = $client->client_user_id;
+        $headers['CLIENT-USER-AGENT'] = $client->client_user_agent;
 
-        $response = \Yii::$app->apiClient->post($url,$param,$headers);
+        $response = Yii::$app->apiClient->post($url, $param, $headers);
         if ($response['status'] === 200) {
             $result = $response['body']->result;
-            $accessToken = new OauthAccessTokens([
+            $accessToken = new ObOauthAccessTokens([
                 'access_token' => $result->access_token,
                 'expires' => time() + $result->expires_in,
                 'scope' => $result->scopes,
@@ -99,6 +111,11 @@ class Authentication extends BaseAuthentication
         }
 
         return null;
+    }
+
+    public static function getUrl($baseUrl, $url)
+    {
+        return 'https://oauth.faraboom.co' . $url;
     }
 
 }

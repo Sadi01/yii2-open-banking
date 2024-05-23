@@ -83,6 +83,7 @@ class ObOauthClientsController extends Controller
     public function actionCreate($platform)
     {
         $model = new ObOauthClients(['scenario' => $platform == ObOauthClients::PLATFORM_FARABOOM ? ObOauthClients::SCENARIO_FARABOOM : ObOauthClients::SCENARIO_FINNOTECH]);
+        $model->client_id = $platform;
 
         if ($model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

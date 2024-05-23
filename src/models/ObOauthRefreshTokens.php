@@ -80,7 +80,7 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
     public static function find()
     {
         $query = new ObOauthRefreshTokensQuery(get_called_class());
-        return $query->active();
+        return $query;
     }
 
     public static function itemAlias($type, $code = NULL)

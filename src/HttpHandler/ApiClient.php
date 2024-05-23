@@ -12,7 +12,7 @@ class ApiClient extends Component
 {
     public $baseUrl;
     public $defaultHeaders = [];
-    public $maxRetries = 3; // Number of retries for failed requests
+    public $maxRetries = 1; // Number of retries for failed requests
     public $timeout = 30; // Request timeout in seconds
 
     private $client;
@@ -53,20 +53,21 @@ class ApiClient extends Component
         return $this->sendRequest('DELETE', $url, $data, $headers);
     }
 
-    private function sendRequest($method, $url, $data, $headers = [])
+    private function sendRequest($method, $url, $data = [], $headers = [])
     {
         $attempt = 0;
         while ($attempt < $this->maxRetries) {
             $attempt++;
             try {
                 $request = $this->client->createRequest()
+                    ->setFormat(Client::FORMAT_URLENCODED)
                     ->setMethod($method)
                     ->setUrl($url)
-                    ->setData($data);
-                   // ->addHeaders(array_merge($this->defaultHeaders, $headers));
+                    ->setData($data)
+                    ->addHeaders($headers);
 
                 $response = $request->send();
-                $this->logRequest($method, $url, $data, $response);
+                $this->logRequest($method, $url, $data, $response,$headers);
 
                 if ($response->isOk) {
                     return [
@@ -76,7 +77,7 @@ class ApiClient extends Component
                     ];
                 } else {
                     Yii::error("API request failed: " . $response->statusCode . ' - ' );
-                  //  throw new ApiException('API request failed', $response->statusCode, $response->data);
+                    throw new \sadi01\openbanking\HttpHandler\ApiException('API request failed', $response->statusCode, $response->data);
                 }
             } catch (Exception $e) {
                 Yii::error("API request exception: " . $e->getMessage());
@@ -87,12 +88,13 @@ class ApiClient extends Component
         }
     }
 
-    private function logRequest($method, $url, $data, $response)
+    private function logRequest($method, $url, $data, $response,$headers)
     {
-        Yii::info([
+        Yii::error([
             'method' => $method,
             'url' => $url,
             'data' => $data,
+            'headers' => $headers,
             'response' => $response->data,
             'status' => $response->statusCode,
         ], 'apiClient');

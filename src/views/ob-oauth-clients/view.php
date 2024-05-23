@@ -38,7 +38,6 @@ YiiAsset::register($this);
                 'client_secret',
                 'grant_types',
                 'scope',
-                'provider',
                 'username',
                 'password',
                 //'add_on',

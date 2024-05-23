@@ -18,7 +18,7 @@ class ObOauthClientsSearch extends ObOauthClients
     {
         return [
             [['id'], 'integer'],
-            [['client_id', 'base_url', 'client_secret', 'grant_types', 'scope', 'provider', 'username', 'password', 'add_on'], 'safe'],
+            [['client_id', 'base_url', 'client_secret', 'grant_types', 'scope', 'username', 'password', 'add_on'], 'safe'],
         ];
     }
 
@@ -66,7 +66,6 @@ class ObOauthClientsSearch extends ObOauthClients
             ->andFilterWhere(['like', 'client_secret', $this->client_secret])
             ->andFilterWhere(['like', 'grant_types', $this->grant_types])
             ->andFilterWhere(['like', 'scope', $this->scope])
-            ->andFilterWhere(['like', 'provider', $this->provider])
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like', 'add_on', $this->add_on]);

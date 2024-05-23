@@ -29,6 +29,9 @@ class Bootstrap implements BootstrapInterface
             'apiClient' => [
                 'class' => 'sadi01\openbanking\HttpHandler\ApiClient',
             ],
+            'apiException' => [
+                'class' => 'sadi01\openbanking\HttpHandler\ApiException',
+            ],
             'faraboom' => [
                 'class' => 'sadi01\openbanking\components\faraboom\Faraboom',
             ],

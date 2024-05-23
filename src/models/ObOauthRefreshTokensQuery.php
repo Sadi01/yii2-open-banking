@@ -41,4 +41,9 @@ class ObOauthRefreshTokensQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere(['like', ObOauthRefreshTokens::tableName() . '.scope', $scope]);
     }
+
+    public function notExpire()
+    {
+        return $this->andWhere(['>', ObOauthRefreshTokens::tableName() . '.expires', date('Y-m-d H:i:s', time())]);
+    }
 }

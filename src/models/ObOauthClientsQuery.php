@@ -31,4 +31,9 @@ class ObOauthClientsQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    public function byClient($client_id)
+    {
+        return $this->andWhere([ObOauthClients::tableName() . '.client_id' => $client_id]);
+    }
 }

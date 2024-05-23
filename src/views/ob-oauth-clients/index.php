@@ -22,11 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <h3><?= Html::encode($this->title) ?></h3>
 
         <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                 ثبت خدمات دهنده
             </button>
             <ul class="dropdown-menu" style="">
-                <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM] )?>">فرابوم</a></li>
+                <li><a class="dropdown-item"
+                       href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a>
+                </li>
                 <li><a class="dropdown-item" href="">فینوتک</a></li>
             </ul>
         </div>
@@ -42,13 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
-                'client_id',
+                //'id',
+                [
+                    'attribute' => 'client_id',
+                    'value' => function ($model) {
+                        return ObOauthClients::itemAlias('Client', $model->client_id);
+                    }
+                ],
                 'base_url:url',
-                'client_secret',
-                'grant_types',
+                //'client_secret',
+                // 'grant_types',
                 //'scope',
-                //'provider',
                 //'username',
                 //'password',
                 //'add_on',

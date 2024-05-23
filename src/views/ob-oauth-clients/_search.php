@@ -32,8 +32,6 @@ use sadi01\openbanking\models\ObOauthClients;
 
     <?php // echo $form->field($model, 'scope') ?>
 
-    <?php // echo $form->field($model, 'provider') ?>
-
     <?php // echo $form->field($model, 'username') ?>
 
     <?php // echo $form->field($model, 'password') ?>

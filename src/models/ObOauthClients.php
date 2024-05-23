@@ -14,7 +14,6 @@ use common\behaviors\Jsonable;
  * @property string|null $client_secret
  * @property string $grant_types
  * @property string|null $scope
- * @property string $provider
  * @property string|null $username
  * @property string|null $password
  * @property string|null $add_on
@@ -60,9 +59,10 @@ class ObOauthClients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'base_url', 'grant_types', 'provider'], 'required'],
+            [['client_id', 'base_url'], 'required'],
+            [['client_id', 'base_url', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'content_type', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
             [['add_on'], 'safe'],
-            [['client_id', 'client_secret', 'provider'], 'string', 'max' => 32],
+            [['client_id', 'client_secret'], 'string', 'max' => 32],
             [['base_url'], 'string', 'max' => 255],
             [['grant_types', 'username'], 'string', 'max' => 100],
             [['scope', 'password'], 'string', 'max' => 2000],
@@ -73,7 +73,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
-        $scenarios[self::SCENARIO_FARABOOM] = ['app_key','authorization','bank_id','client_device_id','client_ip_address','client_platform_type','client_user_agent','client_user_id','content_type','device_id','token_id'];
+        $scenarios[self::SCENARIO_FARABOOM] = ['client_id', 'base_url', 'grant_types', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'content_type', 'device_id', 'token_id'];
         $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
 
         return $scenarios;
@@ -91,7 +91,6 @@ class ObOauthClients extends \yii\db\ActiveRecord
             'client_secret' => Yii::t('openBanking', 'Client Secret'),
             'grant_types' => Yii::t('openBanking', 'Grant Types'),
             'scope' => Yii::t('openBanking', 'Scope'),
-            'provider' => Yii::t('openBanking', 'Provider'),
             'username' => Yii::t('openBanking', 'Username'),
             'password' => Yii::t('openBanking', 'Password'),
             'add_on' => Yii::t('openBanking', 'Add On'),
@@ -134,6 +133,10 @@ class ObOauthClients extends \yii\db\ActiveRecord
                 self::STATUS_ACTIVE => '#23a665',
                 self::STATUS_DELETED => '#ff5050',
             ],
+            'Client' => [
+                self::PLATFORM_FARABOOM => Yii::t('openBanking', 'Faraboom'),
+                self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech')
+            ],
         ];
 
         if (isset($code))
@@ -141,6 +144,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
         else
             return isset($_items[$type]) ? $_items[$type] : false;
     }
+
 
     public function behaviors()
     {
