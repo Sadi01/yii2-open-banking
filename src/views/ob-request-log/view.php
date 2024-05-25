@@ -20,36 +20,37 @@ YiiAsset::register($this);
         <p>
             <?= Html::a(Yii::t('openBanking', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('openBanking', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-            'confirm' => Yii::t('openBanking', 'Are you sure you want to delete this item?'),
-            'method' => 'post',
-            ],
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Yii::t('openBanking', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
             ]) ?>
         </p>
     </div>
     <div class="card-body">
         <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-                  //  'id',
-            'client_id',
-            [
-                    'attribute'=>'service_type',
-                'value'=> ObRequestLog::itemAlias('ServiceType',$model->service_type),
+            'model' => $model,
+            'attributes' => [
+                //  'id',
+                'client_id',
+                [
+                    'attribute' => 'service_type',
+                    'value' => ObRequestLog::itemAlias('ServiceType', $model->service_type),
+                ],
+                'status',
+                'message',
+                'transaction_id',
+                'url',
+                'headers',
+                'data',
+                'response',
+                'created_at:date',
+                [
+                    'attribute' => 'created_by',
+                    'value' => $model->createdBy->username,
+                ]
             ],
-            'status',
-            'message',
-            'transaction_id',
-            'url',
-            'request_info',
-            'response_info',
-            'created_at:date',
-            [
-                    'attribute'=> 'created_by',
-                'value'=>$model->createdBy->username,
-            ]
-        ],
         ]) ?>
     </div>
 </div>

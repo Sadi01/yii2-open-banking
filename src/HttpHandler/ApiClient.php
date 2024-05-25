@@ -1,6 +1,8 @@
 <?php
+
 namespace sadi01\openbanking\HttpHandler;
 
+use sadi01\openbanking\models\ObRequestLog;
 use Yii;
 use yii\base\Component;
 use yii\httpclient\Client;
@@ -12,7 +14,7 @@ class ApiClient extends Component
 {
     public $baseUrl;
     public $defaultHeaders = [];
-    public $maxRetries = 1; // Number of retries for failed requests
+    public $maxRetries = 1;
     public $timeout = 30; // Request timeout in seconds
 
     private $client;
@@ -32,42 +34,42 @@ class ApiClient extends Component
         ]);
     }
 
-    public function get($url, $params = [], $headers = [])
+    public function get($url, $params = [], $headers = [], $clientId, $serviceType)
     {
-        $response = $this->sendRequest('GET', $url, $params, $headers);
+        $response = $this->sendRequest('GET', $url, $params, $headers, $clientId, $serviceType);
         return $response;
     }
 
-    public function post($url, $data = [], $headers = [])
+    public function post($url, $data = [], $headers = [], $clientId, $serviceType)
     {
-        return $this->sendRequest('POST', $url, $data, $headers);
+        return $this->sendRequest('POST', $url, $data, $headers, $clientId, $serviceType);
     }
 
-    public function put($url, $data = [], $headers = [])
+    public function put($url, $data = [], $headers = [], $clientId, $serviceType)
     {
-        return $this->sendRequest('PUT', $url, $data, $headers);
+        return $this->sendRequest('PUT', $url, $data, $headers, $clientId, $serviceType);
     }
 
-    public function delete($url, $data = [], $headers = [])
+    public function delete($url, $data = [], $headers = [], $clientId, $serviceType)
     {
-        return $this->sendRequest('DELETE', $url, $data, $headers);
+        return $this->sendRequest('DELETE', $url, $data, $headers, $clientId, $serviceType);
     }
 
-    private function sendRequest($method, $url, $data = [], $headers = [])
+    private function sendRequest($method, $url, $data = [], $headers = [], $clientId, $serviceType)
     {
         $attempt = 0;
         while ($attempt < $this->maxRetries) {
             $attempt++;
             try {
                 $request = $this->client->createRequest()
-                    ->setFormat(Client::FORMAT_URLENCODED)
+                    ->setFormat(isset($headers['Content-Type']) ? $headers['Content-Type'] : Client::FORMAT_JSON)
                     ->setMethod($method)
                     ->setUrl($url)
                     ->setData($data)
                     ->addHeaders($headers);
 
                 $response = $request->send();
-                $this->logRequest($method, $url, $data, $response,$headers);
+                $this->logRequest($method, $url, $data, $response, $headers, $clientId, $serviceType);
 
                 if ($response->isOk) {
                     return [
@@ -76,8 +78,14 @@ class ApiClient extends Component
                         'data' => $response->data,
                     ];
                 } else {
-                    Yii::error("API request failed: " . $response->statusCode . ' - ' );
-                    throw new \sadi01\openbanking\HttpHandler\ApiException('API request failed', $response->statusCode, $response->data);
+                    return [
+                        'success' => false,
+                        'status' => $response->statusCode,
+                        'data' => $response->data
+                    ];
+
+                    /*Yii::error("API request failed: " . $response->statusCode . ' - ' );
+                    throw new \sadi01\openbanking\HttpHandler\ApiException('API request failed', $response->statusCode, $response->data);*/
                 }
             } catch (Exception $e) {
                 Yii::error("API request exception: " . $e->getMessage());
@@ -88,15 +96,24 @@ class ApiClient extends Component
         }
     }
 
-    private function logRequest($method, $url, $data, $response,$headers)
+    private function logRequest($method, $url, $data, $response, $headers, $clientId, $serviceType)
     {
-        Yii::error([
-            'method' => $method,
-            'url' => $url,
-            'data' => $data,
-            'headers' => $headers,
-            'response' => $response->data,
+        $model = new ObRequestLog([
             'status' => $response->statusCode,
-        ], 'apiClient');
+            'url' => $url,
+            'method' => $method,
+            'data' => json_encode($data, JSON_UNESCAPED_UNICODE),
+            'headers' => json_encode($headers, JSON_UNESCAPED_UNICODE),
+            'response' => json_encode($response->data, JSON_UNESCAPED_UNICODE),
+            'client_id' => $clientId,
+            'service_type' => $serviceType,
+            'message' => '',
+            'transaction_id' => null,
+        ]);
+
+        if (!$model->save()) {
+            print_r($model->errors);
+            die;
+        }
     }
 }

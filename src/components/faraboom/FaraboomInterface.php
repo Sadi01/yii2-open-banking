@@ -18,6 +18,14 @@ interface FaraboomInterface
     /*$source_deposit_number,$iban_number,$owner_name,$amount,$transfer_description,$customer_number,$description,$factor_number,$additional_document_desc,$transaction_reason,$pay_id*/
     public function paya($data);
 
+    //$source_deposit,$destination_deposit,$amount,$customer_number,$source_comment,$destination_comment,$pay_id,$reference_number,$additional_document_desc,$transaction_reason
+    public function internalTransfer($data);
+
+    //$source_deposit_number,$destination_batch_transfers,$ignore_error,$customer_number,$source_description,$additional_document_desc,$signers,$transaction_reason
+    public function batchInternalTransfer($data);
+
+    public function deposits($data);
+
     /*$amount,$source_deposit_number,$receiver_name,$receiver_family,$destination_iban_number,$customer_number,$receiver_phone_number,$factor_number,$description,$tranaction_reason,$pay_id*/
     public function satna($data);
 

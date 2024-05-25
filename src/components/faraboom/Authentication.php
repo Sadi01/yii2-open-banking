@@ -7,6 +7,7 @@ use sadi01\openbanking\models\ObOauthAccessTokens;
 use sadi01\openbanking\models\ObOauthRefreshTokens;
 use sadi01\openbanking\components\BaseAuthentication;
 use sadi01\openbanking\models\ObOauthClients;
+use yii\httpclient\Client;
 
 class Authentication extends BaseAuthentication
 {
@@ -37,11 +38,11 @@ class Authentication extends BaseAuthentication
             $headers['CLIENT-PLATFORM-TYPE'] = $client->client_platform_type;
             $headers['CLIENT-USER-AGENT'] = $client->client_user_agent;
             $headers['CLIENT-USER-ID'] = $client->client_user_id;
-            $headers['Content-Type'] = $client->content_type;
+            $headers['Content-Type'] = Client::FORMAT_URLENCODED;
             $headers['Device-Id'] = $client->device_id;
             $headers['Token-Id'] = $client->token_id;
 
-            $response = Yii::$app->apiClient->post(self::getUrl($client->base_url,self::OAUTH_URL), $body, $headers);
+            $response = Yii::$app->apiClient->post(self::getUrl($client->base_url,self::OAUTH_URL), $body, $headers,ObOauthClients::PLATFORM_FARABOOM,1);
 
             if ($response['status'] == 200) {
                 $result = $response['data'];
@@ -50,7 +51,6 @@ class Authentication extends BaseAuthentication
                     'access_token' => $result['access_token'],
                     'client_id' => (string)ObOauthClients::PLATFORM_FARABOOM,
                     'user_id' => Yii::$app->user->id,
-                    //'token_type' => $result->token_type,
                     'expires' => date('Y-m-d H:i:s', time() + $result['expires_in']),
                     'scope' => $result['scope'],
                 ]);

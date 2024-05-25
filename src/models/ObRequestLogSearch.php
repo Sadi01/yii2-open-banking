@@ -18,7 +18,7 @@ class ObRequestLogSearch extends ObRequestLog
     {
         return [
             [['id', 'client_id', 'service_type', 'status', 'created_at', 'created_by'], 'integer'],
-            [['url','message', 'transaction_id', 'request_info', 'response_info'], 'safe'],
+            [['url','message', 'transaction_id', 'data', 'response','headers','method'], 'safe'],
         ];
     }
 
@@ -62,6 +62,8 @@ class ObRequestLogSearch extends ObRequestLog
             'client_id' => $this->client_id,
             'service_type' => $this->service_type,
             'status' => $this->status,
+            'method' => $this->method,
+            'headers' => $this->headers,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
         ]);
@@ -69,8 +71,8 @@ class ObRequestLogSearch extends ObRequestLog
         $query->andFilterWhere(['like', 'message', $this->message])
             ->andFilterWhere(['like', 'transaction_id', $this->transaction_id])
             ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'request_info', $this->request_info])
-            ->andFilterWhere(['like', 'response_info', $this->response_info]);
+            ->andFilterWhere(['like', 'data', $this->data])
+            ->andFilterWhere(['like', 'response', $this->response]);
 
         return $dataProvider;
     }
