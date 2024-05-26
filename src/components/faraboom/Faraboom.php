@@ -39,7 +39,8 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     /**
      * @param array $data The data array containing:
-     *     - string 'iban' => The Shaba number value.
+     *     - string 'iban' => شماره شبا.
+     * @return mixed The result of the processing.
      * */
     public function shabaToDeposit($data)
     {
@@ -48,7 +49,13 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         } else return $this->model->errors;
     }
 
-//    $national_code, $account
+    /**
+     * @param array $data The data array containing:
+     *     - string 'national_code' => شماره ملی.
+     *     - string 'account' => شماره حساب.
+     * @return mixed The result of the processing.
+     * */
+
     public function matchNationalCodeAccount($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT)) {
@@ -56,7 +63,12 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         } else return $this->model->errors;
     }
 
-// $deposit_number
+    /**
+     * @param array $data The data array containing:
+     *     - string 'deposit_number' => شماره سپرده.
+     * @return mixed The result of the processing.
+     * */
+
     public function depositHolder($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT)) {
@@ -64,7 +76,22 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         } else return $this->model->errors;
     }
 
-    //$source_deposit_number, $iban_number, $owner_name, $amount, $transfer_description, $customer_number, $description, $factor_number, $additional_document_desc, $transaction_reason, $pay_id
+    /**
+     * @param array $data The data array containing:
+     *     - string 'source_deposit_number' => شماره حساب مبدا.
+     *     - string 'iban_number' => شماره شبا مقصد.
+     *     - string 'owner_name' => نام صاحب سپرده مقصد.
+     *     - Decimal 'amount' => 1.00=حداقل مقدار BigDecimal مبلغ انتقال وجه پایا نوع.
+     *     - ?string 'transfer_description' => شرح انتقال
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?string 'description' => توضیحات
+     *     - ?string 'factor_number' => شماره فاکتور
+     *     - ?string 'additional_document_desc' => توضیحی های اضافه
+     *     - ?enum 'transaction_reason' => [POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
+     *     - ?string 'pay_id' => شناسه پرداخت
+     * @return mixed The result of the processing.
+     * */
+
     public function paya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_PAYA)) {
@@ -72,30 +99,75 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         } else return $this->model->errors;
     }
 
-    //$source_deposit,$destination_deposit,$amount,$customer_number,$source_comment,$destination_comment,$pay_id,$reference_number,$additional_document_desc,$transaction_reason
+    /**
+     * @param array $data The data array containing:
+     *     - string 'source_deposit' => سپرده مبدا
+     *     - string 'destination_deposit' => شماره سپرده مقصد
+     *     - decimal 'amount' => مبلغ انتقال وجه حداقل مقدار =1.00
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?string 'source_comment' => شرحی توسط انتقال دهنده وجه وارد می شود
+     *     - ?string 'destination_comment' => شرحی که پس از انتقال وجه ، توسط شخصی که دریافت کننده وجه است قابل رویت است
+     *     - ?string 'pay_id' => شناسه پرداخت
+     *     - ?string 'reference_number' => شماره پیگیری توسط خود کاربر وارد می شود و مسئولیت یکتا بودن آن به عهده خود اوست.
+     * کاربرد آن در زمان جستجوی تراکنش هایی است که دارای آن شماره پیگیری هستند
+     *     - ?string 'additional_document_desc' =>
+     *     - ?enum 'transaction_reason' => [POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function internalTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_INTERNAL_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, ObRequestLog::SERVICE_INTERNAL_TRANSFER, $this->baseUrl . 'deposits/transfer/normal', $data, $this->getHeaders($token));
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, ObRequestLog::SERVICE_INTERNAL_TRANSFER, $this->baseUrl . 'deposits/transfer/normal', $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
-//$source_deposit_number,$destination_batch_transfers,$ignore_error,$customer_number,$source_description,$additional_document_desc,$signers,$transaction_reason
+    /**
+     * @param array $data The data array containing:
+     *     - string 'source_deposit_number' => سپرده مبدا
+     *     - array 'destination_batch_transfers' => اطلاعات سپرده های مقصد
+     *     - boolean 'ignore_error' =>
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?string 'source_description' => یادداشت مربوط به سپرده مبدا است. این یادداشت در صورتحساب سپرده مبدا ظاهر میشود
+     *     - ?string 'additional_document_desc' =>
+     *     - ?array 'signers' =>
+     *     - ?enum 'transaction_reason' =>[POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function batchInternalTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_INTERNAL_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, ObRequestLog::SERVICE_BATCH_INTERNAL_TRANSFER, $this->baseUrl . 'deposits/transfer/batch', $data, $this->getHeaders($token));
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, ObRequestLog::SERVICE_BATCH_INTERNAL_TRANSFER, $this->baseUrl . 'deposits/transfer/batch', $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
     public function deposits($data)
     {
         // if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSITS)) {
-        return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, ObRequestLog::SERVICE_DEPOSITS, $this->baseUrl . 'deposits', $data, $this->getHeaders($token));
+        return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, ObRequestLog::SERVICE_DEPOSITS, $this->baseUrl . 'deposits', $data, $this->getHeaders());
         //  } else return $this->model->errors;
     }
 
-    //$amount, $source_deposit_number, $receiver_name, $receiver_family, $destination_iban_number, $customer_number, $receiver_phone_number, $factor_number, $description, $tranaction_reason, $pay_id
+    /**
+     * @param array $data The data array containing:
+     *     - decimal 'amount' => حداقل مقدار =150000000.00,BigDecimal مبلغ از نوع
+     *     - string 'source_deposit_number' => شماره سپرده مبدا
+     *     - string 'receiver_name' => نام دریافت کننده
+     *     - string 'receiver_family' => نام خانوداگی دریافت کننده
+     *     - string 'destination_iban_number' => شبای مقصد
+     *     - ?string 'customer_number' =>شماره مشتری
+     *     - ?string 'receiver_phone_number' => شماره تلفن دریافت کننده
+     *     - ?string 'factor_number' => شماره فاکتور
+     *     - ?string 'description' => توضیحات
+     *     - ?enum 'tranaction_reason' => [POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
+     *     - ?string 'pay_id' => شناسه پرداخت
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function satna($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SATNA)) {
@@ -104,7 +176,14 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-    //$sayad_id, $customer_number
+    /**
+     * @param array $data The data array containing:
+     *     - string 'sayad_id' => نام شخص
+     *     - ?string 'customer_number' => شماره مشتری
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function checkinquiryReceiver($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SATNA)) {
@@ -113,7 +192,13 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-//$shaba_number
+    /**
+     * @param array $data The data array containing:
+     *     - string 'shaba_number' => شماره شبا
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function shabainquiry($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_INQUIRY)) {
@@ -122,7 +207,14 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-    //$national_code, $mobile
+    /**
+     * @param array $data The data array containing:
+     *     - string 'national_code' => شماره ملی
+     *     - string 'mobile' =>
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function matchNationalCodeMobile($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_MOBILE)) {
@@ -131,7 +223,13 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-    //$pan
+    /**
+     * @param array $data The data array containing:
+     *     - string 'pan' => شماره کارت
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function cartToShaba($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_CART_TO_SHABA)) {
@@ -140,8 +238,19 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - ?string 'transfer_description' => شرح انتقال
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?string 'source_deposit_number' => شماره سپرده مبدا
+     *     - ?boolean 'ignore_error' => این فیلد مشخص می کند که اگر در انجام یک تراکنس خطایی رخ داد از انجام بقیه تراکنش ها صرف نظر کند یا خیر
+     *     - ?array 'transactions' =>
+     *     - ?string 'additional_document_desc' =>
+     *     - ?enum 'transaction_reason' => [POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
+     *
+     * @return mixed The result of the processing.
+     * */
 
-    //$transfer_description, $customer_number, $source_deposit_number, $ignore_error, $transactions, $additional_document_desc, $transaction_reason
     public function batchPaya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_PAYA)) {
@@ -150,7 +259,31 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-    //$source_deposit_iban, $transfer_description, $customer_number, $offset, $length, $reference_id, $traco_no, $transaction_id, $from_register_date, $to_register_date, $from_issue_date, $To_issue_date, $from_transaction_amount, $to_transaction_amount, $iban_number, $iban_owner_name, $factor_number, $description, $include_transaction_status
+    /**
+     * @param array $data The data array containing:
+     *     - ?string 'source_deposit_iban' => شماره شبای سپرده مبد
+     *     - ?string 'transfer_description' => شرح انتقال
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?int64 'offset' =>  long شماره اولین رکورد بازگشتی از نوع
+     *     - ?int64 'length' =>  long تعداد رکورد بازگشتی از نوع
+     *     - ?string 'reference_id' =>شماره پیگیری انتقال وجه پایا
+     *     - ?string 'traco_no' => کد یکتا برای پیگیری
+     *     - ?string 'transaction_id' => شماره پیگیری تراکنش
+     *     - ?string 'from_register_date' => از تاریخ ثبت انتقال وجه پایا
+     *     - ?string 'to_register_date' => تا تاریخ ثبت انتقال وجه پایا
+     *     - ?string 'from_issue_date' => از تاریخ انجام انتقال وجه پایا
+     *     - ?string 'To_issue_date' => تا تاریخ انجام انتقال وجه پایا
+     *     - ?decimal 'from_transaction_amount' => حداقل مبلغ انتقال وجه پایا
+     *     - ?decimal 'to_transaction_amount' => حداکثر مبلغ انتقال وجه پایا
+     *     - ?string 'iban_number' => آی بن شماره سپرده مقصد
+     *     - ?string 'iban_owner_name' => نام صاحب سپرده مقصد
+     *     - ?string 'factor_number' => شماره فاکتور انتقال وجه پایا
+     *     - ?string 'description' => شرح انتقال وجه پایا
+     *     - ?array 'include_transaction_status' => [READY_FOR_PROCESS, SUSPENDED, CANCELED, PROCESS_FAIL, READY_TO_TRANSFER, TRANSFERRED, SETTLED, NOT_SETTLED, REJECTED, UNKNOWN]
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function reportPayaTransactions($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSACTIONS)) {
@@ -159,7 +292,31 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-    //$source_deposit_iban, $transfer_description, $customer_number, $offset, $length, $from_transaction_amount, $to_transaction_amount, $reference_id, $trace_no, $destination_iban_number, $destination_owner_name, $from_register_date, $to_register_date, $from_issue_date, $to_issue_date, $description, $factor_number, $status_set, $transaction_status_set
+    /**
+     * @param array $data The data array containing:
+     *     - ?string 'source_deposit_iban' => شماره شبای سپرده مبدأ
+     *     - ?string 'transfer_description' => شرح انتقال
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?int64 'offset' =>  long شماره اولین رکورد بازگشتی از نوع
+     *     - ?int64 'length' =>  long تعداد رکورد بازگشتی از نوع
+     *     - ?decimal 'from_transaction_amount' => حداقل مبلغ انتقال وجه پایا
+     *     - ?decimal 'to_transaction_amount' => حداکثر مبلغ انتقال وجه پایا
+     *     - ?string 'reference_id' => شماره پیگیری انتقال وجه پایا
+     *     - ?string 'trace_no' => شماره پیگیری تراکنش
+     *     - ?string 'destination_iban_number' => شماره آی بن مقصد را برمی گرداند
+     *     - ?string 'destination_owner_name' => نام صاحب سپرده مقصد را برمی گرداند
+     *     - ?string 'from_register_date' => از تاریخ ثبت انتقال وجه پایا
+     *     - ?string 'to_register_date' => تا تاریخ ثبت انتقال وجه پایا
+     *     - ?string 'from_issue_date' => از تاریخ انجام انتقال وجه پایا
+     *     - ?string 'to_issue_date' => تا تاریخ انجام انتقال وجه پایا
+     *     - ?string 'description' => شرح انتقال وجه پایا
+     *     - ?string 'factor_number' => شماره فاکتور انتقال وجه پایا
+     *     - ?array 'status_set' => لیستی از وضعیت هایی انتقال وجه پایا
+     *     - ?array 'transaction_status_set' => لیستی از وضعیت تراکنش های انتقال وجه پایا
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function reportPayaTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSFER)) {
@@ -168,7 +325,15 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-    //$customer_number, $transfer_id, $comment
+    /**
+     * @param array $data The data array containing:
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?string 'transfer_id' => شماره پیگیری که در پاسخ سرویس انتقال وجه پایا برگردانده شد
+     *     - ?string 'comment' => یادداشت
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function cancelPaya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_CANCLE_PAYA)) {
@@ -177,7 +342,22 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     }
 
-//$customer_number, $status, $branch_code, $branch_name, $from_date, $length, $offset, $serial, $trace_no, $to_date
+    /**
+     * @param array $data The data array containing:
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - ?enum 'status' => وضعیت انتقال وجه
+     *     - ?int16 'branch_code' => کد شعبه
+     *     - ?string 'branch_name' => نام شعبه
+     *     - ?string 'from_date' => از تاریخ
+     *     - ?int64 'length' =>  long تعداد رکورد بازگشتی از نوع
+     *     - ?int64 'offset' =>  long اولین رکورد بازگشتی از نوع
+     *     - ?string 'serial' => شماره سریال
+     *     - ?string 'trace_no' => یادداشتشماره پیگیری ارسال شده از برنامه
+     *     - ?string 'to_date' => تا تاریخ
+     *
+     * @return mixed The result of the processing.
+     * */
+
     public function reportSatnaTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_SATNA_TRANSFER)) {
@@ -185,6 +365,18 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         } else return $this->model->errors;
 
     }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'source_deposit_number' => شماره حساب مبدا
+     *     - string 'description' => شماره مشتری
+     *     - ?string 'customer_number' => توضیحات
+     *     - ?enum 'transaction_reason' =>
+     *     - ?array 'signers' =>
+     *     - ?array 'transactions' =>
+     *
+     * @return mixed The result of the processing.
+     * */
 
     //$source_deposit_number, $description, $customer_number,$transaction_reason,$signers, $transactions
     public function batchSatna($data)
@@ -211,8 +403,6 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         $headers = [];
         $headers['Accept-Language'] = 'fa';
         $headers['App-Key'] = $this->client->app_key;
-        //$headers['Session'] = $this->client->authorization;
-        // $headers['session-id'] = 'Bearer ' . $token;
         $headers['Authorization'] = 'Bearer ' . $token;
         $headers['bank-id'] = $this->client->bank_id;
         $headers['CLIENT-DEVICE-ID'] = $this->client->client_device_id;

@@ -44,7 +44,10 @@ YiiAsset::register($this);
                 'url',
                 'headers',
                 'data',
-                'response',
+                [
+                    'attribute' => 'response',
+                    'value' =>json_encode($model->response),
+                ],
                 'created_at:date',
                 [
                     'attribute' => 'created_by',

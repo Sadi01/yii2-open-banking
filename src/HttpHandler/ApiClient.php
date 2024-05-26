@@ -4,6 +4,7 @@ namespace sadi01\openbanking\HttpHandler;
 
 use Yii;
 use yii\base\Component;
+use yii\helpers\Json;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
 use sadi01\openbanking\models\ObRequestLog;
@@ -114,9 +115,9 @@ class ApiClient extends Component
             'status' => $response->statusCode,
             'url' => $url,
             'method' => $method,
-            'data' => json_encode($data, JSON_UNESCAPED_UNICODE),
-            'headers' => json_encode($headers, JSON_UNESCAPED_UNICODE),
-            'response' => json_encode($response->data, JSON_UNESCAPED_UNICODE),
+            'data' => $data ? $data : json_decode("{}"),
+            'headers' => $headers ? $headers : json_decode("{}"),
+            'response' => $response->data,
             'client_id' => $clientId,
             'service_type' => $serviceType,
             'message' => '',

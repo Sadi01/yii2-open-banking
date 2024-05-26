@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\models;
 
+use common\behaviors\Jsonable;
 use common\models\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -73,8 +74,8 @@ class ObRequestLog extends \yii\db\ActiveRecord
             [['client_id', 'service_type', 'status', 'data', 'response', 'url','method','headers'], 'required'],
             [['client_id', 'service_type', 'status', 'created_at', 'created_by'], 'integer'],
             [['message'], 'string', 'max' => 100],
-            [['data','headers'], 'string', 'max' => 1000],
-            [['response'], 'string', 'max' => 3000],
+            //[['data','headers'], 'string', 'max' => 1000],
+            [['response','data','headers'], 'safe'],
             [['method'], 'string', 'max' => 5],
             [['url'], 'string', 'max' => 255],
             [['transaction_id'], 'string', 'max' => 30],
@@ -184,6 +185,13 @@ class ObRequestLog extends \yii\db\ActiveRecord
                 'updatedByAttribute' => false
                 //'value' => Yii::$app->user->id,
             ],
+            /*'Jsonable' => [
+                'class' => Jsonable::class,
+                'jsonAttributes' => [
+                    'response' => [
+                    ],
+                ],
+            ],*/
         ]);
     }
 

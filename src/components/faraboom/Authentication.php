@@ -29,7 +29,7 @@ class Authentication extends BaseAuthentication
                 'password' => $client->password,
             );
 
-           // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
             $headers['App-Key'] = $client->app_key;
             $headers['Authorization'] = $client->authorization;
             $headers['Bank-Id'] = $client->bank_id;
@@ -42,29 +42,29 @@ class Authentication extends BaseAuthentication
             $headers['Device-Id'] = $client->device_id;
             $headers['Token-Id'] = $client->token_id;
 
-            $response = Yii::$app->apiClient->post(self::getUrl($client->base_url,self::OAUTH_URL), $body, $headers,ObOauthClients::PLATFORM_FARABOOM,1);
+            $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, 0, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
 
             if ($response['status'] == 200) {
                 $result = $response['data'];
-            //    print_r($result);die;
+                //    print_r($result);die;
                 $accessToken = new ObOauthAccessTokens([
-                    'access_token' => $result['access_token'],
+                    'access_token' => $result->access_token,
                     'client_id' => (string)ObOauthClients::PLATFORM_FARABOOM,
                     'user_id' => Yii::$app->user->id,
-                    'expires' => date('Y-m-d H:i:s', time() + $result['expires_in']),
-                    'scope' => $result['scope'],
+                    'expires' => date('Y-m-d H:i:s', time() + $result->expires_in),
+                    'scope' => $result->scope,
                 ]);
-                if(!$accessToken->save()){
+                if (!$accessToken->save()) {
                     print_r($accessToken->errors);
                     die;
                 }
 
                 $refreshToken = new ObOauthRefreshTokens([
-                    'refresh_token' => $result['refresh_token'],
+                    'refresh_token' => $result->refresh_token,
                     'user_id' => Yii::$app->user->id,
                     'client_id' => (string)ObOauthClients::PLATFORM_FARABOOM,
-                    'expires' => date('Y-m-d H:i:s', time() + $result['expires_in']),
-                    'scope' => $result['scope'],
+                    'expires' => date('Y-m-d H:i:s', time() + $result->expires_in),
+                    'scope' => $result->scope,
                 ]);
 
                 $refreshToken->save();
