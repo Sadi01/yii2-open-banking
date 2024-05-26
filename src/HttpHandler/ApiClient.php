@@ -2,13 +2,11 @@
 
 namespace sadi01\openbanking\HttpHandler;
 
-use sadi01\openbanking\models\ObRequestLog;
 use Yii;
 use yii\base\Component;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
-use common\exceptions\ApiException;
-use common\exceptions\NetworkException;
+use sadi01\openbanking\models\ObRequestLog;
 
 class ApiClient extends Component
 {
@@ -28,34 +26,48 @@ class ApiClient extends Component
                 'format' => Client::FORMAT_JSON,
                 //'timeout' => $this->timeout,
             ],
+            'parsers' => [
+                // configure options of the JsonParser, parse JSON as objects
+                Client::FORMAT_JSON => [
+                    'class' => 'yii\httpclient\JsonParser',
+                    'asArray' => false,
+                ]
+            ],
             'responseConfig' => [
                 'format' => Client::FORMAT_JSON,
             ],
         ]);
     }
 
-    public function get($url, $params = [], $headers = [], $clientId, $serviceType)
+    /**
+     * @param int | string $clientId
+     * @param int | string $serviceType
+     * @param string $url
+     * @param array $params
+     * @param array $headers
+     * */
+    public function get($clientId, $serviceType, $url, $params = [], $headers = [])
     {
-        $response = $this->sendRequest('GET', $url, $params, $headers, $clientId, $serviceType);
+        $response = $this->sendRequest($clientId, $serviceType, 'GET', $url, $params, $headers);
         return $response;
     }
 
-    public function post($url, $data = [], $headers = [], $clientId, $serviceType)
+    public function post($clientId, $serviceType, $url, $data = [], $headers = [])
     {
-        return $this->sendRequest('POST', $url, $data, $headers, $clientId, $serviceType);
+        return $this->sendRequest($clientId, $serviceType, 'POST', $url, $data, $headers);
     }
 
-    public function put($url, $data = [], $headers = [], $clientId, $serviceType)
+    public function put($clientId, $serviceType, $url, $data = [], $headers = [])
     {
-        return $this->sendRequest('PUT', $url, $data, $headers, $clientId, $serviceType);
+        return $this->sendRequest($clientId, $serviceType, 'PUT', $url, $data, $headers);
     }
 
-    public function delete($url, $data = [], $headers = [], $clientId, $serviceType)
+    public function delete($clientId, $serviceType, $url, $data = [], $headers = [])
     {
-        return $this->sendRequest('DELETE', $url, $data, $headers, $clientId, $serviceType);
+        return $this->sendRequest($clientId, $serviceType, 'DELETE', $url, $data, $headers);
     }
 
-    private function sendRequest($method, $url, $data = [], $headers = [], $clientId, $serviceType)
+    private function sendRequest($clientId, $serviceType, $method, $url, $data = [], $headers = [])
     {
         $attempt = 0;
         while ($attempt < $this->maxRetries) {

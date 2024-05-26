@@ -9,7 +9,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     public $service;
     public $object;
 
-    const
+
 
 
     public function rules()
