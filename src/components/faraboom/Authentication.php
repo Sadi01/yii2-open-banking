@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\components\faraboom;
 
+use sadi01\openbanking\models\BaseOpenBanking;
 use Yii;
 use sadi01\openbanking\models\ObOauthAccessTokens;
 use sadi01\openbanking\models\ObOauthRefreshTokens;
@@ -42,7 +43,7 @@ class Authentication extends BaseAuthentication
             $headers['Device-Id'] = $client->device_id;
             $headers['Token-Id'] = $client->token_id;
 
-            $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, 0, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
+            $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_GET_TOKEN, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
 
             if ($response['status'] == 200) {
                 $result = $response['data'];

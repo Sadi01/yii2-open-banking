@@ -33,7 +33,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function depositToShaba($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, $this->client->base_url . '/v1/deposits' . '/' . $data['deposit_id'], $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA) . '/' . $data['deposit_id'], $data, $this->getHeaders());
         } else die('eee');
     }
 
