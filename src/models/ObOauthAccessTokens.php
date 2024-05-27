@@ -104,9 +104,9 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
         ];
 
         if (isset($code))
-            return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
+            return $_items[$type][$code] ?? false;
         else
-            return isset($_items[$type]) ? $_items[$type] : false;
+            return $_items[$type] ?? false;
     }
 
     public function behaviors()

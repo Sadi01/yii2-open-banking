@@ -4,10 +4,10 @@ namespace sadi01\openbanking\models;
 class BasePlatform extends \yii\db\ActiveRecord
 {
 
-    const PROVIDER_FINNOTECH = 1;
-    const PROVIDER_FARABOOM = 2;
-    const PROVIDER_SHAHIN = 3;
-    const PROVIDER_SHAHKAR = 4;
+    const PLATFORM_FINNOTECH = 1;
+    const PLATFORM_FARABOOM = 2;
+    const PLATFORM_SHAHIN = 3;
+    const PLATFORM_SHAHKAR = 4;
 
     public $id;
     public $name;
@@ -49,10 +49,10 @@ class BasePlatform extends \yii\db\ActiveRecord
     {
         $_items = [
             'Provider' => [
-                self::PROVIDER_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
-                self::PROVIDER_FARABOOM=> Yii::t('openBanking', 'Faraboom'),
-                self::PROVIDER_SHAHIN=> Yii::t('openBanking', 'Shahin'),
-                self::PROVIDER_SHAHKAR=> Yii::t('openBanking', 'Shahkar')
+                self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
+                self::PLATFORM_FARABOOM=> Yii::t('openBanking', 'Faraboom'),
+                self::PLATFORM_SHAHIN=> Yii::t('openBanking', 'Shahin'),
+                self::PLATFORM_SHAHKAR=> Yii::t('openBanking', 'Shahkar')
             ],
         ];
 

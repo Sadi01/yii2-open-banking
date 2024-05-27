@@ -25,7 +25,6 @@ class ApiClient extends Component
             'baseUrl' => $this->baseUrl,
             'requestConfig' => [
                 'format' => Client::FORMAT_JSON,
-                //'timeout' => $this->timeout,
             ],
             'parsers' => [
                 // configure options of the JsonParser, parse JSON as objects
@@ -75,7 +74,7 @@ class ApiClient extends Component
             $attempt++;
             try {
                 $request = $this->client->createRequest()
-                    ->setFormat(isset($headers['Content-Type']) ? $headers['Content-Type'] : Client::FORMAT_JSON)
+                    ->setFormat($headers['Content-Type'] ?? Client::FORMAT_JSON)
                     ->setMethod($method)
                     ->setUrl($url)
                     ->setData($data)
