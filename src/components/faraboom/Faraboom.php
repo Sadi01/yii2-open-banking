@@ -33,7 +33,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function depositToShaba($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA) . '/' . $data['deposit_id'], $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, $data['deposit_id']), null, $this->getHeaders());
         } else die('eee');
     }
 
@@ -45,7 +45,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function shabaToDeposit($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_TO_DEPOSIT)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, $this->baseUrl . 'ibans', $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, $data['iban']), null, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -59,7 +59,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function matchNationalCodeAccount($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT, $this->baseUrl . 'deposits/account', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT,BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT), $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -72,7 +72,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function depositHolder($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, $this->baseUrl . 'deposits', $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, $data['deposit_number']), null, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -95,7 +95,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function paya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_PAYA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_PAYA, $this->baseUrl . 'ach/transfer/normal', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_PAYA), $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -119,7 +119,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function internalTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_INTERNAL_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_INTERNAL_TRANSFER, $this->baseUrl . 'deposits/transfer/normal', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_INTERNAL_TRANSFER), $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -140,14 +140,14 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function batchInternalTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_INTERNAL_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_INTERNAL_TRANSFER, $this->baseUrl . 'deposits/transfer/batch', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_INTERNAL_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_BATCH_INTERNAL_TRANSFER), $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
     public function deposits($data)
     {
         // if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSITS)) {
-        return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSITS, $this->baseUrl . 'deposits', $data, $this->getHeaders());
+        return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSITS, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSITS), $data, $this->getHeaders());
         //  } else return $this->model->errors;
     }
 
@@ -171,7 +171,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function satna($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SATNA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SATNA, $this->baseUrl . 'rtgs/transfer ', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SATNA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SATNA), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -187,7 +187,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function checkinquiryReceiver($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SATNA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CHECK_INQUIRY_RECEIVER, $this->baseUrl . 'cheques/sayad/holder/inquiry', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CHECK_INQUIRY_RECEIVER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CHECK_INQUIRY_RECEIVER), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -202,7 +202,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function shabainquiry($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $this->baseUrl . 'ach/iban/{iban}/info', $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['shaba_number']), null, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -218,7 +218,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function matchNationalCodeMobile($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_MOBILE)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_MOBILE, $this->baseUrl . 'mobile/national-code', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_MOBILE, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_MOBILE), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -233,7 +233,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function cartToShaba($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_CART_TO_SHABA)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CART_TO_SHABA, $this->baseUrl . 'cards/{pan}/iban', $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CART_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CART_TO_SHABA, $data['pan']), null, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -254,7 +254,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function batchPaya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_PAYA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_PAYA, $this->baseUrl . 'ach/transfer/batch', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_BATCH_PAYA), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -287,7 +287,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function reportPayaTransactions($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSACTIONS)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSACTIONS, $this->baseUrl . 'ach/reports/transaction', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSACTIONS,  BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSACTIONS), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -320,7 +320,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function reportPayaTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_PAYA_TRANSFER, $this->baseUrl . 'ach/reports/transfer', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_PAYA_TRANSFER), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -337,7 +337,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function cancelPaya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_CANCLE_PAYA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CANCLE_PAYA, $this->baseUrl . 'ach/cancel/transfer', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CANCLE_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CANCLE_PAYA), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -361,7 +361,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function reportSatnaTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_SATNA_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_SATNA_TRANSFER, $this->baseUrl . 'rtgs/transfer/report', $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_SATNA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_REPORT_SATNA_TRANSFER), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -381,8 +381,8 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     //$source_deposit_number, $description, $customer_number,$transaction_reason,$signers, $transactions
     public function batchSatna($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_SATNA_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_SATNA, $this->baseUrl . 'rtgs/transfer/batch', $data, $this->getHeaders());
+        if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_SATNA)) {
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_SATNA,  BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_BATCH_SATNA), $data, $this->getHeaders());
         } else return $this->model->errors;
 
     }

@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\models;
 
+use Yii;
 
 class BaseOpenBanking extends \yii\db\ActiveRecord
 {
@@ -55,7 +56,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function itemAlias($type, $code = NULL)
+    public static function itemAlias($type, $code = NULL, $params = null)
     {
         $_items = [
             'ServiceType' => [
@@ -81,25 +82,25 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits',
-                self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_DEPOSIT_HOLDER => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_PAYA => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_SATNA => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_CHECK_INQUIRY_RECEIVER => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_SHABA_INQUIRY => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_MATCH_NATIONAL_CODE_MOBILE => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_CART_TO_SHABA => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_BATCH_PAYA => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_REPORT_PAYA_TRANSACTIONS => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_PAYA_TRANSFER => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_CANCLE_PAYA => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_REPORT_SATNA_TRANSFER => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_BATCH_SATNA => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_BATCH_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_DEPOSITS => self::FARABOOM_BASE_URL . '',
+                self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits' . $params,
+                self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . 'ibans/' . $params,
+                self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => self::FARABOOM_BASE_URL . 'deposits/account',
+                self::FARABOOM_DEPOSIT_HOLDER => self::FARABOOM_BASE_URL . 'deposits'. $params,
+                self::FARABOOM_PAYA => self::FARABOOM_BASE_URL . 'ach/transfer/normal',
+                self::FARABOOM_SATNA => self::FARABOOM_BASE_URL . 'rtgs/transfer',
+                self::FARABOOM_CHECK_INQUIRY_RECEIVER => self::FARABOOM_BASE_URL . 'cheques/sayad/holder/inquiry',
+                self::FARABOOM_SHABA_INQUIRY => self::FARABOOM_BASE_URL . 'ach/iban/{iban}/info' . $params,
+                self::FARABOOM_MATCH_NATIONAL_CODE_MOBILE => self::FARABOOM_BASE_URL . 'mobile/national-code',
+                self::FARABOOM_CART_TO_SHABA => self::FARABOOM_BASE_URL . 'cards/{pan}/iban' . $params,
+                self::FARABOOM_BATCH_PAYA => self::FARABOOM_BASE_URL . 'ach/transfer/batch',
+                self::FARABOOM_REPORT_PAYA_TRANSACTIONS => self::FARABOOM_BASE_URL . 'ach/reports/transaction',
+                self::FARABOOM_PAYA_TRANSFER => self::FARABOOM_BASE_URL . 'ach/reports/transfer',
+                self::FARABOOM_CANCLE_PAYA => self::FARABOOM_BASE_URL . 'ach/cancel/transfer',
+                self::FARABOOM_REPORT_SATNA_TRANSFER => self::FARABOOM_BASE_URL . 'rtgs/transfer/report',
+                self::FARABOOM_BATCH_SATNA => self::FARABOOM_BASE_URL . 'rtgs/transfer/batch',
+                self::FARABOOM_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/normal',
+                self::FARABOOM_BATCH_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/batch',
+                self::FARABOOM_DEPOSITS => self::FARABOOM_BASE_URL . 'deposits',
             ],
         ];
 
@@ -109,9 +110,9 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             return $_items[$type] ?? false;
     }
 
-    public static function getUrl($service)
+    public static function getUrl($service, $params = null)
     {
-        return self::itemAlias('ServiceUrl', $service);
+        return self::itemAlias('ServiceUrl', $service, $params);
     }
 
 }

@@ -108,6 +108,7 @@ class ApiClient extends Component
         }
     }
 
+
     private function logRequest($method, $url, $data, $response, $headers, $clientId, $serviceType)
     {
         $model = new ObRequestLog([

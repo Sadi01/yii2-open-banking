@@ -168,6 +168,25 @@ class ObRequestLog extends \yii\db\ActiveRecord
             return $_items[$type] ?? false;
     }
 
+    function maskSensitiveData($array, $sensitiveKeys = ['password', 'Token-Id', 'Authorization']) {
+        foreach ($array as $key => &$value) {
+            if (in_array($key, $sensitiveKeys)) {
+                $value = '*******';
+            } elseif (is_array($value)) {
+                $value = maskSensitiveData($value, $sensitiveKeys);
+            }
+        }
+        return $array;
+    }
+
+    public function beforeSave($insert): bool
+    {
+        $this->headers = $this->maskSensitiveData($this->headers);
+        $this->data = $this->maskSensitiveData($this->data);
+
+        return parent::beforeSave($insert);
+    }
+
     public function getCreatedBy()
     {
         return $this->hasOne(User::class, ['id' => 'created_by']);
