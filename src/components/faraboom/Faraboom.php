@@ -6,7 +6,6 @@ use Yii;
 use yii\httpclient\Client;
 use sadi01\openbanking\models\BaseOpenBanking;
 use sadi01\openbanking\models\ObOauthClients;
-use sadi01\openbanking\models\ObRequestLog;
 use sadi01\openbanking\components\OpenBanking;
 use sadi01\openbanking\models\Faraboom as FaraboomBaseModel;
 
