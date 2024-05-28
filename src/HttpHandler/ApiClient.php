@@ -69,6 +69,7 @@ class ApiClient extends Component
 
     private function sendRequest($clientId, $serviceType, $method, $url, $data = [], $headers = [])
     {
+        //print_r($url);die;
         $attempt = 0;
         while ($attempt < $this->maxRetries) {
             $attempt++;
@@ -100,9 +101,10 @@ class ApiClient extends Component
                     throw new \sadi01\openbanking\HttpHandler\ApiException('API request failed', $response->statusCode, $response->data);*/
                 }
             } catch (Exception $e) {
+                print_r($e);
                 Yii::error("API request exception: " . $e->getMessage());
                 if ($attempt >= $this->maxRetries) {
-                    throw new NetworkException('Network error: ' . $e->getMessage(), null, null, 0, $e);
+                    throw new \Http\Client\Exception\NetworkException('Network error: ' . $e->getMessage(), null, null, 0, $e);
                 }
             }
         }

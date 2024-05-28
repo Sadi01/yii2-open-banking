@@ -82,10 +82,10 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL . '',
-                self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits' . $params,
+                self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits/' . $params,
                 self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . 'ibans/' . $params,
-                self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => self::FARABOOM_BASE_URL . 'deposits/account',
-                self::FARABOOM_DEPOSIT_HOLDER => self::FARABOOM_BASE_URL . 'deposits'. $params,
+                self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => self::FARABOOM_BASE_URL . 'deposits/account/national-code',
+                self::FARABOOM_DEPOSIT_HOLDER => self::FARABOOM_BASE_URL . 'deposits/'. $params . '/holder',
                 self::FARABOOM_PAYA => self::FARABOOM_BASE_URL . 'ach/transfer/normal',
                 self::FARABOOM_SATNA => self::FARABOOM_BASE_URL . 'rtgs/transfer',
                 self::FARABOOM_CHECK_INQUIRY_RECEIVER => self::FARABOOM_BASE_URL . 'cheques/sayad/holder/inquiry',

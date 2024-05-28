@@ -71,8 +71,8 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function depositHolder($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, $data['deposit_number']), null, $this->getHeaders());
+        if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_HOLDER)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, $data['deposit_number']), null, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -95,7 +95,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function paya($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_PAYA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_PAYA), $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_PAYA), $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
@@ -119,7 +119,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function internalTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_INTERNAL_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_INTERNAL_TRANSFER), $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_INTERNAL_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_INTERNAL_TRANSFER), $data, $this->getHeaders());
         } else return $this->model->errors;
     }
 
