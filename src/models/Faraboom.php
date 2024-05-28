@@ -112,7 +112,7 @@ class Faraboom extends Model
             // [[], 'required' , 'on' => [self::SCENARIO_REPORT_SATNA_TRANSFER]],
             // [[], 'required' , 'on' => [self::SCENARIO_CANCLE_PAYA]],
             // [[], 'required' , 'on' => [self::SCENARIO_REPORT_PAYA_TRANSACTIONS]],
-
+            [['iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
             [['deposit_id', 'iban', 'national_code', 'account', 'deposit_number', 'source_deposit_number', 'iban_number', 'owner_name', 'transfer_description', 'customer_number', 'description', 'factor_number'
                 , 'additional_document_desc', 'pay_id', 'receiver_name', 'receiver_family', 'destination_iban_number', 'receiver_phone_number', 'branch_name', 'from_date', 'serial', 'trace_no', 'to_date'
                 , 'transfer_id', 'comment', 'source_deposit_iban', 'reference_id', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'iban_owner_name'
@@ -148,7 +148,7 @@ class Faraboom extends Model
         $scenarios[self::SCENARIO_CANCLE_PAYA] = ['customer_number', 'transfer_id', 'comment'];
         $scenarios[self::SCENARIO_REPORT_SATNA_TRANSFER] = ['customer_number', 'status', 'branch_code', 'branch_name', 'from_date', 'length', 'offset', 'serial', 'trace_no', 'to_date'];
         $scenarios[self::SCENARIO_BATCH_SATNA] = ['source_deposit_number', 'description', 'customer_number', 'transaction_reason', 'signers', 'transactions'];
-        $scenarios[self::SCENARIO_BATCH_INTERNAL_TRANSFER] = ['source_deposit_number','destination_batch_transfers','ignore_error','customer_number','source_description','additional_document_desc','signers,$transaction_reason'];
+        $scenarios[self::SCENARIO_BATCH_INTERNAL_TRANSFER] = ['source_deposit_number', 'destination_batch_transfers', 'ignore_error', 'customer_number', 'source_description', 'additional_document_desc', 'signers,$transaction_reason'];
 
         return $scenarios;
     }
