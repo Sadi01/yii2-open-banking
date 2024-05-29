@@ -173,7 +173,7 @@ class ObRequestLog extends \yii\db\ActiveRecord
             if (in_array($key, $sensitiveKeys)) {
                 $value = '*******';
             } elseif (is_array($value)) {
-                $value = maskSensitiveData($value, $sensitiveKeys);
+                $value = $this->maskSensitiveData($value, $sensitiveKeys);
             }
         }
         return $array;

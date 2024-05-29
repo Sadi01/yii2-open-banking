@@ -101,6 +101,27 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     /**
      * @param array $data The data array containing:
+     *     - ?string 'transfer_description' => شرح انتقال
+     *     - ?string 'customer_number' => شماره مشتری
+     *     - string 'source_deposit_number' => شماره سپرده مبدا
+     *     - ?boolean 'ignore_error' => این فیلد مشخص می کند که اگر در انجام یک تراکنس خطایی رخ داد از انجام بقیه تراکنش ها صرف نظر کند یا خیر
+     *     - ?array 'transactions' =>
+     *     - ?string 'additional_document_desc' =>
+     *     - ?enum 'transaction_reason' => [POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
+     *
+     * @return mixed The result of the processing.
+     * */
+
+    public function batchPaya($data)
+    {
+        if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_PAYA)) {
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_BATCH_PAYA), $data, $this->getHeaders());
+        } else return $this->model->errors;
+
+    }
+
+    /**
+     * @param array $data The data array containing:
      *     - string 'source_deposit' => سپرده مبدا
      *     - string 'destination_deposit' => شماره سپرده مقصد
      *     - decimal 'amount' => مبلغ انتقال وجه حداقل مقدار =1.00
@@ -194,7 +215,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     /**
      * @param array $data The data array containing:
-     *     - string 'shaba_number' => شماره شبا
+     *     - string 'iban' => شماره شبا
      *
      * @return mixed The result of the processing.
      * */
@@ -202,7 +223,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function shabainquiry($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['shaba_number']), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['iban']), null, $this->getHeaders());
         } else return $this->model->errors;
 
     }
@@ -240,27 +261,6 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     /**
      * @param array $data The data array containing:
-     *     - ?string 'transfer_description' => شرح انتقال
-     *     - ?string 'customer_number' => شماره مشتری
-     *     - ?string 'source_deposit_number' => شماره سپرده مبدا
-     *     - ?boolean 'ignore_error' => این فیلد مشخص می کند که اگر در انجام یک تراکنس خطایی رخ داد از انجام بقیه تراکنش ها صرف نظر کند یا خیر
-     *     - ?array 'transactions' =>
-     *     - ?string 'additional_document_desc' =>
-     *     - ?enum 'transaction_reason' => [POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]
-     *
-     * @return mixed The result of the processing.
-     * */
-
-    public function batchPaya($data)
-    {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_PAYA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_BATCH_PAYA), $data, $this->getHeaders());
-        } else return $this->model->errors;
-
-    }
-
-    /**
-     * @param array $data The data array containing:
      *     - ?string 'source_deposit_iban' => شماره شبای سپرده مبد
      *     - ?string 'transfer_description' => شرح انتقال
      *     - ?string 'customer_number' => شماره مشتری
@@ -286,9 +286,9 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function reportPayaTransactions($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSACTIONS)) {
+        //if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSACTIONS)) {
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSACTIONS,  BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSACTIONS), $data, $this->getHeaders());
-        } else return $this->model->errors;
+      //  } else return $this->model->errors;
 
     }
 
@@ -319,9 +319,9 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function reportPayaTransfer($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSFER)) {
+        //if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSFER)) {
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_PAYA_TRANSFER), $data, $this->getHeaders());
-        } else return $this->model->errors;
+       // } else return $this->model->errors;
 
     }
 
@@ -336,9 +336,9 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function cancelPaya($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_CANCLE_PAYA)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CANCLE_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CANCLE_PAYA), $data, $this->getHeaders());
-        } else return $this->model->errors;
+      //  if ($this->load($data, FaraboomBaseModel::SCENARIO_CANCLE_PAYA)) {
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CANCLE_PAYA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CANCLE_PAYA,$data['transfer_id']), $data, $this->getHeaders());
+      //  } else return $this->model->errors;
 
     }
 
@@ -360,9 +360,9 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function reportSatnaTransfer($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_SATNA_TRANSFER)) {
+       // if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_SATNA_TRANSFER)) {
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_SATNA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_REPORT_SATNA_TRANSFER), $data, $this->getHeaders());
-        } else return $this->model->errors;
+        //} else return $this->model->errors;
 
     }
 

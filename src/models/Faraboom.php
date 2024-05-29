@@ -92,6 +92,26 @@ class Faraboom extends Model
     const SCENARIO_BATCH_INTERNAL_TRANSFER = 'batch_internal-transfer';
     const SCENARIO_DEPOSITS = 'deposits';
 
+    const POSA = 'posa';
+    const IOSP = 'posa';
+    const HIPA = 'posa';
+    const ISAP = 'posa';
+    const FXAP = 'posa';
+    const DRPA = 'posa';
+    const RTAP = 'posa';
+    const MPTP = 'posa';
+    const IMPT = 'posa';
+    const LMAP = 'posa';
+    const CDAP = 'posa';
+    const TCAP = 'posa';
+    const GEAC = 'posa';
+    const LRPA = 'posa';
+    const CCPA = 'posa';
+    const GPAC = 'posa';
+    const CPAC = 'posa';
+    const GPPC = 'posa';
+    const SPAC = 'posa';
+
     public function rules()
     {
         return [
@@ -105,13 +125,13 @@ class Faraboom extends Model
             [['source_deposit_number', 'description'], 'required', 'on' => [self::SCENARIO_BATCH_SATNA]],
             [['pan'], 'required', 'on' => [self::SCENARIO_CART_TO_SHABA]],
             [['sayad_id'], 'required', 'on' => [self::SCENARIO_CHECK_INQUIRY_RECEIVER]],
-            [['shaba_number'], 'required', 'on' => [self::SCENARIO_SHABA_INQUIRY]],
+            [['iban'], 'required', 'on' => [self::SCENARIO_SHABA_INQUIRY]],
             [['national_code', 'mobile'], 'required', 'on' => [self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE]],
             [['source_deposit', 'destination_deposit', 'amount'], 'required', 'on' => [self::SCENARIO_INTERNAL_TRANSFER]],
-            [['source_deposit_number', 'destination_batch_transfers', 'ignore_error'], 'required', 'on' => [self::SCENARIO_BATCH_INTERNAL_TRANSFER]],
+            [['source_deposit_number', 'ignore_error'], 'required', 'on' => [self::SCENARIO_BATCH_INTERNAL_TRANSFER]],
             // [[], 'required' , 'on' => [self::SCENARIO_REPORT_SATNA_TRANSFER]],
             // [[], 'required' , 'on' => [self::SCENARIO_CANCLE_PAYA]],
-            // [[], 'required' , 'on' => [self::SCENARIO_REPORT_PAYA_TRANSACTIONS]],
+            //[[], 'required' , 'on' => [self::SCENARIO_REPORT_PAYA_TRANSACTIONS]],
             [['iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
             [['deposit_id', 'iban', 'national_code', 'account', 'deposit_number', 'source_deposit_number', 'iban_number', 'owner_name', 'transfer_description', 'customer_number', 'description', 'factor_number'
                 , 'additional_document_desc', 'pay_id', 'receiver_name', 'receiver_family', 'destination_iban_number', 'receiver_phone_number', 'branch_name', 'from_date', 'serial', 'trace_no', 'to_date'
@@ -119,12 +139,56 @@ class Faraboom extends Model
                 , 'source_deposit_iban', 'destination_owner_name', 'additional_document_desc', 'pan', 'sayad_id', 'shaba_number', 'mobile'], 'string'],
             //    [['amount','from_transaction_amount','to_transaction_amount'], 'decimal'],
             //  [['signers','transactions','include_transaction_status'.'status_set','transaction_status_set'], 'array'],
+            [['source_deposit_number'], 'required', 'on' => [self::SCENARIO_BATCH_PAYA]],
+            [['transactions'], 'validatePayaTransaction', 'on' => self::SCENARIO_BATCH_PAYA],
             [['branch_code'], 'integer', 'max' => 16],
+            [['transaction_reason'], 'in', 'range' => array_keys(self::itemAlias('TransactionReason'))],
             [['ignore_error'], 'boolean'],
+         [['amount'], 'number', 'min' => 10000],
+            [['source_deposit','destination_deposit'], 'number'],
             [['length', 'offset'], 'integer', 'max' => 64],
             //  [['transaction_reason','status'], 'enum'],
         ];
 
+    }
+
+    public function validatePayaTransaction($attribute, $params)
+    {
+        $value = $this->$attribute;
+
+        if (!is_array($value)) {
+            $this->addError($attribute, 'فیلد باید آرایه باشد');
+            return;
+        }
+
+        if (count($value) < 2) {
+            $this->addError($attribute, "تعداد ردیف های حواله گروهی می بایست بیشتر از یک ردیف باشد");
+            return;
+        }
+
+        foreach ($value as $index => $item) {
+            if (!isset($item['iban_number'])) {
+                $this->addError($attribute, "شماره شبا الزامیست");
+                return;
+            }
+            if (!isset($item['owner_name'])) {
+                $this->addError($attribute, "نام صاحب حساب الزامیست");
+                return;
+            }
+            if (!isset($item['description'])) {
+                $this->addError($attribute, "توضیحات الزلمیست");
+                return;
+            }
+            if (!isset($item['amount'])) {
+                $this->addError($attribute, "وارد کردن مبلغ الزامیست");
+                return;
+            }
+
+            if (isset($item['amount']) && $item['amount'] < 10000) {
+                $this->addError($attribute, "حداقل مبلغ مجاز 10000 ریال می باشد");
+                return;
+            }
+        }
     }
 
     public function scenarios()
@@ -160,6 +224,39 @@ class Faraboom extends Model
 
         ];
     }*/
+
+    public function itemAlias($type, $code = NULL)
+    {
+        $_items = [
+            'TransactionReason' => [
+                self::POSA => Yii::t('openBanking', 'POSA'),
+                self::IOSP => Yii::t('openBanking', 'IOSP'),
+                self::HIPA => Yii::t('openBanking', 'HIPA'),
+                self::ISAP => Yii::t('openBanking', 'ISAP'),
+                self::FXAP => Yii::t('openBanking', 'FXAP'),
+                self::DRPA => Yii::t('openBanking', 'DRPA'),
+                self::RTAP => Yii::t('openBanking', 'RTAP'),
+                self::MPTP => Yii::t('openBanking', 'MPTP'),
+                self::IMPT => Yii::t('openBanking', 'IMPT'),
+                self::LMAP => Yii::t('openBanking', 'LMAP'),
+                self::CDAP => Yii::t('openBanking', 'CDAP'),
+                self::TCAP => Yii::t('openBanking', 'TCAP'),
+                self::CDAP => Yii::t('openBanking', 'CDAP'),
+                self::GEAC => Yii::t('openBanking', 'GEAC'),
+                self::LRPA => Yii::t('openBanking', 'LRPA'),
+                self::CCPA => Yii::t('openBanking', 'CCPA'),
+                self::GPAC => Yii::t('openBanking', 'GPAC'),
+                self::CPAC => Yii::t('openBanking', 'CPAC'),
+                self::GPPC => Yii::t('openBanking', 'GPPC'),
+                self::SPAC => Yii::t('openBanking', 'SPAC'),
+            ],
+        ];
+
+        if (isset($code))
+            return $_items[$type][$code] ?? false;
+        else
+            return $_items[$type] ?? false;
+    }
 
 
 }
