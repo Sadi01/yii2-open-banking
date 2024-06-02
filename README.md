@@ -3,19 +3,19 @@
         <img src="https://raw.githubusercontent.com/Sadi01/yii2-bi-dashboard/master/src/img/yii.png" height="80px">
     </a>
     <a href="" target="_blank" rel="external">
-        <img src="https://raw.githubusercontent.com/Sadi01/yii2-bi-dashboard/master/src/img/BI.png" height="80px">
+        <img src="https://raw.githubusercontent.com/Sadi01/yii2-open-banking/master/src/img/ob.png" height="80px">
     </a>
-    <h1 align="center">Business intelligence dashboard for Yii 2</h1>
+    <h1 align="center">Open banking extension for Yii 2</h1>
     <br>
 </p>
 
 # Yii2 Open Banking
 
-**Bidashboard** is a data visualization dashboard designed to provide insights into key metrics and data for business
-intelligence purposes. It allows users to monitor and analyze various aspects of their business in real-time through
-interactive charts and graphs.
+**Openbanking** is an extension for integrating the service calls of various banking platforms, including Faraboom,
+Finotech, Shaheen, and Shahkar.
 
-This extension provides the Business Intelligence Dashboard for the [Yii framework 2.0](http://www.yiiframework.com).
+This extension enables the unified management of calling various banking services for
+the [Yii framework 2.0](http://www.yiiframework.com).
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
@@ -27,18 +27,18 @@ Installation
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/):
 
 ```
-composer require --prefer-dist sadi01/yii2-bi-dashboard:"*"
+composer require --prefer-dist sadi01/yii2-open-banking"*"
 ```
 
 ### Alternative Method:
 
-If you prefer adding the bidashboard extension to your `composer.json` file manually, you can do so by adding the
+If you prefer adding the openbanking extension to your `composer.json` file manually, you can do so by adding the
 following entry to the `require` section:
 
 ```json
 {
   "require": {
-    "sadi01/yii2-bi-dashboard": "*"
+    "sadi01/yii2-open-banking": "*"
   }
 }
 ```
@@ -50,30 +50,23 @@ within your project directory:
 composer update
 ```
 
-This command will fetch and install the bidashboard extension and its required dependencies into your Yii 2 project.
+This command will fetch and install the openbanking extension and its required dependencies into your Yii 2 project.
 
 Configuration
 -------------
 
-To use this extension, you have to configure the bidashboard module in your application configuration:
+To use this extension, you have to configure the openbanking module in your application configuration:
 
 ```php
 return [
     //....
     'modules' => [
-        'bidashboard' => [
-            'class' => 'sadi01\bidashboard\Module',
+       'openbanking' => [
+            'class' => 'sadi01\openbanking\Module'
         ],
     ]
 ];
 ```
-
-
-
-
-Env
--------------
-You have to add the database configuration to env, its example is in - [Env.example](./src/env-config/.env.example)
 
 DB Migrations
 -------------
@@ -81,7 +74,7 @@ DB Migrations
 Run module migrations:
 
 ```php
-php yii migrate --migrationPath=@sadi01/bidashboard/migrations
+php yii migrate --migrationPath=@sadi01/openbanking/migrations
 ```
 
 Or, Add migrations path in console application config:
@@ -92,7 +85,7 @@ Or, Add migrations path in console application config:
         'class' => 'yii\console\controllers\MigrateController',
         'migrationNamespaces' => [],
         'migrationPath' => [
-            '@vendor/sadi01/yii2-bi-dashboard/src/migrations',
+            '@vendor/sadi01/yii2-open-banking/src/migrations',
             '@app/migrations'
         ]
     ],
@@ -101,48 +94,58 @@ Or, Add migrations path in console application config:
 
 How To Use
 -------------
-add to view model:
+add to your code:
 
 ```php
-use sadi01\bidashboard\widgets\ReportModalWidget;
-
-<?= ReportModalWidget::widget([
-    'queryParams' => $queryParams,
-    'searchModel' => $searchModel,
-    'searchModelMethod' => $searchWidget,
-    'searchModelRunResultView' => $searchModelRunResultView,
-    'searchRoute' => Yii::$app->request->pathInfo,
-    'searchModelFormName' => $searchModelFormName,
-    'outputColumn' => $outputColumn,
-]) ?>
+Yii::$app->openBanking->call('','',[])
 ```
 
-add to search model:
+Shaba trnsfer:
 
-```php
-public function searchWidget(array $params,int $rangeType,int $startRange,int $endRange)
-{
-    $query = Invoice::find();
-    $dataProvider = new ActiveDataProvider([
-        'query' => $query,
-    ]);
-    $this->load($params, '');
-    $query->andFilterWhere(['between', 'created_at', $startRange, $endRange]);
-    if ($rangeType == ReportWidget::RANGE_TYPE_MONTHLY) {
-    ...
-     }
-    elseif ($rangeType == ReportWidget::RANGE_TYPE_DAILY) {
-    ...    
-    }
-    return $dataProvider;
-}
-```
+| platform | OpenBanking::FARABOOM |     | #2  |
+|:--------:|:---------------------:|-----|:---:|
+| service  |        'shaba'        |     | 283 |
+|   data   |          []           |     |     |
+
+<table>
+  <tr>
+    <th>platform</th>
+    <th>OpenBanking::FARABOOM</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>shaba</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>ssssss</td>
+  </tr>
+  <tr>
+    <td>ssssss</td>
+  </tr>
+  <tr>
+    <td>ssssss</td>
+  </tr>
+  <tr>
+    <td>ssssss</td>
+  </tr>
+<tr>
+</tr>
+
+</table>
+
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
 Advanced config
 -------------
+
 - [Installation Guide](./src/guide/installation.md)
 
 - [Description Guide](./src/guide/description.md)
 
 - [Usage Guide](./src/guide/usage.md)
-
-- [Access Control Guide (RBAC)](./src/guide/rbac.md)
