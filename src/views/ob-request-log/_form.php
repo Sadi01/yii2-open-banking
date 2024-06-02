@@ -22,7 +22,9 @@ use sadi01\openbanking\models\ObRequestLog;
 
     <?= $form->field($model, 'message')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'transaction_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'track_id')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'slave_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'url')->textInput() ?>
 
@@ -30,9 +32,7 @@ use sadi01\openbanking\models\ObRequestLog;
 
     <?= $form->field($model, 'response_info')->textInput() ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('openBanking', 'Save'), ['class' => 'btn btn-success']) ?>

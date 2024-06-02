@@ -17,8 +17,8 @@ class ObRequestLogSearch extends ObRequestLog
     public function rules()
     {
         return [
-            [['id', 'client_id', 'service_type', 'status', 'created_at', 'created_by'], 'integer'],
-            [['url','message', 'transaction_id', 'data', 'response','headers','method'], 'safe'],
+            [['id', 'client_id', 'service_type', 'status', 'created_at', 'created_by','slave_id'], 'integer'],
+            [['url','message', 'track_id', 'data', 'response','headers','method'], 'safe'],
         ];
     }
 
@@ -63,13 +63,14 @@ class ObRequestLogSearch extends ObRequestLog
             'service_type' => $this->service_type,
             'status' => $this->status,
             'method' => $this->method,
+            'method' => $this->slave_id,
             'headers' => $this->headers,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
         ]);
 
         $query->andFilterWhere(['like', 'message', $this->message])
-            ->andFilterWhere(['like', 'transaction_id', $this->transaction_id])
+            ->andFilterWhere(['like', 'track_id', $this->track_id])
             ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'data', $this->data])
             ->andFilterWhere(['like', 'response', $this->response]);

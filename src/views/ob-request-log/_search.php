@@ -30,7 +30,9 @@ use sadi01\openbanking\models\ObRequestLog;
 
     <?= $form->field($model, 'message') ?>
 
-    <?php // echo $form->field($model, 'transaction_id') ?>
+    <?= $form->field($model, 'slave_id') ?>
+
+    <?php // echo $form->field($model, 'track_id') ?>
 
     <?php // echo $form->field($model, 'request_info') ?>
 

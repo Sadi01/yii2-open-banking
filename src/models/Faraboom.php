@@ -7,6 +7,8 @@ use yii\base\Model;
 
 class Faraboom extends Model
 {
+    public $track_id;
+    public $slave_id;
     public $deposit_id;
     public $iban;
     public $national_code;
@@ -116,6 +118,7 @@ class Faraboom extends Model
     {
         return [
 
+            [['slave_id', 'track_id'], 'required'],
             [['deposit_id'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
             [['iban'], 'required', 'on' => [self::SCENARIO_SHABA_TO_DEPOSIT]],
             [['national_code', 'account'], 'required', 'on' => [self::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT]],
@@ -144,8 +147,8 @@ class Faraboom extends Model
             [['branch_code'], 'integer', 'max' => 16],
             [['transaction_reason'], 'in', 'range' => array_keys(self::itemAlias('TransactionReason'))],
             [['ignore_error'], 'boolean'],
-         [['amount'], 'number', 'min' => 10000],
-            [['source_deposit','destination_deposit'], 'number'],
+            [['amount'], 'number', 'min' => 10000],
+            [['source_deposit', 'destination_deposit'], 'number'],
             [['length', 'offset'], 'integer', 'max' => 64],
             //  [['transaction_reason','status'], 'enum'],
         ];
@@ -195,24 +198,24 @@ class Faraboom extends Model
     {
         $scenarios = parent::scenarios();
 
-        $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['deposit_id'];
-        $scenarios[self::SCENARIO_SHABA_TO_DEPOSIT] = ['iban'];
-        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT] = ['national_code', 'account'];
-        $scenarios[self::SCENARIO_DEPOSIT_HOLDER] = ['deposit_number'];
-        $scenarios[self::SCENARIO_PAYA] = ['Source_deposit_number', 'iban_number', 'owner_name', 'amount', 'transfer_description', 'customer_number', 'description', 'factor_number', 'additional_document_desc', 'transaction_reason', 'pay_id'];
-        $scenarios[self::SCENARIO_INTERNAL_TRANSFER] = ['source_deposit', 'destination_deposit', 'amount', 'customer_number', 'source_comment', 'destination_comment', 'pay_id', 'reference_number', 'additional_document_desc', 'transaction_reason'];
-        $scenarios[self::SCENARIO_SATNA] = ['amount', 'source_deposit_number', 'receiver_name', 'receiver_family', 'destination_iban_number', 'customer_number', 'receiver_phone_number', 'factor_number', 'description', 'tranaction_reason', 'pay_id'];
-        $scenarios[self::SCENARIO_CHECK_INQUIRY_RECEIVER] = ['sayad_id', 'customer_number'];
-        $scenarios[self::SCENARIO_SHABA_INQUIRY] = ['shaba_number'];
-        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['national_code', 'mobile'];
-        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['national_code', 'mobile'];
-        $scenarios[self::SCENARIO_BATCH_PAYA] = ['transfer_description', 'customer_number', 'source_deposit_number', 'ignore_error', 'transactions', 'additional_document_desc', 'transaction_reason'];
-        $scenarios[self::SCENARIO_REPORT_PAYA_TRANSACTIONS] = ['source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'reference_id', 'traco_no', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'from_transaction_amount', 'to_transaction_amount', 'iban_number', 'iban_owner_name', 'factor_number', 'description', 'include_transaction_status'];
-        $scenarios[self::SCENARIO_REPORT_PAYA_TRANSFER] = ['source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'from_transaction_amount', 'to_transaction_amount', 'reference_id', 'trace_no', 'destination_iban_number', 'destination_owner_name', 'from_register_date', 'to_register_date', 'from_issue_date', 'to_issue_date', 'description', 'factor_number', 'status_set', 'transaction_status_set'];
-        $scenarios[self::SCENARIO_CANCLE_PAYA] = ['customer_number', 'transfer_id', 'comment'];
-        $scenarios[self::SCENARIO_REPORT_SATNA_TRANSFER] = ['customer_number', 'status', 'branch_code', 'branch_name', 'from_date', 'length', 'offset', 'serial', 'trace_no', 'to_date'];
-        $scenarios[self::SCENARIO_BATCH_SATNA] = ['source_deposit_number', 'description', 'customer_number', 'transaction_reason', 'signers', 'transactions'];
-        $scenarios[self::SCENARIO_BATCH_INTERNAL_TRANSFER] = ['source_deposit_number', 'destination_batch_transfers', 'ignore_error', 'customer_number', 'source_description', 'additional_document_desc', 'signers,$transaction_reason'];
+        $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['slave_id', 'track_id', 'deposit_id'];
+        $scenarios[self::SCENARIO_SHABA_TO_DEPOSIT] = ['slave_id', 'track_id', 'iban'];
+        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT] = ['slave_id', 'track_id', 'national_code', 'account'];
+        $scenarios[self::SCENARIO_DEPOSIT_HOLDER] = ['slave_id', 'track_id', 'deposit_number'];
+        $scenarios[self::SCENARIO_PAYA] = ['slave_id', 'track_id', 'Source_deposit_number', 'iban_number', 'owner_name', 'amount', 'transfer_description', 'customer_number', 'description', 'factor_number', 'additional_document_desc', 'transaction_reason', 'pay_id'];
+        $scenarios[self::SCENARIO_INTERNAL_TRANSFER] = ['slave_id', 'track_id', 'source_deposit', 'destination_deposit', 'amount', 'customer_number', 'source_comment', 'destination_comment', 'pay_id', 'reference_number', 'additional_document_desc', 'transaction_reason'];
+        $scenarios[self::SCENARIO_SATNA] = ['slave_id', 'track_id', 'amount', 'source_deposit_number', 'receiver_name', 'receiver_family', 'destination_iban_number', 'customer_number', 'receiver_phone_number', 'factor_number', 'description', 'tranaction_reason', 'pay_id'];
+        $scenarios[self::SCENARIO_CHECK_INQUIRY_RECEIVER] = ['slave_id', 'track_id', 'sayad_id', 'customer_number'];
+        $scenarios[self::SCENARIO_SHABA_INQUIRY] = ['slave_id', 'track_id', 'shaba_number'];
+        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['slave_id', 'track_id', 'national_code', 'mobile'];
+        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['slave_id', 'track_id', 'national_code', 'mobile'];
+        $scenarios[self::SCENARIO_BATCH_PAYA] = ['slave_id', 'track_id', 'transfer_description', 'customer_number', 'source_deposit_number', 'ignore_error', 'transactions', 'additional_document_desc', 'transaction_reason'];
+        $scenarios[self::SCENARIO_REPORT_PAYA_TRANSACTIONS] = ['slave_id', 'track_id', 'source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'reference_id', 'traco_no', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'from_transaction_amount', 'to_transaction_amount', 'iban_number', 'iban_owner_name', 'factor_number', 'description', 'include_transaction_status'];
+        $scenarios[self::SCENARIO_REPORT_PAYA_TRANSFER] = ['slave_id', 'track_id', 'source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'from_transaction_amount', 'to_transaction_amount', 'reference_id', 'trace_no', 'destination_iban_number', 'destination_owner_name', 'from_register_date', 'to_register_date', 'from_issue_date', 'to_issue_date', 'description', 'factor_number', 'status_set', 'transaction_status_set'];
+        $scenarios[self::SCENARIO_CANCLE_PAYA] = ['slave_id', 'track_id', 'customer_number', 'transfer_id', 'comment'];
+        $scenarios[self::SCENARIO_REPORT_SATNA_TRANSFER] = ['slave_id', 'track_id', 'customer_number', 'status', 'branch_code', 'branch_name', 'from_date', 'length', 'offset', 'serial', 'trace_no', 'to_date'];
+        $scenarios[self::SCENARIO_BATCH_SATNA] = ['slave_id', 'track_id', 'source_deposit_number', 'description', 'customer_number', 'transaction_reason', 'signers', 'transactions'];
+        $scenarios[self::SCENARIO_BATCH_INTERNAL_TRANSFER] = ['slave_id', 'track_id', 'source_deposit_number', 'destination_batch_transfers', 'ignore_error', 'customer_number', 'source_description', 'additional_document_desc', 'signers,$transaction_reason'];
 
         return $scenarios;
     }

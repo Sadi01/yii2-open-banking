@@ -17,11 +17,12 @@ use yii\behaviors\BlameableBehavior;
  * @property int $service_type
  * @property int $status
  * @property string|null $message
- * @property string|null $transaction_id
+ * @property string|null $track_id
  * @property string $data
  * @property string $url
  * @property string $response
  * @property string $method
+ * @property int $slave_id
  * @property string $headers
  * @property int $created_at
  * @property int $created_by
@@ -72,14 +73,14 @@ class ObRequestLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'service_type', 'status', 'data', 'response', 'url','method','headers'], 'required'],
-            [['client_id', 'service_type', 'status', 'created_at', 'created_by'], 'integer'],
+            [['client_id', 'service_type', 'status', 'data', 'response', 'url','method','headers','slave_id'], 'required'],
+            [['client_id', 'service_type', 'status', 'created_at', 'created_by','slave_id'], 'integer'],
             [['message'], 'string', 'max' => 100],
             //[['data','headers'], 'string', 'max' => 1000],
             [['response','data','headers'], 'safe'],
             [['method'], 'string', 'max' => 5],
             [['url'], 'string', 'max' => 255],
-            [['transaction_id'], 'string', 'max' => 30],
+            [['track_id'], 'string', 'max' => 30],
         ];
     }
 
@@ -102,10 +103,11 @@ class ObRequestLog extends \yii\db\ActiveRecord
             'service_type' => Yii::t('openBanking', 'Service Type'),
             'status' => Yii::t('openBanking', 'Status'),
             'message' => Yii::t('openBanking', 'Message'),
-            'transaction_id' => Yii::t('openBanking', 'Transaction ID'),
+            'track_id' => Yii::t('openBanking', 'Track ID'),
             'url' => Yii::t('openBanking', 'Url'),
             'data' => Yii::t('openBanking', 'Data'),
             'method' => Yii::t('openBanking', 'Method'),
+            'slave_id' => Yii::t('openBanking', 'Slave ID'),
             'headers' => Yii::t('openBanking', 'Headers'),
             'response' => Yii::t('openBanking', 'Response'),
             'created_at' => Yii::t('openBanking', 'Created At'),
