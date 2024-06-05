@@ -1,17 +1,45 @@
 {
   "name": "vendor_name/yii2-open-banking",
-  "description": "description",
-  "minimum-stability": "stable",
-  "license": "proprietary",
-  "autoload": {
-    "psr-4": { "sadi01\\openbanking\\": "src" }
+  "description": "Yii2 Open Banking Service",
+  "keywords": [
+    "yii2",
+    "framework",
+    "extension",
+    "Open Banking",
+    "Bank"
+  ],
+  "homepage": "https://github.com/Sadi01/yii2-open-banking",
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "support": {
+    "issues": "https://github.com/Sadi01/yii2-open-banking/issues?state=open",
+    "source": "https://github.com/Sadi01/yii2-open-banking"
   },
   "authors": [
     {
-      "name": "mobithamrah",
-      "email": "email@example.com"
+      "name": "Sadegh Shafii",
+      "email": "sadshafiei.01@gmail.com",
+      "homepage": "https://github.com/Sadi01"
+    },
+    {
+      "name": "Amin Shafiei",
+      "email": "amin.shafiee.d@gmail.com",
+      "homepage": "https://github.com/aminshafieed"
+    },
+    {
+      "name": "Parvaneh Seifaddini ",
+      "email": "p.seifaddini.dev@gmail.com",
+      "homepage": "https://github.com/pseifaddini"
     }
   ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "yiisoft/yii2": "~2.0.14"
+  },
+  "autoload": {
+    "psr-4": { "sadi01\\openbanking\\": "src" }
+  },  
   "config": {
     "process-timeout": 1800,
     "fxp-asset": {
@@ -21,9 +49,12 @@
       "yiisoft/yii2-composer": true
     }
   },
-  "require": {
-    "yiisoft/yii2": "~2.0.14"
-  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
   "extra": {
     "bootstrap": "sadi01\\openbanking\\Bootstrap"
   }
