@@ -346,6 +346,213 @@ shabainquiry:
   </tr>
 </table>
 
+matchNationalCodeMobile:
+<table>
+  <tr>
+    <th>platform</th>
+    <th>OpenBanking::FARABOOM</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>matchNationalCodeMobile</th>
+  </tr>
+  <tr>
+    <td rowspan="3">data</td>
+  </tr>
+  <tr>
+    <td>*national_code</td>
+  </tr>
+  <tr>
+    <td>*mobile</td>
+  </tr>
+</table>
+
+reportPayaTransactions:
+<table>
+  <tr>
+    <th>platform</th>
+    <td>OpenBanking::FARABOOM</td>
+    <td>OpenBanking::FARABOOM</td>
+  </tr>
+  <tr>
+    <th>service</th>
+    <td>reportPayaTransactions</td>
+    <td>سرویس گزارش لیست تراکنش های انتقال وجه پایا</td>
+  </tr>
+  <tr>
+    <td rowspan="113">data</td>
+  </tr>
+  <tr>
+    <td>source_deposit_iban</td>
+    <td>شماره حساب مبدا</td>
+  </tr>
+  <tr>
+    <td>transfer_description</td>
+    <td>شرح انتقال</td>
+  </tr>
+ <tr>
+    <td>customer_number</td>
+    <td>شماره مشتری</td>
+  </tr>
+ <tr>
+    <td>offset</td>
+    <td>شماره اولین رکورد بازگشتی</td>
+  </tr>
+ <tr>
+    <td>length</td>
+    <td>تعداد رکورد بازگشتی</td>
+  </tr>
+ <tr>
+    <td>reference_id</td>
+    <td>شماره پیگیری انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>traco_no</td>
+    <td>کد یکتا برای پیگیری</td>
+  </tr>
+ <tr>
+    <td>transaction_id</td>
+    <td>شماره پیگیری تراکنش</td>
+  </tr>
+ <tr>
+    <td>from_register_date</td>
+    <td>از تاریخ ثبت انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_register_date</td>
+    <td>تا تاریخ ثبت انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>from_issue_date</td>
+    <td>از تاریخ انجام انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>To_issue_date</td>
+    <td>تا تاریخ انجام انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>from_transaction_amount</td>
+    <td>حداقل مبلغ انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_transaction_amount</td>
+    <td>حداکثر مبلغ انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>iban_number</td>
+    <td>آی بن شماره سپرده مقصد</td>
+  </tr>
+ <tr>
+    <td>iban_owner_name</td>
+    <td>نام صاحب سپرده مقصد</td>
+  </tr>
+ <tr>
+    <td>factor_number</td>
+    <td>شماره فاکتور انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>description</td>
+    <td>شرح انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>include_transaction_status</td>
+    <td></td>
+  </tr>
+</table>
+
+reportPayaTransactions:
+<table>
+  <tr>
+    <th>platform</th>
+    <td>OpenBanking::FARABOOM</td>
+    <td>OpenBanking::FARABOOM</td>
+  </tr>
+  <tr>
+    <th>service</th>
+    <td>reportPayaTransactions</td>
+    <td>سرویس گزارش لیست تراکنش های انتقال وجه پایا</td>
+  </tr>
+  <tr>
+    <td rowspan="113">data</td>
+  </tr>
+  <tr>
+    <td>source_deposit_iban</td>
+    <td>شماره حساب مبدا</td>
+  </tr>
+  <tr>
+    <td>transfer_description</td>
+    <td>شرح انتقال</td>
+  </tr>
+ <tr>
+    <td>customer_number</td>
+    <td>شماره مشتری</td>
+  </tr>
+ <tr>
+    <td>offset</td>
+    <td>شماره اولین رکورد بازگشتی</td>
+  </tr>
+ <tr>
+    <td>length</td>
+    <td>تعداد رکورد بازگشتی</td>
+  </tr>
+ <tr>
+    <td>reference_id</td>
+    <td>شماره پیگیری انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>traco_no</td>
+    <td>کد یکتا برای پیگیری</td>
+  </tr>
+ <tr>
+    <td>transaction_id</td>
+    <td>شماره پیگیری تراکنش</td>
+  </tr>
+ <tr>
+    <td>from_register_date</td>
+    <td>از تاریخ ثبت انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_register_date</td>
+    <td>تا تاریخ ثبت انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>from_issue_date</td>
+    <td>از تاریخ انجام انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>To_issue_date</td>
+    <td>تا تاریخ انجام انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>from_transaction_amount</td>
+    <td>حداقل مبلغ انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_transaction_amount</td>
+    <td>حداکثر مبلغ انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>iban_number</td>
+    <td>آی بن شماره سپرده مقصد</td>
+  </tr>
+ <tr>
+    <td>iban_owner_name</td>
+    <td>نام صاحب سپرده مقصد</td>
+  </tr>
+ <tr>
+    <td>factor_number</td>
+    <td>شماره فاکتور انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>description</td>
+    <td>شرح انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>include_transaction_status</td>
+    <td>[READY_FOR_PROCESS, SUSPENDED, CANCELED, PROCESS_FAIL, READY_TO_TRANSFER, TRANSFERRED, SETTLED, NOT_SETTLED, REJECTED, UNKNOWN]</td>
+  </tr>
+</table>
+
 
 
 
