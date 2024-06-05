@@ -153,6 +153,41 @@ batchPaya:
     <td rowspan="8">data</td>
   </tr>
   <tr>
+    <td>*transactions</td>
+    <td>آرایه ای از مبالغ انتقال. حداقل باید شامل دو آیتم باشد:
+    <table>
+        <tr>
+            <th>نام فیلد</th>
+            <th>توضیحات</th>
+        </tr>
+        <tr>
+            <td>*amount</td>
+            <td>مبلغ (حداقل ۵۰۰۰۰۰۰۰۰) </td>
+        </tr>
+        <tr>
+            <td>*receiver_name</td>
+            <td>نام گیرنده</td>
+        </tr>
+        <tr>
+            <td>*receiver_family</td>
+            <td>نام خانوادگی</td>
+        </tr>
+        <tr>
+            <td>*iban</td>
+            <td>شماره شبا گیرنده</td>
+        </tr>
+        <tr>
+            <td>receiver_phone_number</td>
+            <td>شماره تلفن گیرنده</td>
+        </tr>
+        <tr>
+            <td>factor_number</td>
+            <td>شماره فاکتور </td>
+        </tr>
+    </table>
+</td>
+  </tr>
+  <tr>
     <td>transfer_description</td>
   </tr>
   <tr>
@@ -163,9 +198,6 @@ batchPaya:
   </tr>
   <tr>
     <td>ignore_error</td>
-  </tr>
-  <tr>
-    <td>transactions</td>
   </tr>
  <tr>
     <td>additional_document_desc</td>
