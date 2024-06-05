@@ -353,7 +353,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
      *     - ?int64 'length' =>  long تعداد رکورد بازگشتی از نوع
      *     - ?int64 'offset' =>  long اولین رکورد بازگشتی از نوع
      *     - ?string 'serial' => شماره سریال
-     *     - ?string 'trace_no' => یادداشتشماره پیگیری ارسال شده از برنامه
+     *     - ?string 'trace_no' => شماره پیگیری ارسال شده از برنامه
      *     - ?string 'to_date' => تا تاریخ
      *
      * @return mixed The result of the processing.
@@ -370,8 +370,8 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     /**
      * @param array $data The data array containing:
      *     - string 'source_deposit_number' => شماره حساب مبدا
-     *     - string 'description' => شماره مشتری
-     *     - ?string 'customer_number' => توضیحات
+     *     - string 'description' => توضیحات
+     *     - ?string 'customer_number' =>شماره مشتری
      *     - ?enum 'transaction_reason' =>
      *     - ?array 'signers' =>
      *     - ?array 'transactions' =>

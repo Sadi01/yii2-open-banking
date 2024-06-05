@@ -553,6 +553,226 @@ reportPayaTransactions:
   </tr>
 </table>
 
+reportPayaTransfer:
+<table>
+  <tr>
+    <th>platform</th>
+    <td>OpenBanking::FARABOOM</td>
+    <td>OpenBanking::FARABOOM</td>
+  </tr>
+  <tr>
+    <th>service</th>
+    <td>reportPayaTransfer</td>
+    <td>سرویس گزارش لیست انتقال وجه های پایا</td>
+  </tr>
+  <tr>
+    <td rowspan="113">data</td>
+  </tr>
+  <tr>
+    <td>source_deposit_iban</td>
+    <td>شماره شبای سپرده مبدأ</td>
+  </tr>
+  <tr>
+    <td>transfer_description</td>
+    <td>شرح انتقال</td>
+  </tr>
+ <tr>
+    <td>customer_number</td>
+    <td>شماره مشتری</td>
+  </tr>
+ <tr>
+    <td>offset</td>
+    <td>شماره اولین رکورد بازگشتی</td>
+  </tr>
+ <tr>
+    <td>length</td>
+    <td>تعداد رکورد بازگشتی</td>
+  </tr>
+ <tr>
+    <td>from_transaction_amount</td>
+    <td>حداقل مبلغ انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_transaction_amount</td>
+    <td>حداکثر مبلغ انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>reference_id</td>
+    <td>شماره پیگیری انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>trace_no</td>
+    <td> شماره پیگیری تراکنش</td>
+  </tr>
+ <tr>
+    <td>destination_iban_number</td>
+    <td>شماره آی بن مقصد را برمی گرداند</td>
+  </tr>
+ <tr>
+    <td>destination_owner_name</td>
+    <td>نام صاحب سپرده مقصد را برمی گرداند</td>
+  </tr>
+ <tr>
+    <td>from_register_date</td>
+    <td>از تاریخ ثبت انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_register_date</td>
+    <td>تا تاریخ ثبت انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>from_issue_date</td>
+    <td>از تاریخ انجام انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>to_issue_date</td>
+    <td>تا تاریخ انجام انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>description</td>
+    <td>شرح انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>factor_number</td>
+    <td>شماره فاکتور انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>status_set</td>
+    <td>لیستی از وضعیت هایی انتقال وجه پایا</td>
+  </tr>
+ <tr>
+    <td>transaction_status_set</td>
+    <td>لیستی از وضعیت تراکنش های انتقال وجه پایا</td>
+  </tr>
+</table>
+
+cancelPaya:
+<table>
+  <tr>
+    <th>platform</th>
+    <td>OpenBanking::FARABOOM</td>
+    <td>OpenBanking::FARABOOM</td>
+  </tr>
+  <tr>
+    <th>service</th>
+    <td>cancelPaya</td>
+    <td>لغو انتقال وجه پایا</td>
+  </tr>
+  <tr>
+    <td rowspan="113">data</td>
+  </tr>
+  <tr>
+    <td>customer_number</td>
+    <td>شماره مشتری</td>
+  </tr>
+  <tr>
+    <td>transfer_id</td>
+    <td>شماره پیگیری که در پاسخ سرویس انتقال وجه پایا برگردانده شد</td>
+  </tr>
+ <tr>
+    <td>comment</td>
+    <td>یادداشت</td>
+  </tr>
+</table>
+
+reportSatnaTransfer:
+<table>
+  <tr>
+    <th>platform</th>
+    <td>OpenBanking::FARABOOM</td>
+    <td>OpenBanking::FARABOOM</td>
+  </tr>
+  <tr>
+    <th>service</th>
+    <td>reportSatnaTransfer</td>
+    <td>گزارش انتقال وجه ساتنا</td>
+  </tr>
+  <tr>
+    <td rowspan="113">data</td>
+  </tr>
+  <tr>
+    <td>customer_number</td>
+    <td>شماره مشتری</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>وضعیت انتقال وجه</td>
+  </tr>
+ <tr>
+    <td>branch_code</td>
+    <td>کد شعبه</td>
+  </tr>
+ <tr>
+    <td>branch_name</td>
+    <td>نام شعبه</td>
+  </tr>
+ <tr>
+    <td>from_date</td>
+    <td>از تاریخ</td>
+  </tr>
+ <tr>
+    <td>length</td>
+    <td>long تعداد رکورد بازگشتی از نوع</td>
+  </tr>
+ <tr>
+    <td>offset</td>
+    <td>long اولین رکورد بازگشتی از نوع</td>
+  </tr>
+ <tr>
+    <td>serial</td>
+    <td>شماره سریال</td>
+  </tr>
+ <tr>
+    <td>trace_no</td>
+    <td>شماره پیگیری ارسال شده از برنامه</td>
+  </tr>
+ <tr>
+    <td>to_date</td>
+    <td>تا تاریخ</td>
+  </tr>
+</table>
+
+batchSatna:
+<table>
+  <tr>
+    <th>platform</th>
+    <td>OpenBanking::FARABOOM</td>
+    <td>OpenBanking::FARABOOM</td>
+  </tr>
+  <tr>
+    <th>service</th>
+    <td>batchSatna</td>
+    <td>انتقال وجه ساتنا گروهی</td>
+  </tr>
+  <tr>
+    <td rowspan="113">data</td>
+  </tr>
+  <tr>
+    <td>*source_deposit_number</td>
+    <td>شماره حساب مبدا</td>
+  </tr>
+  <tr>
+    <td>*description</td>
+    <td>توضیحات</td>
+  </tr>
+ <tr>
+    <td>customer_number</td>
+    <td>شماره مشتری</td>
+  </tr>
+ <tr>
+    <td>transaction_reason</td>
+    <td>[POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]</td>
+  </tr>
+ <tr>
+    <td>signers</td>
+    <td></td>
+  </tr>
+ <tr>
+    <td>transactions</td>
+    <td></td>
+  </tr>
+</table>
+
 
 
 
