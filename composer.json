@@ -1,5 +1,5 @@
 {
-  "name": "vendor_name/yii2-open-banking",
+  "name": "vendor_name/yii2-open-banking-ir",
   "description": "Yii2 Open Banking Service",
   "keywords": [
     "yii2",
@@ -38,7 +38,7 @@
     "yiisoft/yii2": "~2.0.14"
   },
   "autoload": {
-    "psr-4": { "sadi01\\openbanking\\": "src" }
+    "psr-4": { "sadi01\\openbankingir\\": "src" }
   },  
   "config": {
     "process-timeout": 1800,
@@ -56,6 +56,6 @@
     }
   ],
   "extra": {
-    "bootstrap": "sadi01\\openbanking\\Bootstrap"
+    "bootstrap": "sadi01\\openbankingir\\Bootstrap"
   }
 }
