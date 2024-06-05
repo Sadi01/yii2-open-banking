@@ -9,11 +9,10 @@ class Faraboom extends Model
 {
     public $track_id;
     public $slave_id;
-    public $deposit_id;
+    public $deposit_number;
     public $iban;
     public $national_code;
     public $account;
-    public $deposit_number;
     public $source_deposit_number;
     public $iban_number;
     public $owner_name;
@@ -64,13 +63,11 @@ class Faraboom extends Model
     public $serial;
     public $to_date;
     public $signers;
-
     public $source_deposit;
     public $destination_deposit;
     public $source_comment;
     public $destination_comment;
     public $reference_number;
-
     public $destination_batch_transfers;
     public $source_description;
 
@@ -119,7 +116,7 @@ class Faraboom extends Model
         return [
 
             [['slave_id', 'track_id'], 'required'],
-            [['deposit_id'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
+            [['deposit_number'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
             [['iban'], 'required', 'on' => [self::SCENARIO_SHABA_TO_DEPOSIT]],
             [['national_code', 'account'], 'required', 'on' => [self::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT]],
             [['deposit_number'], 'required', 'on' => [self::SCENARIO_DEPOSIT_HOLDER]],
@@ -136,7 +133,7 @@ class Faraboom extends Model
             // [[], 'required' , 'on' => [self::SCENARIO_CANCLE_PAYA]],
             //[[], 'required' , 'on' => [self::SCENARIO_REPORT_PAYA_TRANSACTIONS]],
             [['iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
-            [['deposit_id', 'iban', 'national_code', 'account', 'deposit_number', 'source_deposit_number', 'iban_number', 'owner_name', 'transfer_description', 'customer_number', 'description', 'factor_number'
+            [['deposit_number', 'iban', 'national_code', 'account', 'deposit_number', 'source_deposit_number', 'iban_number', 'owner_name', 'transfer_description', 'customer_number', 'description', 'factor_number'
                 , 'additional_document_desc', 'pay_id', 'receiver_name', 'receiver_family', 'destination_iban_number', 'receiver_phone_number', 'branch_name', 'from_date', 'serial', 'trace_no', 'to_date'
                 , 'transfer_id', 'comment', 'source_deposit_iban', 'reference_id', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'iban_owner_name'
                 , 'source_deposit_iban', 'destination_owner_name', 'additional_document_desc', 'pan', 'sayad_id', 'shaba_number', 'mobile'], 'string'],
@@ -198,7 +195,7 @@ class Faraboom extends Model
     {
         $scenarios = parent::scenarios();
 
-        $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['slave_id', 'track_id', 'deposit_id'];
+        $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['slave_id', 'track_id', 'deposit_number'];
         $scenarios[self::SCENARIO_SHABA_TO_DEPOSIT] = ['slave_id', 'track_id', 'iban'];
         $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT] = ['slave_id', 'track_id', 'national_code', 'account'];
         $scenarios[self::SCENARIO_DEPOSIT_HOLDER] = ['slave_id', 'track_id', 'deposit_number'];
@@ -207,7 +204,6 @@ class Faraboom extends Model
         $scenarios[self::SCENARIO_SATNA] = ['slave_id', 'track_id', 'amount', 'source_deposit_number', 'receiver_name', 'receiver_family', 'destination_iban_number', 'customer_number', 'receiver_phone_number', 'factor_number', 'description', 'tranaction_reason', 'pay_id'];
         $scenarios[self::SCENARIO_CHECK_INQUIRY_RECEIVER] = ['slave_id', 'track_id', 'sayad_id', 'customer_number'];
         $scenarios[self::SCENARIO_SHABA_INQUIRY] = ['slave_id', 'track_id', 'shaba_number'];
-        $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['slave_id', 'track_id', 'national_code', 'mobile'];
         $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['slave_id', 'track_id', 'national_code', 'mobile'];
         $scenarios[self::SCENARIO_BATCH_PAYA] = ['slave_id', 'track_id', 'transfer_description', 'customer_number', 'source_deposit_number', 'ignore_error', 'transactions', 'additional_document_desc', 'transaction_reason'];
         $scenarios[self::SCENARIO_REPORT_PAYA_TRANSACTIONS] = ['slave_id', 'track_id', 'source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'reference_id', 'traco_no', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'from_transaction_amount', 'to_transaction_amount', 'iban_number', 'iban_owner_name', 'factor_number', 'description', 'include_transaction_status'];
@@ -220,13 +216,75 @@ class Faraboom extends Model
         return $scenarios;
     }
 
-    /*public function attributeLabels()
+    public function attributeLabels()
     {
         return [
-
-
+            'track_id' => Yii::t('openBanking', 'شماره پیگیری'),
+            'slave_id' => Yii::t('openBanking', 'شناسه کسب وکار'),
+            'deposit_number' => Yii::t('openBanking', ''),
+            'iban' => Yii::t('openBanking', ''),
+            'national_code' => Yii::t('openBanking', ''),
+            'account' => Yii::t('openBanking', ''),
+            'deposit_number' => Yii::t('openBanking', ''),
+            'source_deposit_number' => Yii::t('openBanking', ''),
+            'iban_number' => Yii::t('openBanking', ''),
+            'owner_name' => Yii::t('openBanking', ''),
+            'amount' => Yii::t('openBanking', ''),
+            'transfer_description' => Yii::t('openBanking', ''),
+            'customer_number' => Yii::t('openBanking', ''),
+            'description' => Yii::t('openBanking', ''),
+            'factor_number' => Yii::t('openBanking', ''),
+            'additional_document_desc' => Yii::t('openBanking', ''),
+            'transaction_reason' => Yii::t('openBanking', ''),
+            'pay_id' => Yii::t('openBanking', ''),
+            'receiver_name' => Yii::t('openBanking', ''),
+            'receiver_family' => Yii::t('openBanking', ''),
+            'destination_iban_number' => Yii::t('openBanking', ''),
+            'receiver_phone_number' => Yii::t('openBanking', ''),
+            'tranaction_reason' => Yii::t('openBanking', ''),
+            'sayad_id' => Yii::t('openBanking', ''),
+            'shaba_number' => Yii::t('openBanking', ''),
+            'mobile' => Yii::t('openBanking', ''),
+            'pan' => Yii::t('openBanking', ''),
+            'ignore_error' => Yii::t('openBanking', ''),
+            'transactions' => Yii::t('openBanking', ''),
+            'source_deposit_iban' => Yii::t('openBanking', ''),
+            'offset' => Yii::t('openBanking', ''),
+            'length' => Yii::t('openBanking', ''),
+            'reference_id' => Yii::t('openBanking', ''),
+            'traco_no' => Yii::t('openBanking', ''),
+            'transaction_id' => Yii::t('openBanking', ''),
+            'from_register_date' => Yii::t('openBanking', ''),
+            'to_register_date' => Yii::t('openBanking', ''),
+            'from_issue_date' => Yii::t('openBanking', ''),
+            'To_issue_date' => Yii::t('openBanking', ''),
+            'from_transaction_amount' => Yii::t('openBanking', ''),
+            'to_transaction_amount' => Yii::t('openBanking', ''),
+            'iban_owner_name' => Yii::t('openBanking', ''),
+            'include_transaction_status' => Yii::t('openBanking', ''),
+            'trace_no' => Yii::t('openBanking', ''),
+            'destination_owner_name' => Yii::t('openBanking', ''),
+            'to_issue_date' => Yii::t('openBanking', ''),
+            'status_set' => Yii::t('openBanking', ''),
+            'transaction_status_set' => Yii::t('openBanking', ''),
+            'transfer_id' => Yii::t('openBanking', ''),
+            'comment' => Yii::t('openBanking', ''),
+            'status' => Yii::t('openBanking', ''),
+            'branch_code' => Yii::t('openBanking', ''),
+            'branch_name' => Yii::t('openBanking', ''),
+            'from_date' => Yii::t('openBanking', ''),
+            'serial' => Yii::t('openBanking', ''),
+            'to_date' => Yii::t('openBanking', ''),
+            'signers' => Yii::t('openBanking', ''),
+            'source_deposit' => Yii::t('openBanking', ''),
+            'destination_deposit' => Yii::t('openBanking', ''),
+            'source_comment' => Yii::t('openBanking', ''),
+            'destination_comment' => Yii::t('openBanking', ''),
+            'reference_number' => Yii::t('openBanking', ''),
+            'destination_batch_transfers' => Yii::t('openBanking', ''),
+            'source_description' => Yii::t('openBanking', ''),
         ];
-    }*/
+    }
 
     public function itemAlias($type, $code = NULL)
     {

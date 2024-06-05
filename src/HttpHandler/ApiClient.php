@@ -104,7 +104,7 @@ class ApiClient extends Component
                 print_r($e);
                 Yii::error("API request exception: " . $e->getMessage());
                 if ($attempt >= $this->maxRetries) {
-                    throw new \Http\Client\Exception\NetworkException('Network error: ' . $e->getMessage(), null, null, 0, $e);
+                    throw $e;
                 }
             }
         }
