@@ -144,10 +144,12 @@ batchPaya:
   <tr>
     <th>platform</th>
     <th>OpenBanking::FARABOOM</th>
+    <th></th>
   </tr>
   <tr>
     <th>service</th>
     <th>batchPaya</th>
+    <th>توضیحات</th>
   </tr>
   <tr>
     <td rowspan="8">data</td>
