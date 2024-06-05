@@ -100,52 +100,14 @@ add to your code:
 Yii::$app->openBanking->call('','',[])
 ```
 
-Shaba trnsfer:
 
-| platform | OpenBanking::FARABOOM |     | #2  |
-|:--------:|:---------------------:|-----|:---:|
-| service  |        'shaba'        |     | 283 |
-|   data   |          []           |     |     |
 
-<table>
-  <tr>
-    <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-  </tr>
-  <tr>
-    <th>service</th>
-    <th>shaba</th>
-  </tr>
-  <tr>
-    <td rowspan="5">data</td>
-  </tr>
-  <tr>
-    <td>ssssss</td>
-  </tr>
-  <tr>
-    <td>ssssss</td>
-  </tr>
-  <tr>
-    <td>ssssss</td>
-  </tr>
-  <tr>
-    <td>ssssss</td>
-  </tr>
-<tr>
-</tr>
 
-</table>
 
-| First Header | Second Header |
-|--------------|---------------|
-| Content Cell | Content Cell  |
-| Content Cell | Content Cell  |
 
 Advanced config
 -------------
 
 - [Installation Guide](./src/guide/installation.md)
 
-- [Description Guide](./src/guide/description.md)
-
-- [Usage Guide](./src/guide/usage.md)
+- [Faraboom Description Guide](./src/guide/faraboom.md)
