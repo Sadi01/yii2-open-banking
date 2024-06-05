@@ -187,23 +187,29 @@ batchPaya:
     </table>
 </td>
   </tr>
+<tr>
+    <td>*source_deposit_number</td>
+    <td>شماره حساب مبدا</td>
+  </tr>
   <tr>
     <td>transfer_description</td>
+    <td>توضیحات انتقال</td>
   </tr>
   <tr>
     <td>customer_number</td>
-  </tr>
-  <tr>
-    <td>source_deposit_number</td>
+    <td>شماره مشتری</td>
   </tr>
   <tr>
     <td>ignore_error</td>
+    <td></td>
   </tr>
  <tr>
     <td>additional_document_desc</td>
+    <td></td>
   </tr>
  <tr>
     <td>transaction_reason</td>
+    <td></td>
   </tr>
 </table>
 
