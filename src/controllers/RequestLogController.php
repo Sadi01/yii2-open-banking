@@ -2,17 +2,16 @@
 
 namespace sadi01\openbanking\controllers;
 
-use sadi01\openbanking\models\ObOauthClients;
-use sadi01\openbanking\models\ObOauthClientsSearch;
+use sadi01\openbanking\models\ObRequestLog;
+use sadi01\openbanking\models\ObRequestLogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * ObOauthClientsController implements the CRUD actions for ObOauthClients model.
+ * ObRequestLogController implements the CRUD actions for ObRequestLog model.
  */
-class ObOauthClientsController extends Controller
+class RequestLogController extends Controller
 {
     /**
      * @inheritDoc
@@ -22,20 +21,6 @@ class ObOauthClientsController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'access' => [
-                    'class' => AccessControl::class,
-                    'rules' => [
-                        [
-                            'actions' => [
-                                'index', 'view', 'create', 'update', 'delete'
-                            ],
-                            'roles' => [
-                                '@'
-                            ],
-                            'allow' => true,
-                        ],
-                    ]
-                ],
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [
@@ -47,13 +32,13 @@ class ObOauthClientsController extends Controller
     }
 
     /**
-     * Lists all ObOauthClients models.
+     * Lists all ObRequestLog models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ObOauthClientsSearch();
+        $searchModel = new ObRequestLogSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -63,7 +48,7 @@ class ObOauthClientsController extends Controller
     }
 
     /**
-     * Displays a single ObOauthClients model.
+     * Displays a single ObRequestLog model.
      * @param int $id شناسه
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -76,29 +61,29 @@ class ObOauthClientsController extends Controller
     }
 
     /**
-     * Creates a new ObOauthClients model.
+     * Creates a new ObRequestLog model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($platform)
+    public function actionCreate()
     {
-        $model = new ObOauthClients(['scenario' => $platform == ObOauthClients::PLATFORM_FARABOOM ? ObOauthClients::SCENARIO_FARABOOM : ObOauthClients::SCENARIO_FINNOTECH]);
-        $model->client_id = $platform;
+        $model = new ObRequestLog();
 
-        if ($model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
-
 
         return $this->render('create', [
             'model' => $model,
-            'platform' => $platform,
-
         ]);
     }
 
     /**
-     * Updates an existing ObOauthClients model.
+     * Updates an existing ObRequestLog model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id شناسه
      * @return string|\yii\web\Response
@@ -118,7 +103,7 @@ class ObOauthClientsController extends Controller
     }
 
     /**
-     * Deletes an existing ObOauthClients model.
+     * Deletes an existing ObRequestLog model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id شناسه
      * @return \yii\web\Response
@@ -132,18 +117,18 @@ class ObOauthClientsController extends Controller
     }
 
     /**
-     * Finds the ObOauthClients model based on its primary key value.
+     * Finds the ObRequestLog model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id شناسه
-     * @return ObOauthClients the loaded model
+     * @return ObRequestLog the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ObOauthClients::findOne(['id' => $id])) !== null) {
+        if (($model = ObRequestLog::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('main', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('openBanking', 'The requested page does not exist.'));
     }
 }
