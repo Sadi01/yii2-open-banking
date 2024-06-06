@@ -25,7 +25,6 @@ class m240526_113940_create_table_howdy_ob_oauth_access_tokens extends Migration
             $tableOptions
         );
 
-        $this->createIndex('access_token', '{{%ob_oauth_access_tokens}}', ['access_token']);
         $this->createIndex('client_id', '{{%ob_oauth_access_tokens}}', ['client_id']);
         $this->createIndex('user_id', '{{%ob_oauth_access_tokens}}', ['user_id']);
 
