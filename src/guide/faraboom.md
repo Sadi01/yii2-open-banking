@@ -17,7 +17,7 @@ depositToShaba(تبدیل شماره حساب به شماره شبا):
   </tr>
   <tr>
     <th>service</th>
-    <td>depositToShaba</td>
+    <td>BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA</td>
 <td>سرویس تبدیل شماره سپرده به شبا</td>
   </tr>
   <tr>
