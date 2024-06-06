@@ -13,7 +13,7 @@ depositToShaba(تبدیل شماره حساب به شماره شبا):
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
-<td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+<td>پلتفرم</td>
   </tr>
   <tr>
     <th>service</th>
