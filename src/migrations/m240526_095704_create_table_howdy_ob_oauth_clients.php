@@ -22,7 +22,7 @@ class m240526_095704_create_table_howdy_ob_oauth_clients extends Migration
                 'scope' => $this->string(2000),
                 'username' => $this->string(100),
                 'password' => $this->string(2000),
-                'add_on' => $this->json(),
+                'add_on' => $this->json()->defaultExpression('(JSON_OBJECT())'),
             ],
             $tableOptions
         );

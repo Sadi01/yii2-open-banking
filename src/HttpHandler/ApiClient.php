@@ -14,7 +14,7 @@ class ApiClient extends Component
     public $baseUrl;
     public $defaultHeaders = [];
     public $maxRetries = 1;
-    public $timeout = 30; // Request timeout in seconds
+    public $timeout = 30;
 
     private $client;
 
@@ -69,7 +69,6 @@ class ApiClient extends Component
 
     private function sendRequest($clientId, $serviceType, $method, $url, $data = [], $headers = [])
     {
-        //print_r($url);die;
         $attempt = 0;
         while ($attempt < $this->maxRetries) {
             $attempt++;
@@ -96,12 +95,8 @@ class ApiClient extends Component
                         'status' => $response->statusCode,
                         'data' => $response->data
                     ];
-
-                    /*Yii::error("API request failed: " . $response->statusCode . ' - ' );
-                    throw new \sadi01\openbanking\HttpHandler\ApiException('API request failed', $response->statusCode, $response->data);*/
                 }
             } catch (Exception $e) {
-                print_r($e);
                 Yii::error("API request exception: " . $e->getMessage());
                 if ($attempt >= $this->maxRetries) {
                     throw $e;
@@ -127,9 +122,6 @@ class ApiClient extends Component
             'slave_id' => 1,
         ]);
 
-        if (!$model->save()) {
-            print_r($model->errors);
-            die;
-        }
+        $model->save();
     }
 }

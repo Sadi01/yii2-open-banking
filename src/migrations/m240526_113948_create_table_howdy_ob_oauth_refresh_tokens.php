@@ -19,7 +19,7 @@ class m240526_113948_create_table_howdy_ob_oauth_refresh_tokens extends Migratio
                 'expires' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
                 'scope' => $this->string(2000),
                 'user_id' => $this->integer()->notNull(),
-                'add_on' => $this->json(),
+                'add_on' => $this->json()->defaultExpression('(JSON_OBJECT())'),
             ],
             $tableOptions
         );
