@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\components;
 
+use sadi01\openbanking\models\BaseOpenBanking;
 use Yii;
 use yii\base\Component;
 use yii\base\NotSupportedException;
@@ -19,9 +20,10 @@ class OpenBanking extends Component implements OpenBankingInterface
      * */
     public function call($platform, $service, $body)
     {
-        if (Yii::$app->has($platform) && method_exists(Yii::$app->$platform, $service)) {
+        $mappedPlatform = BaseOpenBanking::itemAlias('PlatformMap',$platform);
+        if (Yii::$app->has($mappedPlatform) && method_exists(Yii::$app->$mappedPlatform, $service)) {
 
-            return Yii::$app->$platform->$service($body);
+            return Yii::$app->$mappedPlatform->$service($body);
 
         } else {
             throw new NotSupportedException('Operation not suported');
@@ -43,11 +45,13 @@ class OpenBanking extends Component implements OpenBankingInterface
             $map[$key]['value'] = null;
             $key++;
         }
-        return [
-            'success' => false,
-            'status' => '422',
-            'errors' => $map
-        ];
+        $response = new \stdClass();
+        $response->success = false;
+        $response->status = 422;
+        $response->data = null;
+        $response->errors = $map;
+
+        return $response;
     }
 
 }

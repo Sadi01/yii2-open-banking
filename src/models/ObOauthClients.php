@@ -3,7 +3,7 @@
 namespace sadi01\openbanking\models;
 
 use Yii;
-use common\behaviors\Jsonable;
+use sadi01\openbanking\behaviors\Jsonable;
 
 /**
  * This is the model class for table "{{%ob_oauth_clients}}".

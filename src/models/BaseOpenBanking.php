@@ -10,9 +10,10 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     public $service;
     public $object;
 
-
-    const PLATFORM_FARABOOM = 1;
-    const PLATFORM_FINNOTECH = 2;
+    const PLATFORM_FINNOTECH = 1;
+    const PLATFORM_FARABOOM = 2;
+    const PLATFORM_SHAHIN = 3;
+    const PLATFORM_SHAHKAR = 4;
 
     const FARABOOM_BASE_URL = 'https://api.faraboom.co/v1/';
 
@@ -59,6 +60,18 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     public static function itemAlias($type, $code = NULL, $params = null)
     {
         $_items = [
+            'PlatformMap' => [
+                self::PLATFORM_FINNOTECH => 'Finnotech',
+                self::PLATFORM_FARABOOM => 'faraboom',
+                self::PLATFORM_SHAHIN => 'Shahin',
+                self::PLATFORM_SHAHKAR => 'Shahkar'
+            ],
+            'Provider' => [
+                self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
+                self::PLATFORM_FARABOOM => Yii::t('openBanking', 'Faraboom'),
+                self::PLATFORM_SHAHIN => Yii::t('openBanking', 'Shahin'),
+                self::PLATFORM_SHAHKAR => Yii::t('openBanking', 'Shahkar')
+            ],
             'ServiceType' => [
                 self::FARABOOM_DEPOSIT_TO_SHABA => Yii::t('openBanking', 'Deposit To Shaba'),
                 self::FARABOOM_SHABA_TO_DEPOSIT => Yii::t('openBanking', 'Shaba To Deposit'),
@@ -91,7 +104,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_CHECK_INQUIRY_RECEIVER => self::FARABOOM_BASE_URL . 'cheques/sayad/holder/inquiry',
                 self::FARABOOM_SHABA_INQUIRY => self::FARABOOM_BASE_URL . 'ach/iban/' . $params . '/info',
                 self::FARABOOM_MATCH_NATIONAL_CODE_MOBILE => self::FARABOOM_BASE_URL . 'mobile/national-code',
-                self::FARABOOM_CART_TO_SHABA => self::FARABOOM_BASE_URL . 'cards/' . $params . '/iban' ,
+                self::FARABOOM_CART_TO_SHABA => self::FARABOOM_BASE_URL . 'cards/' . $params . '/iban',
                 self::FARABOOM_BATCH_PAYA => self::FARABOOM_BASE_URL . 'ach/transfer/batch',
                 self::FARABOOM_REPORT_PAYA_TRANSACTIONS => self::FARABOOM_BASE_URL . 'ach/reports/transaction',
                 self::FARABOOM_PAYA_TRANSFER => self::FARABOOM_BASE_URL . 'ach/reports/transfer',
