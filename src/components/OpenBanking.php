@@ -43,11 +43,11 @@ class OpenBanking extends Component implements OpenBankingInterface
             $map[$key]['value'] = null;
             $key++;
         }
-        return [
-            'success' => false,
-            'status' => '422',
-            'errors' => $map
-        ];
+        $response = new \stdClass();
+        $response->success = false;
+        $response->status = 422;
+        $response->data = null;
+        $response->errors = $map;
     }
 
 }

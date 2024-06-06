@@ -10,9 +10,10 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     public $service;
     public $object;
 
-
-    const PLATFORM_FARABOOM = 1;
-    const PLATFORM_FINNOTECH = 2;
+    const PLATFORM_FINNOTECH = 1;
+    const PLATFORM_FARABOOM = 2;
+    const PLATFORM_SHAHIN = 3;
+    const PLATFORM_SHAHKAR = 4;
 
     const FARABOOM_BASE_URL = 'https://api.faraboom.co/v1/';
 
@@ -59,6 +60,12 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     public static function itemAlias($type, $code = NULL, $params = null)
     {
         $_items = [
+            'Provider' => [
+                self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
+                self::PLATFORM_FARABOOM=> Yii::t('openBanking', 'Faraboom'),
+                self::PLATFORM_SHAHIN=> Yii::t('openBanking', 'Shahin'),
+                self::PLATFORM_SHAHKAR=> Yii::t('openBanking', 'Shahkar')
+            ],
             'ServiceType' => [
                 self::FARABOOM_DEPOSIT_TO_SHABA => Yii::t('openBanking', 'Deposit To Shaba'),
                 self::FARABOOM_SHABA_TO_DEPOSIT => Yii::t('openBanking', 'Shaba To Deposit'),
