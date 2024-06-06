@@ -819,8 +819,4 @@ batchSatna:
 Advanced config
 -------------
 
-- [Installation Guide](./src/guide/installation.md)
-
-- [Description Guide](./src/guide/description.md)
-
-- [Usage Guide](./src/guide/usage.md)
+- [Installation Guide](./src/guide/README.md)
