@@ -12,8 +12,8 @@ depositToShaba(تبدیل شماره حساب به شماره شبا):
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-<td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+<td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
@@ -35,8 +35,8 @@ shabaToDeposit:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
- <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+ <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -59,8 +59,8 @@ matchNationalCodeAccount:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
- <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+ <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -86,8 +86,8 @@ depositHolder:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-<th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+<th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -109,8 +109,8 @@ paya:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -170,8 +170,8 @@ batchPaya:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -246,8 +246,8 @@ internalTransfer:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -303,8 +303,8 @@ batchInternalTransfer:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -369,8 +369,8 @@ satna:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -430,8 +430,8 @@ checkinquiryReceiver:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -458,8 +458,8 @@ shabainquiry:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -479,8 +479,8 @@ matchNationalCodeMobile:
 <table>
   <tr>
     <th>platform</th>
-    <th>OpenBanking::FARABOOM</th>
-    <th>OpenBanking::FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
+    <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
   </tr>
   <tr>
     <th>service</th>
@@ -504,8 +504,8 @@ reportPayaTransactions:
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-    <td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
@@ -597,8 +597,8 @@ reportPayaTransactions:
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-    <td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
@@ -690,8 +690,8 @@ reportPayaTransfer:
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-    <td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
@@ -783,8 +783,8 @@ cancelPaya:
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-    <td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
@@ -812,8 +812,8 @@ reportSatnaTransfer:
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-    <td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
@@ -869,8 +869,8 @@ batchSatna:
 <table>
   <tr>
     <th>platform</th>
-    <td>OpenBanking::FARABOOM</td>
-    <td>OpenBanking::FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
+    <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
   </tr>
   <tr>
     <th>service</th>
