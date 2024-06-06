@@ -384,7 +384,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_BATCH_SATNA)) {
             return ResponseHelper::mapFaraboom(Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_BATCH_SATNA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_BATCH_SATNA), $data, $this->getHeaders()));
-        } else return $this->model->errors;
+        } else return $this->setErrors($this->model->errors);
 
     }
 
@@ -399,6 +399,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
             ];*/
             return true;
         }
+        $this->model->validate();
 
         return false;
     }
