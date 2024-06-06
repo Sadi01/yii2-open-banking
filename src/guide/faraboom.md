@@ -3,7 +3,7 @@ How To Use Faraboom Services
 add to your code:
 
 ```php
-Yii::$app->openBanking->call(platform,service,data[])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,data[])
 ```
 Available Faraboom Services:
 -------------
