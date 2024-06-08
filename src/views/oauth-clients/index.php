@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ob-oauth-clients-index card">
     <div class="card-header d-flex justify-content-between">
-        <h3><?= Html::encode($this->title) ?></h3>
+        <h5><?= Html::encode($this->title) ?></h5>
 
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light"

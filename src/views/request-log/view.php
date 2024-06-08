@@ -1,5 +1,6 @@
 <?php
 
+use sadi01\openbanking\models\BaseOpenBanking;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\web\View;
@@ -17,16 +18,6 @@ YiiAsset::register($this);
 <div class="ob-request-log-view card">
     <div class="card-header d-flex justify-content-between">
         <h3><?= Html::encode($this->title) ?></h3>
-        <p>
-            <?= Html::a(Yii::t('openBanking', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('openBanking', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('openBanking', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
-        </p>
     </div>
     <div class="card-body">
         <?= DetailView::widget([
@@ -35,11 +26,11 @@ YiiAsset::register($this);
                 //  'id',
                 [
                     'attribute' => 'client_id',
-                    'value' => \sadi01\openbanking\models\BaseOpenBanking::itemAlias('Platform', $model->client_id),
+                    'value' => BaseOpenBanking::itemAlias('Platform', $model->client_id),
                 ],
                 [
                     'attribute' => 'service_type',
-                    'value' => \sadi01\openbanking\models\BaseOpenBanking::itemAlias('ServiceType', $model->service_type),
+                    'value' => BaseOpenBanking::itemAlias('ServiceType', $model->service_type),
                 ],
                 'status',
                 'message',

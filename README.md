@@ -68,6 +68,19 @@ return [
 ];
 ```
 
+and you have to configure the openbanking component in your application configuration:
+
+```php
+return [
+    //....
+    'components' => [
+       'openBanking' => [
+            'class' => 'sadi01\openbanking\components\OpenBanking'
+        ],
+    ]
+];
+```
+
 DB Migrations
 -------------
 

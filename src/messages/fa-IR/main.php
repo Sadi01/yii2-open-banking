@@ -1,6 +1,6 @@
 <?php
 return [
-    'Ob Oauth Clients' => 'کلاینت',
+    'Ob Oauth Clients' => 'سرویس دهندگان',
     'Ob Request Logs' => 'تاریخچه درخواست ها',
     'Client ID' => 'سرویس دهنده',
     'Service Type' => 'نوع سرویس',
