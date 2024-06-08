@@ -24,6 +24,10 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         $this->client = ObOauthClients::find()
             ->byClient(ObOauthClients::PLATFORM_FARABOOM)
             ->one();
+
+        if (!($this->client instanceof ObOauthClients)) {
+            throw new InvalidConfigException(Yii::t('openBanking', 'The Service Provider is not set'));
+        }
     }
 
     /**
