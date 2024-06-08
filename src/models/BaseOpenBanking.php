@@ -10,8 +10,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     public $service;
     public $object;
 
-    const PLATFORM_FINNOTECH = 1;
-    const PLATFORM_FARABOOM = 2;
+    const PLATFORM_FARABOOM = 1;
+    const PLATFORM_FINNOTECH = 2;
     const PLATFORM_SHAHIN = 3;
     const PLATFORM_SHAHKAR = 4;
 
@@ -66,13 +66,14 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::PLATFORM_SHAHIN => 'Shahin',
                 self::PLATFORM_SHAHKAR => 'Shahkar'
             ],
-            'Provider' => [
+            'Platform' => [
                 self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
                 self::PLATFORM_FARABOOM => Yii::t('openBanking', 'Faraboom'),
                 self::PLATFORM_SHAHIN => Yii::t('openBanking', 'Shahin'),
                 self::PLATFORM_SHAHKAR => Yii::t('openBanking', 'Shahkar')
             ],
             'ServiceType' => [
+                self::FARABOOM_GET_TOKEN => Yii::t('openBanking', 'Get faraboom token'),
                 self::FARABOOM_DEPOSIT_TO_SHABA => Yii::t('openBanking', 'Deposit To Shaba'),
                 self::FARABOOM_SHABA_TO_DEPOSIT => Yii::t('openBanking', 'Shaba To Deposit'),
                 self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => Yii::t('openBanking', 'Match National Code Account'),
@@ -94,6 +95,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_DEPOSITS => Yii::t('openBanking', 'Deposits'),
             ],
             'ServiceTypeMap' => [
+                self::FARABOOM_GET_TOKEN => 'token',
                 self::FARABOOM_DEPOSIT_TO_SHABA => 'depositToShaba',
                 self::FARABOOM_SHABA_TO_DEPOSIT => 'shabaToDeposit',
                 self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => 'matchNationalCodeAccount',

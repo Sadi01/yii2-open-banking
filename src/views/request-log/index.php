@@ -36,17 +36,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'bordered' => false,
 
 
-
-           // 'filterModel' => $searchModel,
+            // 'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'id',
-                'client_id',
-                'service_type',
+                [
+                    'attribute' => 'client_id',
+                    'value' => function (\sadi01\openbanking\models\ObRequestLog $model) {
+                        return \sadi01\openbanking\models\BaseOpenBanking::itemAlias('Platform', $model->client_id);
+                    }
+                ],
+                [
+                    'attribute' => 'service_type',
+                    'value' => function (\sadi01\openbanking\models\ObRequestLog $model) {
+                        return \sadi01\openbanking\models\BaseOpenBanking::itemAlias('ServiceType', $model->service_type);
+                    }
+                ],
                 'status',
                 'message',
-                //'track_id',
+                'track_id',
                 'url',
                 'slave_id',
                 //'request_info',
@@ -59,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'text-nowrap'
                     ],
                     'template' => '{view}',
-                   // 'class' => ActionColumn::class,
+                    // 'class' => ActionColumn::class,
                     'urlCreator' => function ($action, ObRequestLog $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }

@@ -33,23 +33,32 @@ YiiAsset::register($this);
             'model' => $model,
             'attributes' => [
                 //  'id',
-                'client_id',
+                [
+                    'attribute' => 'client_id',
+                    'value' => \sadi01\openbanking\models\BaseOpenBanking::itemAlias('Platform', $model->client_id),
+                ],
                 [
                     'attribute' => 'service_type',
-                    'value' => ObRequestLog::itemAlias('ServiceType', $model->service_type),
+                    'value' => \sadi01\openbanking\models\BaseOpenBanking::itemAlias('ServiceType', $model->service_type),
                 ],
                 'status',
                 'message',
                 'track_id',
                 'slave_id',
                 'url',
-                'headers',
-                'data',
+                [
+                    'attribute' => 'headers',
+                    'value' =>json_encode($model->headers),
+                ],
+                [
+                    'attribute' => 'data',
+                    'value' =>json_encode($model->data),
+                ],
                 [
                     'attribute' => 'response',
                     'value' =>json_encode($model->response),
                 ],
-                'created_at:date',
+                'created_at:datetime',
                 [
                     'attribute' => 'created_by',
                     'value' => $model->createdBy->username,

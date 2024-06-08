@@ -47,4 +47,13 @@ return [
     'Select Client' => 'سرویس دهنده را انتخاب کنید',
     'Faraboom' => 'فرابوم',
     'Finnotech' => 'فینوتک',
+    'Deposits' => 'دریافت لیست سپرده ها',
+    'Get faraboom token' => 'دریافت توکن',
+    'Batch Internal Transfer' => 'انتقال وجه داخلی گروهی',
+    'Track ID' => 'شماره پیگیری',
+    'Slave ID' => 'شناسه درخواست',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 ];
