@@ -41,7 +41,6 @@ class ObOauthClients extends \yii\db\ActiveRecord
     public ?string $client_platform_type = null;
     public ?string $client_user_agent = null;
     public ?string $client_user_id = null;
-    public ?string $content_type = null;
     public ?string $device_id = null;
     public ?string $token_id = null;
 
@@ -161,7 +160,6 @@ class ObOauthClients extends \yii\db\ActiveRecord
                         'client_platform_type',
                         'client_user_agent',
                         'client_user_id',
-                        'content_type',
                         'device_id',
                         'token_id',
                     ],

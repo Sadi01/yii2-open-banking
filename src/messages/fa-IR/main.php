@@ -45,6 +45,7 @@ return [
     'Token ID' => 'Token ID',
     'Create Ob Oauth Clients' => 'ثبت اطلاعات سرویس دهنده',
     'Select Client' => 'سرویس دهنده را انتخاب کنید',
+    'Save' => 'ذخیره اطلاعات',
     'Faraboom' => 'فرابوم',
     'Finnotech' => 'فینوتک',
     'Deposits' => 'دریافت لیست سپرده ها',
