@@ -16,6 +16,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const PLATFORM_SHAHKAR = 4;
 
     const FARABOOM_BASE_URL = 'https://api.faraboom.co/v1/';
+    const FINNOTECH_BASE_URL = 'https://apibeta.finnotech.ir';
 
     const FARABOOM_GET_TOKEN = 1;
     const FARABOOM_DEPOSIT_TO_SHABA = 2;
@@ -37,6 +38,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FARABOOM_INTERNAL_TRANSFER = 18;
     const FARABOOM_BATCH_INTERNAL_TRANSFER = 19;
     const FARABOOM_DEPOSITS = 20;
+    const FINNOTECH_TRANSFER = 21;
 
 
     public function rules()
@@ -93,6 +95,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => Yii::t('openBanking', ' Internal Transfer'),
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => Yii::t('openBanking', 'Batch Internal Transfer'),
                 self::FARABOOM_DEPOSITS => Yii::t('openBanking', 'Deposits'),
+                self::FINNOTECH_TRANSFER => Yii::t('openBanking', 'Transfer'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -114,7 +117,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_BATCH_SATNA => 'batchSatna',
                 self::FARABOOM_INTERNAL_TRANSFER => 'internalTransfer',
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => 'batchInternalTransfer',
-                self::FARABOOM_DEPOSITS => 'deposits'
+                self::FARABOOM_DEPOSITS => 'deposits',
+                self::FINNOTECH_TRANSFER => 'transfer'
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL . '',
@@ -137,6 +141,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/normal',
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/batch',
                 self::FARABOOM_DEPOSITS => self::FARABOOM_BASE_URL . 'deposits',
+                self::FINNOTECH_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . 'transferTo?trackId=' . (is_array($params) && $params['trackId'] ?: ''),
             ],
         ];
 
