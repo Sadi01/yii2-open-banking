@@ -63,16 +63,12 @@ use sadi01\openbanking\models\ObOauthClients;
             </div>
 
             <div class="col-sm-4">
-                <?= $form->field($model, 'content_type')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'token_id')->passwordInput(['maxlength' => true]) ?>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <?= $form->field($model, 'device_id')->textInput(['maxlength' => true]) ?>
-            </div>
-
-            <div class="col-sm-4">
-                <?= $form->field($model, 'token_id')->passwordInput(['maxlength' => true]) ?>
             </div>
         </div>
 
