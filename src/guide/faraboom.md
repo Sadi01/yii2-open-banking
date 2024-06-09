@@ -60,6 +60,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 </tr>
 </table>
 
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['iban' => your iban])
+```
+
 3- matchNationalCodeAccount:
 <table>
   <tr>
@@ -86,6 +91,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 <tr>
 </tr>
 </table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['national_code' => '' , 'account' => ''])
+```
 
 4- depositHolder:
 <table>
