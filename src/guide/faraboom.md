@@ -8,7 +8,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 Available Faraboom Services:
 -------------
 
-1. depositToShaba(تبدیل شماره حساب به شماره شبا):
+depositToShaba(تبدیل شماره حساب به شماره شبا)
 -------------
 <table>
     <tr>
@@ -42,7 +42,7 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['deposit_number' => your deposit number])
 ```
 
-shabaToDeposit:
+shabaToDeposit
 -------------
 <table>
     <tr>
@@ -77,7 +77,8 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT,['iban' => your iban])
 ```
 
-### 3- matchNationalCodeAccount:
+matchNationalCodeAccount
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -114,7 +115,8 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT,['national_code' => '' , 'account' => ''])
 ```
 
-### 4- depositHolder:
+depositHolder:
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -142,7 +144,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 </tr>
 </table>
 
-### 5- paya:
+paya
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -208,7 +211,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 6- batchPaya:
+batchPaya
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -289,7 +293,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 7- internalTransfer:
+internalTransfer
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -351,7 +356,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 8- batchInternalTransfer:
+batchInternalTransfer
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -422,7 +428,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 9- satna:
+satna
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -488,7 +495,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 10- checkinquiryReceiver:
+checkinquiryReceiver
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -521,7 +529,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 11- shabainquiry:
+shabainquiry
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -547,7 +556,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 12- matchNationalCodeMobile:
+matchNationalCodeMobile
+-------------
 <table>
   <tr>
     <th>platform</th>
@@ -572,7 +582,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 13- cartToShaba:
+cartToShaba
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -598,7 +609,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 14- reportPayaTransactions:
+reportPayaTransactions
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -696,7 +708,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 15- reportPayaTransfer:
+reportPayaTransfer
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -794,7 +807,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 16- cancelPaya:
+cancelPaya
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -828,7 +842,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 17- reportSatnaTransfer:
+reportSatnaTransfer
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -890,7 +905,8 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-### 18- batchSatna:
+batchSatna
+-------------
 <table>
     <tr>
         <th>Arguments</th>
