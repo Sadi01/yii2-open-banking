@@ -42,7 +42,7 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['deposit_number' => your deposit number])
 ```
 
-2. shabaToDeposit:
+shabaToDeposit:
 -------------
 <table>
     <tr>
