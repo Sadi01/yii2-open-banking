@@ -8,7 +8,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 Available Faraboom Services:
 -------------
 
-1- depositToShaba(تبدیل شماره حساب به شماره شبا):
+### 1- depositToShaba(تبدیل شماره حساب به شماره شبا):
 <table>
     <tr>
         <th>Arguments</th>
@@ -41,7 +41,7 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['deposit_number' => your deposit number])
 ```
 
-2- shabaToDeposit:
+### 2- shabaToDeposit:
 <table>
     <tr>
         <th>Arguments</th>
@@ -75,7 +75,7 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT,['iban' => your iban])
 ```
 
-3- matchNationalCodeAccount:
+### 3- matchNationalCodeAccount:
 <table>
     <tr>
         <th>Arguments</th>
@@ -112,7 +112,7 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT,['national_code' => '' , 'account' => ''])
 ```
 
-4- depositHolder:
+### 4- depositHolder:
 <table>
     <tr>
         <th>Arguments</th>
@@ -140,7 +140,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 </tr>
 </table>
 
-5- paya:
+### 5- paya:
 <table>
     <tr>
         <th>Arguments</th>
@@ -206,7 +206,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-6- batchPaya:
+### 6- batchPaya:
 <table>
     <tr>
         <th>Arguments</th>
@@ -287,7 +287,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-7- internalTransfer:
+### 7- internalTransfer:
 <table>
     <tr>
         <th>Arguments</th>
@@ -349,7 +349,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-8- batchInternalTransfer:
+### 8- batchInternalTransfer:
 <table>
     <tr>
         <th>Arguments</th>
@@ -420,7 +420,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-9- satna:
+### 9- satna:
 <table>
     <tr>
         <th>Arguments</th>
@@ -486,7 +486,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-10- checkinquiryReceiver:
+### 10- checkinquiryReceiver:
 <table>
     <tr>
         <th>Arguments</th>
@@ -519,7 +519,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-11- shabainquiry:
+### 11- shabainquiry:
 <table>
     <tr>
         <th>Arguments</th>
@@ -545,7 +545,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-12- matchNationalCodeMobile:
+### 12- matchNationalCodeMobile:
 <table>
   <tr>
     <th>platform</th>
@@ -570,7 +570,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-13- cartToShaba:
+### 13- cartToShaba:
 <table>
     <tr>
         <th>Arguments</th>
@@ -596,7 +596,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-14- reportPayaTransactions:
+### 14- reportPayaTransactions:
 <table>
     <tr>
         <th>Arguments</th>
@@ -694,7 +694,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-15- reportPayaTransfer:
+### 15- reportPayaTransfer:
 <table>
     <tr>
         <th>Arguments</th>
@@ -792,7 +792,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-16- cancelPaya:
+### 16- cancelPaya:
 <table>
     <tr>
         <th>Arguments</th>
@@ -826,7 +826,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-17- reportSatnaTransfer:
+### 17- reportSatnaTransfer:
 <table>
     <tr>
         <th>Arguments</th>
@@ -888,7 +888,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-18- batchSatna:
+### 18- batchSatna:
 <table>
     <tr>
         <th>Arguments</th>
