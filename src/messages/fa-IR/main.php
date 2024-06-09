@@ -23,7 +23,7 @@ return [
     'Cart To Shaba' => 'سرویس کارت به شبا',
     'Batch Paya' => 'انتقال وجه پایا گروهی',
     'Report Paya Transactions' => 'گزارش لیست تراکنش های انتقال وجه پایا',
-    'Paya Transfer' => 'گزارش لیست انتقال وجه های پایا',
+    'Report Paya Transfer' => 'گزارش لیست انتقال وجه های پایا',
     'Cancel Paya' => 'لغو انتقال وجه های پایا',
     'Report Satna Transfer' => 'گزارش انتقال وجه های ساتنا',
     'Batch Satna' => 'انتقال وجه ساتنا گروهی',

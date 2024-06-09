@@ -45,7 +45,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>shabaToDeposit</th>
+    <th>BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT</th>
  <th>سرویس تبدیل شماره شبا به شماره سپرده</th>
 
   </tr>
@@ -62,7 +62,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 Usage Example:
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['iban' => your iban])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT,['iban' => your iban])
 ```
 
 3- matchNationalCodeAccount:
@@ -74,7 +74,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>matchNationalCodeAccount</th>
+    <th>BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT</th>
  <th>سرویس انطباق کدملی و حساب</th>
   </tr>
   <tr>
@@ -94,7 +94,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 Usage Example:
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['national_code' => '' , 'account' => ''])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT,['national_code' => '' , 'account' => ''])
 ```
 
 4- depositHolder:
@@ -106,7 +106,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>depositHolder</th>
+    <th>BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER</th>
  <th>سرویس دریافت نام صاحب سپرده</th>
   </tr>
   <tr>
@@ -129,7 +129,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>paya</th>
+    <th>BaseOpenBanking::FARABOOM_PAYA</th>
     <th>انتقال وجه بین بانکی پایا</th>
   </tr>
   <tr>
@@ -190,7 +190,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>batchPaya</th>
+    <th>BaseOpenBanking::FARABOOM_BATCH_PAYA</th>
     <th>انتقال وجه پایا گروهی</th>
   </tr>
   <tr>
@@ -266,7 +266,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>internalTransfer</th>
+    <th>BaseOpenBanking::FARABOOM_INTERNAL_TRANSFER</th>
     <th>سرویس انتقال وجه داخلی</th>
   </tr>
   <tr>
@@ -323,7 +323,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>batchInternalTransfer</th>
+    <th>BaseOpenBanking::FARABOOM_BATCH_INTERNAL_TRANSFER</th>
     <th>انتقال وجه دسته ای</th>
   </tr>
   <tr>
@@ -389,7 +389,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>satna</th>
+    <th>BaseOpenBanking::FARABOOM_SATNA</th>
     <th>انتقال وجه ساتنا</th>
   </tr>
   <tr>
@@ -450,7 +450,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>checkinquiryReceiver</th>
+    <th>BaseOpenBanking::FARABOOM_CHECK_INQUIRY_RECEIVER</th>
     <th>استعلام چک توسط گیرنده</th>
   </tr>
   <tr>
@@ -478,7 +478,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>shabainquiry</th>
+    <th>BaseOpenBanking::FARABOOM_SHABA_INQUIRY</th>
     <th>استعلام شماره شبا</th>
   </tr>
   <tr>
@@ -499,7 +499,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <th>matchNationalCodeMobile</th>
+    <th>BaseOpenBanking::FARABOOM_MATCH_NATIONAL_CODE_MOBILE</th>
     <th>تطبیق کد ملی و شماره موبایل</th>
   </tr>
   <tr>
@@ -515,7 +515,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
 </table>
 
-13- reportPayaTransactions:
+13- cartToShaba:
 <table>
   <tr>
     <th>platform</th>
@@ -524,87 +524,15 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <td>reportPayaTransactions</td>
-    <td>سرویس گزارش لیست تراکنش های انتقال وجه پایا</td>
+    <td>BaseOpenBanking::FARABOOM_CART_TO_SHABA</td>
+    <td>شماره کارت به شبا</td>
   </tr>
   <tr>
     <td rowspan="113">data</td>
   </tr>
   <tr>
-    <td>source_deposit_iban</td>
-    <td>شماره حساب مبدا</td>
-  </tr>
-  <tr>
-    <td>transfer_description</td>
-    <td>شرح انتقال</td>
-  </tr>
- <tr>
-    <td>customer_number</td>
-    <td>شماره مشتری</td>
-  </tr>
- <tr>
-    <td>offset</td>
-    <td>شماره اولین رکورد بازگشتی</td>
-  </tr>
- <tr>
-    <td>length</td>
-    <td>تعداد رکورد بازگشتی</td>
-  </tr>
- <tr>
-    <td>reference_id</td>
-    <td>شماره پیگیری انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>traco_no</td>
-    <td>کد یکتا برای پیگیری</td>
-  </tr>
- <tr>
-    <td>transaction_id</td>
-    <td>شماره پیگیری تراکنش</td>
-  </tr>
- <tr>
-    <td>from_register_date</td>
-    <td>از تاریخ ثبت انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>to_register_date</td>
-    <td>تا تاریخ ثبت انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>from_issue_date</td>
-    <td>از تاریخ انجام انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>To_issue_date</td>
-    <td>تا تاریخ انجام انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>from_transaction_amount</td>
-    <td>حداقل مبلغ انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>to_transaction_amount</td>
-    <td>حداکثر مبلغ انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>iban_number</td>
-    <td>آی بن شماره سپرده مقصد</td>
-  </tr>
- <tr>
-    <td>iban_owner_name</td>
-    <td>نام صاحب سپرده مقصد</td>
-  </tr>
- <tr>
-    <td>factor_number</td>
-    <td>شماره فاکتور انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>description</td>
-    <td>شرح انتقال وجه پایا</td>
-  </tr>
- <tr>
-    <td>include_transaction_status</td>
-    <td></td>
+    <td>pan</td>
+    <td>شماره کارت</td>
   </tr>
 </table>
 
@@ -617,7 +545,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <td>reportPayaTransactions</td>
+    <td>BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSACTIONS</td>
     <td>سرویس گزارش لیست تراکنش های انتقال وجه پایا</td>
   </tr>
   <tr>
@@ -710,7 +638,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <td>reportPayaTransfer</td>
+    <td>BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSFER</td>
     <td>سرویس گزارش لیست انتقال وجه های پایا</td>
   </tr>
   <tr>
@@ -803,7 +731,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <td>cancelPaya</td>
+    <td>BaseOpenBanking::FARABOOM_CANCLE_PAYA</td>
     <td>لغو انتقال وجه پایا</td>
   </tr>
   <tr>
@@ -832,7 +760,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <td>reportSatnaTransfer</td>
+    <td>BaseOpenBanking::FARABOOM_REPORT_SATNA_TRANSFER</td>
     <td>گزارش انتقال وجه ساتنا</td>
   </tr>
   <tr>
@@ -889,7 +817,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
   </tr>
   <tr>
     <th>service</th>
-    <td>batchSatna</td>
+    <td>BaseOpenBanking::FARABOOM_BATCH_SATNA</td>
     <td>انتقال وجه ساتنا گروهی</td>
   </tr>
   <tr>

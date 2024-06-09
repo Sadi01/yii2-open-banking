@@ -31,7 +31,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FARABOOM_CART_TO_SHABA = 11;
     const FARABOOM_BATCH_PAYA = 12;
     const FARABOOM_REPORT_PAYA_TRANSACTIONS = 13;
-    const FARABOOM_PAYA_TRANSFER = 14;
+    const FARABOOM_REPORT_PAYA_TRANSFER = 14;
     const FARABOOM_CANCLE_PAYA = 15;
     const FARABOOM_REPORT_SATNA_TRANSFER = 16;
     const FARABOOM_BATCH_SATNA = 17;
@@ -88,7 +88,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_CART_TO_SHABA => Yii::t('openBanking', 'Cart To Shaba'),
                 self::FARABOOM_BATCH_PAYA => Yii::t('openBanking', 'Batch Paya'),
                 self::FARABOOM_REPORT_PAYA_TRANSACTIONS => Yii::t('openBanking', 'Report Paya Transactions'),
-                self::FARABOOM_PAYA_TRANSFER => Yii::t('openBanking', 'Paya Transfer'),
+                self::FARABOOM_REPORT_PAYA_TRANSFER => Yii::t('openBanking', 'Paya Transfer'),
                 self::FARABOOM_CANCLE_PAYA => Yii::t('openBanking', 'Cancel Paya'),
                 self::FARABOOM_REPORT_SATNA_TRANSFER => Yii::t('openBanking', 'Report Satna Transfer'),
                 self::FARABOOM_BATCH_SATNA => Yii::t('openBanking', 'Batch Satna'),
@@ -111,7 +111,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_CART_TO_SHABA => 'cartToShaba',
                 self::FARABOOM_BATCH_PAYA => 'batchPaya',
                 self::FARABOOM_REPORT_PAYA_TRANSACTIONS => 'reportPayaTransactions',
-                self::FARABOOM_PAYA_TRANSFER => 'reportPayaTransfer',
+                self::FARABOOM_REPORT_PAYA_TRANSFER => 'reportPayaTransfer',
                 self::FARABOOM_CANCLE_PAYA => 'cancelPaya',
                 self::FARABOOM_REPORT_SATNA_TRANSFER => 'reportSatnaTransfer',
                 self::FARABOOM_BATCH_SATNA => 'batchSatna',
@@ -134,7 +134,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_CART_TO_SHABA => self::FARABOOM_BASE_URL . 'cards/' . $params . '/iban',
                 self::FARABOOM_BATCH_PAYA => self::FARABOOM_BASE_URL . 'ach/transfer/batch',
                 self::FARABOOM_REPORT_PAYA_TRANSACTIONS => self::FARABOOM_BASE_URL . 'ach/reports/transaction',
-                self::FARABOOM_PAYA_TRANSFER => self::FARABOOM_BASE_URL . 'ach/reports/transfer',
+                self::FARABOOM_REPORT_PAYA_TRANSFER => self::FARABOOM_BASE_URL . 'ach/reports/transfer',
                 self::FARABOOM_CANCLE_PAYA => self::FARABOOM_BASE_URL . 'ach/cancel/transfer/' . $params,
                 self::FARABOOM_REPORT_SATNA_TRANSFER => self::FARABOOM_BASE_URL . 'rtgs/transfer/report',
                 self::FARABOOM_BATCH_SATNA => self::FARABOOM_BASE_URL . 'rtgs/transfer/batch',
