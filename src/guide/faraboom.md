@@ -36,7 +36,7 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['deposit_number' => your deposit number])
 ```
 
-shabaToDeposit:
+2- shabaToDeposit:
 <table>
   <tr>
     <th>platform</th>
@@ -60,7 +60,7 @@ shabaToDeposit:
 </tr>
 </table>
 
-matchNationalCodeAccount:
+3- matchNationalCodeAccount:
 <table>
   <tr>
     <th>platform</th>
@@ -87,7 +87,7 @@ matchNationalCodeAccount:
 </tr>
 </table>
 
-depositHolder:
+4- depositHolder:
 <table>
   <tr>
     <th>platform</th>
@@ -110,7 +110,7 @@ depositHolder:
 </tr>
 </table>
 
-paya:
+5- paya:
 <table>
   <tr>
     <th>platform</th>
@@ -171,7 +171,7 @@ paya:
   </tr>
 </table>
 
-batchPaya:
+6- batchPaya:
 <table>
   <tr>
     <th>platform</th>
@@ -247,7 +247,7 @@ batchPaya:
   </tr>
 </table>
 
-internalTransfer:
+7- internalTransfer:
 <table>
   <tr>
     <th>platform</th>
@@ -304,7 +304,7 @@ internalTransfer:
   </tr>
 </table>
 
-batchInternalTransfer:
+8- batchInternalTransfer:
 <table>
   <tr>
     <th>platform</th>
@@ -370,7 +370,7 @@ batchInternalTransfer:
   </tr>
 </table>
 
-satna:
+9- satna:
 <table>
   <tr>
     <th>platform</th>
@@ -431,7 +431,7 @@ satna:
   </tr>
 </table>
 
-checkinquiryReceiver:
+10- checkinquiryReceiver:
 <table>
   <tr>
     <th>platform</th>
@@ -459,7 +459,7 @@ checkinquiryReceiver:
   </tr>
 </table>
 
-shabainquiry:
+11- shabainquiry:
 <table>
   <tr>
     <th>platform</th>
@@ -480,7 +480,7 @@ shabainquiry:
   </tr>
 </table>
 
-matchNationalCodeMobile:
+12- matchNationalCodeMobile:
 <table>
   <tr>
     <th>platform</th>
@@ -505,7 +505,7 @@ matchNationalCodeMobile:
   </tr>
 </table>
 
-reportPayaTransactions:
+13- reportPayaTransactions:
 <table>
   <tr>
     <th>platform</th>
@@ -598,7 +598,7 @@ reportPayaTransactions:
   </tr>
 </table>
 
-reportPayaTransactions:
+14- reportPayaTransactions:
 <table>
   <tr>
     <th>platform</th>
@@ -691,7 +691,7 @@ reportPayaTransactions:
   </tr>
 </table>
 
-reportPayaTransfer:
+15- reportPayaTransfer:
 <table>
   <tr>
     <th>platform</th>
@@ -784,7 +784,7 @@ reportPayaTransfer:
   </tr>
 </table>
 
-cancelPaya:
+16- cancelPaya:
 <table>
   <tr>
     <th>platform</th>
@@ -813,7 +813,7 @@ cancelPaya:
   </tr>
 </table>
 
-reportSatnaTransfer:
+17- reportSatnaTransfer:
 <table>
   <tr>
     <th>platform</th>
@@ -870,7 +870,7 @@ reportSatnaTransfer:
   </tr>
 </table>
 
-batchSatna:
+18- batchSatna:
 <table>
   <tr>
     <th>platform</th>
