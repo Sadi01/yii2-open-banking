@@ -144,6 +144,11 @@ depositHolder:
 </tr>
 </table>
 
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER,['deposit_number' => your deposit number])
+```
+
 paya
 -------------
 <table>
@@ -210,6 +215,16 @@ paya
     <td>شناسه پرداخت</td>
   </tr>
 </table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_PAYA,[
+'source_deposit_number' => '',
+'amount' => 10000,
+'owner_name' => '',
+'iban_number' => '',
+])
+```
 
 batchPaya
 -------------
@@ -292,6 +307,21 @@ batchPaya
     <td>[POSA, IOSP, HIPA, ISAP, FXAP, DRPA, RTAP, MPTP, IMPT, LMAP, CDAP, TCAP, GEAC, LRPA, CCPA, GPAC, CPAC, GPPC, SPAC]</td>
   </tr>
 </table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_BATCH_PAYA,[
+'source_deposit_number' => '',
+'transactions' => [
+    [
+        'amount' => 10000,
+        'receiver_name' => '',
+        'receiver_family' => '',
+        'iban' => '',
+    ]
+]
+])
+```
 
 internalTransfer
 -------------
