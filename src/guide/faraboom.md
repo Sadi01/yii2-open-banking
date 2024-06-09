@@ -9,6 +9,7 @@ Available Faraboom Services:
 -------------
 
 ### 1- depositToShaba(تبدیل شماره حساب به شماره شبا):
+-------------
 <table>
     <tr>
         <th>Arguments</th>
@@ -42,6 +43,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 ```
 
 ### 2- shabaToDeposit:
+
 <table>
     <tr>
         <th>Arguments</th>
