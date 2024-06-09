@@ -4,6 +4,7 @@ namespace sadi01\openbanking\components\faraboom;
 
 use sadi01\openbanking\helpers\ResponseHelper;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\httpclient\Client;
 use sadi01\openbanking\models\BaseOpenBanking;
 use sadi01\openbanking\models\ObOauthClients;
