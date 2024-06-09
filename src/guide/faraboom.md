@@ -8,7 +8,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 Available Faraboom Services:
 -------------
 
-### 1- depositToShaba(تبدیل شماره حساب به شماره شبا):
+1. depositToShaba(تبدیل شماره حساب به شماره شبا):
 -------------
 <table>
     <tr>
@@ -42,8 +42,8 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA,['deposit_number' => your deposit number])
 ```
 
-### 2- shabaToDeposit:
-
+2. shabaToDeposit:
+-------------
 <table>
     <tr>
         <th>Arguments</th>
