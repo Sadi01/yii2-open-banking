@@ -905,6 +905,8 @@ reportSatnaTransfer
   </tr>
 </table>
 
+-------------
+
 batchSatna
 -------------
 <table>
@@ -952,6 +954,7 @@ batchSatna
   </tr>
 </table>
 
+-------------
 
 
 
