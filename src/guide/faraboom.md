@@ -10,22 +10,27 @@ Available Faraboom Services:
 
 1- depositToShaba(تبدیل شماره حساب به شماره شبا):
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
-<td>پلتفرم</td>
+    <td>پلتفرم</td>
   </tr>
   <tr>
     <th>service</th>
     <td>BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA</td>
-<td>سرویس تبدیل شماره سپرده به شبا</td>
+    <td>سرویس تبدیل شماره سپرده به شبا</td>
   </tr>
   <tr>
     <th rowspan="2">data</th>
   </tr>
   <tr>
     <td>deposit_number</td>
-<td>شماره سپرده</td>
+    <td>شماره سپرده</td>
   </tr>
 <tr>
 </tr>
@@ -38,6 +43,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 2- shabaToDeposit:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -67,6 +77,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 3- matchNationalCodeAccount:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -99,6 +114,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 4- depositHolder:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -122,6 +142,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 5- paya:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -183,6 +208,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 6- batchPaya:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -259,6 +289,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 7- internalTransfer:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -316,6 +351,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 8- batchInternalTransfer:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -382,6 +422,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 9- satna:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -443,6 +488,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 10- checkinquiryReceiver:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -471,6 +521,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 11- shabainquiry:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <th>BaseOpenBanking::PLATFORM_FARABOOM</th>
@@ -517,6 +572,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 13- cartToShaba:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
@@ -538,6 +598,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 14- reportPayaTransactions:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
@@ -631,6 +696,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 15- reportPayaTransfer:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
@@ -724,6 +794,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 16- cancelPaya:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
@@ -753,6 +828,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 17- reportSatnaTransfer:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
@@ -810,6 +890,11 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FARABOOM,BaseOpenBanking:
 
 18- batchSatna:
 <table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
   <tr>
     <th>platform</th>
     <td>BaseOpenBanking::PLATFORM_FARABOOM</td>
