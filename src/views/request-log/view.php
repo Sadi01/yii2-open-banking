@@ -39,15 +39,15 @@ YiiAsset::register($this);
                 'url',
                 [
                     'attribute' => 'headers',
-                    'value' =>json_encode($model->headers),
+                    'value' =>json_encode($model->headers,JSON_UNESCAPED_UNICODE),
                 ],
                 [
                     'attribute' => 'data',
-                    'value' =>json_encode($model->data),
+                    'value' =>json_encode($model->data,JSON_UNESCAPED_UNICODE),
                 ],
                 [
                     'attribute' => 'response',
-                    'value' =>json_encode($model->response),
+                    'value' =>json_encode($model->response,JSON_UNESCAPED_UNICODE),
                 ],
                 'created_at:datetime',
                 [
