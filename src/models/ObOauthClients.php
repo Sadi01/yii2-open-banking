@@ -59,7 +59,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         return [
             [['client_id', 'base_url'], 'required'],
-            [['client_id', 'base_url', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'content_type', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
+            [['client_id', 'base_url', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
             [['add_on'], 'safe'],
             [['client_id', 'client_secret'], 'string', 'max' => 32],
             [['base_url'], 'string', 'max' => 255],
@@ -72,7 +72,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
-        $scenarios[self::SCENARIO_FARABOOM] = ['client_id', 'base_url', 'grant_types', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'content_type', 'device_id', 'token_id'];
+        $scenarios[self::SCENARIO_FARABOOM] = ['client_id', 'base_url', 'grant_types', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'];
         $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
 
         return $scenarios;
@@ -101,7 +101,6 @@ class ObOauthClients extends \yii\db\ActiveRecord
             'client_platform_type' => Yii::t('openBanking', 'Client Platform Type'),
             'client_user_agent' => Yii::t('openBanking', 'Client User Agent'),
             'client_user_id' => Yii::t('openBanking', 'Client User ID'),
-            'content_type' => Yii::t('openBanking', 'Content Type'),
             'device_id' => Yii::t('openBanking', 'Device ID'),
             'token_id' => Yii::t('openBanking', 'Token ID'),
         ];
