@@ -27,16 +27,6 @@ class m240526_113940_create_table_ob_oauth_access_tokens extends Migration
 
         $this->createIndex('client_id', '{{%ob_oauth_access_tokens}}', ['client_id']);
         $this->createIndex('user_id', '{{%ob_oauth_access_tokens}}', ['user_id']);
-
-        /*$this->addForeignKey(
-            'howdy_ob_oauth_access_tokens_ibfk_1',
-            '{{%ob_oauth_access_tokens}}',
-            ['user_id'],
-            '{{%user}}',
-            ['id'],
-            'CASCADE',
-            'CASCADE'
-        );*/
     }
 
     public function safeDown()
