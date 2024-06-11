@@ -32,7 +32,7 @@ use sadi01\openbanking\models\ObOauthClients;
                 <?= $form->field($model, 'app_key')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-sm-4">
-                <?= $form->field($model, 'authorization')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'app_secret')->textInput(['maxlength' => true]) ?>
             </div>
 
             <div class="col-sm-4">
