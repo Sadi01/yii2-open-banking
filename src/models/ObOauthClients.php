@@ -64,7 +64,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
             [['client_id', 'client_secret'], 'string', 'max' => 32],
             [['base_url'], 'string', 'max' => 255],
             [['grant_types', 'username'], 'string', 'max' => 100],
-            [['scope', 'password'], 'string', 'max' => 2000],
+            [['scope', 'password', 'app_secret'], 'string', 'max' => 2000],
         ];
     }
 
@@ -72,7 +72,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
-        $scenarios[self::SCENARIO_FARABOOM] = ['username','password','client_id', 'base_url', 'grant_types', 'app_key','app_secret', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'];
+        $scenarios[self::SCENARIO_FARABOOM] = ['username', 'password', 'client_id', 'base_url', 'grant_types', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'];
         $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
 
         return $scenarios;
