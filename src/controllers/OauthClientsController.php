@@ -108,6 +108,8 @@ class OauthClientsController extends Controller
     {
         $model = $this->findModel($id);
 
+        $model->scenario = $model->client_id == ObOauthClients::PLATFORM_FARABOOM ? ObOauthClients::SCENARIO_FARABOOM : ObOauthClients::SCENARIO_FINNOTECH;
+
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
