@@ -32,7 +32,7 @@ class Authentication extends BaseAuthentication
 
             // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
             $headers['App-Key'] = $client->app_key;
-            $headers['Authorization'] = base64_encode($client->app_key.':'.$client->app_secret);
+            $headers['Authorization'] = base64_encode($client->app_key . ':' . $client->app_secret);
             $headers['Bank-Id'] = $client->bank_id;
             $headers['CLIENT-DEVICE-ID'] = $client->client_device_id;
             $headers['CLIENT-IP-ADDRESS'] = $client->client_ip_address;
