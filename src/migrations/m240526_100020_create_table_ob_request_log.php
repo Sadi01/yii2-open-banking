@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m240526_100020_create_table_howdy_ob_request_log extends Migration
+class m240526_100020_create_table_ob_request_log extends Migration
 {
     public function safeUp()
     {

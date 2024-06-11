@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m240526_095704_create_table_howdy_ob_oauth_clients extends Migration
+class m240526_095704_create_table_ob_oauth_clients extends Migration
 {
     public function safeUp()
     {
