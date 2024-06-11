@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'slave_id',
                 //'request_info',
                 //'response_info',
-                //'created_at',
+                'created_at:datetime',
                 //'created_by',
                 [
                     'class' => 'common\widgets\grid\ActionColumn',
