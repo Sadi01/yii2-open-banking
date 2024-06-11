@@ -20,8 +20,8 @@ class OpenBanking extends Component implements OpenBankingInterface
      * */
     public function call($platform, $service, $body)
     {
-        $mappedPlatform = BaseOpenBanking::itemAlias('PlatformMap',$platform);
-        $mappedService = BaseOpenBanking::itemAlias('ServiceTypeMap',$service);
+        $mappedPlatform = BaseOpenBanking::itemAlias('PlatformMap', $platform);
+        $mappedService = BaseOpenBanking::itemAlias('ServiceTypeMap', $service);
         if (Yii::$app->has($mappedPlatform) && method_exists(Yii::$app->$mappedPlatform, $mappedService)) {
 
             return Yii::$app->$mappedPlatform->$mappedService($body);
@@ -41,9 +41,10 @@ class OpenBanking extends Component implements OpenBankingInterface
         $map = [];
         $key = 0;
         foreach ($errors as $item) {
-            $map[$key]['code'] = 422;
-            $map[$key]['message'] = $item[0];
-            $map[$key]['value'] = null;
+            $itemObj = new \stdClass();
+            $itemObj->code = 422;
+            $itemObj->message = $item[0];
+            $map[$key] = $itemObj;
             $key++;
         }
         $response = new \stdClass();
