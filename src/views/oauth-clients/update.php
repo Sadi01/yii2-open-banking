@@ -7,7 +7,7 @@ use sadi01\openbanking\models\ObOauthClients;
 /** @var View $this */
 /** @var sadi01\openbanking\models\ObOauthClients $model */
 
-$this->title = Yii::t('main', 'Update Ob Oauth Clients: {name}', [
+$this->title = Yii::t('openBanking', 'Update Ob Oauth Clients: {name}', [
     'name' => $model->id,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('openBanking', 'Ob Oauth Clients'), 'url' => ['index']];
