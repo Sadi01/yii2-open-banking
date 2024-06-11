@@ -72,7 +72,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
-        $scenarios[self::SCENARIO_FARABOOM] = ['client_id', 'base_url', 'grant_types', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'];
+        $scenarios[self::SCENARIO_FARABOOM] = ['username','password','client_id', 'base_url', 'grant_types', 'app_key', 'authorization', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'];
         $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
 
         return $scenarios;
