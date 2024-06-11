@@ -19,7 +19,7 @@ class m240526_113940_create_table_howdy_ob_oauth_access_tokens extends Migration
                 'client_id' => $this->string(32)->notNull(),
                 'expires' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
                 'scope' => $this->string(2000),
-                'user_id' => $this->integer()->notNull(),
+                'user_id' => $this->integer()->unsigned()->notNull(),
                 'add_on' => $this->json()->defaultExpression('(JSON_OBJECT())'),
             ],
             $tableOptions
@@ -28,7 +28,7 @@ class m240526_113940_create_table_howdy_ob_oauth_access_tokens extends Migration
         $this->createIndex('client_id', '{{%ob_oauth_access_tokens}}', ['client_id']);
         $this->createIndex('user_id', '{{%ob_oauth_access_tokens}}', ['user_id']);
 
-        $this->addForeignKey(
+        /*$this->addForeignKey(
             'howdy_ob_oauth_access_tokens_ibfk_1',
             '{{%ob_oauth_access_tokens}}',
             ['user_id'],
@@ -36,7 +36,7 @@ class m240526_113940_create_table_howdy_ob_oauth_access_tokens extends Migration
             ['id'],
             'CASCADE',
             'CASCADE'
-        );
+        );*/
     }
 
     public function safeDown()
