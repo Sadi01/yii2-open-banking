@@ -404,6 +404,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
             ];*/
             return true;
         }
+        $this->model->loadDefaults();
         $this->model->validate();
 
         return false;
