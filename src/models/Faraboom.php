@@ -123,6 +123,7 @@ class Faraboom extends Model
             [['amount', 'receiver_name', 'receiver_family', 'destination_iban_number'], 'required', 'on' => [self::SCENARIO_SATNA]],
             [['description'], 'required', 'on' => [self::SCENARIO_BATCH_SATNA]],
             [['pan'], 'required', 'on' => [self::SCENARIO_CART_TO_SHABA]],
+            [['transfer_id'], 'required', 'on' => [self::SCENARIO_CANCLE_PAYA]],
             [['sayad_id'], 'required', 'on' => [self::SCENARIO_CHECK_INQUIRY_RECEIVER]],
             [['national_code', 'mobile'], 'required', 'on' => [self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE]],
             [['source_deposit', 'destination_deposit', 'amount'], 'required', 'on' => [self::SCENARIO_INTERNAL_TRANSFER]],
@@ -139,6 +140,7 @@ class Faraboom extends Model
             //  [['signers','transactions','include_transaction_status'.'status_set','transaction_status_set'], 'array'],
             [['source_deposit_number'], 'required', 'on' => [self::SCENARIO_BATCH_PAYA, self::SCENARIO_BATCH_SATNA, self::SCENARIO_BATCH_INTERNAL_TRANSFER, self::SCENARIO_PAYA, self::SCENARIO_SATNA]],
             [['transactions'], 'validatePayaTransaction', 'on' => self::SCENARIO_BATCH_PAYA],
+            [['destination_batch_transfers'], 'validateInternalTransaction', 'on' => self::SCENARIO_BATCH_INTERNAL_TRANSFER],
             [['branch_code'], 'integer', 'max' => 16],
             [['transaction_reason'], 'in', 'range' => array_keys(self::itemAlias('TransactionReason'))],
             [['ignore_error'], 'boolean'],
@@ -189,10 +191,46 @@ class Faraboom extends Model
         }
     }
 
+    public function validateInternalTransaction($attribute, $params)
+    {
+        $value = $this->$attribute;
+
+        if (!is_array($value)) {
+            $this->addError($attribute, 'فیلد باید آرایه باشد');
+            return;
+        }
+
+        if (count($value) < 2) {
+            $this->addError($attribute, "تعداد ردیف های حواله گروهی می بایست بیشتر از یک ردیف باشد");
+            return;
+        }
+
+        foreach ($value as $index => $item) {
+            if (!isset($item['destination_deposit_number'])) {
+                $this->addError($attribute, "شماره حساب مقصد الزامیست");
+                return;
+            }/*
+            if (!isset($item['description'])) {
+                $this->addError($attribute, "توضیحات الزلمیست");
+                return;
+            }*/
+            if (!isset($item['amount'])) {
+                $this->addError($attribute, "وارد کردن مبلغ الزامیست");
+                return;
+            }
+
+            if (isset($item['amount']) && $item['amount'] < 10000) {
+                $this->addError($attribute, "حداقل مبلغ مجاز 10000 ریال می باشد");
+                return;
+            }
+        }
+    }
+
     public function scenarios()
     {
         $scenarios = parent::scenarios();
 
+        $scenarios[self::SCENARIO_DEPOSITS] = ['slave_id', 'track_id'];
         $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['slave_id', 'track_id', 'deposit_number'];
         $scenarios[self::SCENARIO_SHABA_TO_DEPOSIT] = ['slave_id', 'track_id', 'iban'];
         $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_ACCOUNT] = ['slave_id', 'track_id', 'national_code', 'account'];
@@ -206,7 +244,7 @@ class Faraboom extends Model
         $scenarios[self::SCENARIO_BATCH_PAYA] = ['slave_id', 'track_id', 'transfer_description', 'customer_number', 'source_deposit_number', 'ignore_error', 'transactions', 'additional_document_desc', 'transaction_reason'];
         $scenarios[self::SCENARIO_REPORT_PAYA_TRANSACTIONS] = ['slave_id', 'track_id', 'source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'reference_id', 'traco_no', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'from_transaction_amount', 'to_transaction_amount', 'iban_number', 'iban_owner_name', 'factor_number', 'description', 'include_transaction_status'];
         $scenarios[self::SCENARIO_REPORT_PAYA_TRANSFER] = ['slave_id', 'track_id', 'source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'from_transaction_amount', 'to_transaction_amount', 'reference_id', 'trace_no', 'destination_iban_number', 'destination_owner_name', 'from_register_date', 'to_register_date', 'from_issue_date', 'to_issue_date', 'description', 'factor_number', 'status_set', 'transaction_status_set'];
-        $scenarios[self::SCENARIO_CANCLE_PAYA] = ['slave_id', 'track_id', 'customer_number', 'transfer_id', 'comment'];
+        $scenarios[self::SCENARIO_CANCLE_PAYA] = ['slave_id', 'track_id', 'transfer_id','customer_number', 'transfer_id', 'comment'];
         $scenarios[self::SCENARIO_REPORT_SATNA_TRANSFER] = ['slave_id', 'track_id', 'customer_number', 'status', 'branch_code', 'branch_name', 'from_date', 'length', 'offset', 'serial', 'trace_no', 'to_date'];
         $scenarios[self::SCENARIO_BATCH_SATNA] = ['slave_id', 'track_id', 'source_deposit_number', 'description', 'customer_number', 'transaction_reason', 'signers', 'transactions'];
         $scenarios[self::SCENARIO_BATCH_INTERNAL_TRANSFER] = ['slave_id', 'track_id', 'source_deposit_number', 'destination_batch_transfers', 'ignore_error', 'customer_number', 'source_description', 'additional_document_desc', 'signers,$transaction_reason'];
@@ -240,9 +278,9 @@ class Faraboom extends Model
             'destination_iban_number' => Yii::t('openBanking', ''),
             'receiver_phone_number' => Yii::t('openBanking', ''),
             'tranaction_reason' => Yii::t('openBanking', ''),
-            'sayad_id' => Yii::t('openBanking', ''),
-            'shaba_number' => Yii::t('openBanking', ''),
-            'mobile' => Yii::t('openBanking', ''),
+            'sayad_id' => Yii::t('openBanking', 'شناسه صیاد'),
+            'shaba_number' => Yii::t('openBanking', 'شماره شبا'),
+            'mobile' => Yii::t('openBanking', 'شماره موبایل'),
             'pan' => Yii::t('openBanking', 'شماره کارت'),
             'ignore_error' => Yii::t('openBanking', ''),
             'transactions' => Yii::t('openBanking', ''),
@@ -274,11 +312,11 @@ class Faraboom extends Model
             'serial' => Yii::t('openBanking', ''),
             'to_date' => Yii::t('openBanking', ''),
             'signers' => Yii::t('openBanking', ''),
-            'source_deposit' => Yii::t('openBanking', ''),
-            'destination_deposit' => Yii::t('openBanking', ''),
-            'source_comment' => Yii::t('openBanking', ''),
+            'source_deposit' => Yii::t('openBanking', 'سپرده مبدا'),
+            'destination_deposit' => Yii::t('openBanking', 'شماره سپرده مقصد'),
+            'source_comment' => Yii::t('openBanking', 'شرح انتقال دهنده وجه'),
             'destination_comment' => Yii::t('openBanking', ''),
-            'reference_number' => Yii::t('openBanking', ''),
+            'reference_number' => Yii::t('openBanking', 'شماره پیگیری کاربر'),
             'destination_batch_transfers' => Yii::t('openBanking', ''),
             'source_description' => Yii::t('openBanking', ''),
         ];
