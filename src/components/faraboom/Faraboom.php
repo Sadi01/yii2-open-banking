@@ -326,7 +326,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function reportPayaTransfer($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_REPORT_PAYA_TRANSFER)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_PAYA_TRANSFER), $data, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_REPORT_PAYA_TRANSFER), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
 
     }
