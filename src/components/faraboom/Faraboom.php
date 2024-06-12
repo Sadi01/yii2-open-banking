@@ -213,7 +213,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
 
     public function checkinquiryReceiver($data)
     {
-        if ($this->load($data, FaraboomBaseModel::SCENARIO_SATNA)) {
+        if ($this->load($data, FaraboomBaseModel::SCENARIO_CHECK_INQUIRY_RECEIVER)) {
             return ResponseHelper::mapFaraboom(Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CHECK_INQUIRY_RECEIVER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CHECK_INQUIRY_RECEIVER), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
 
