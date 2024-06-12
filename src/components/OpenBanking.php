@@ -9,8 +9,10 @@ use yii\base\NotSupportedException;
 
 class OpenBanking extends Component implements OpenBankingInterface
 {
+    const BS_4 = 4;
+    const BS_5 = 5;
 
-
+    public $bsVersion = self::BS_5;
     /**
      * Parameters:
      * string $platform

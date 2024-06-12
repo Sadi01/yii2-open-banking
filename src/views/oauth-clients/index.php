@@ -1,6 +1,8 @@
 <?php
 
+use Yii;
 use sadi01\openbanking\models\ObOauthClients;
+use sadi01\openbanking\components\OpenBanking;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -21,18 +23,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card-header d-flex justify-content-between">
         <h5><?= Html::encode($this->title) ?></h5>
 
+        <?php if (Yii::$app->openBanking->bsVersion == OpenBanking::BS_4): ?>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                ثبت سرویس دهنده
+            </button>
+            <div class="dropdown-menu">
+                <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a></li>
+                <li><a class="dropdown-item" href="">فینوتک</a></li>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (Yii::$app->openBanking->bsVersion == OpenBanking::BS_5): ?>
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                ثبت خدمات دهنده
+                ثبت سرویس دهنده
             </button>
             <ul class="dropdown-menu" style="">
-                <li><a class="dropdown-item"
-                       href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a>
+                <li>
+                    <a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a>
                 </li>
                 <li><a class="dropdown-item" href="">فینوتک</a></li>
             </ul>
         </div>
+        <?php endif; ?>
 
     </div>
     <div class="card-body">
