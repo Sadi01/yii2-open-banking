@@ -37,9 +37,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     public ?string $app_secret = null;
     public ?string $client_device_id = null;
     public ?string $bank_id = null;
-    public ?string $client_ip_address = null;
     public ?string $client_platform_type = null;
-    public ?string $client_user_agent = null;
     public ?string $client_user_id = null;
     public ?string $device_id = null;
     public ?string $token_id = null;
@@ -59,7 +57,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         return [
             [['client_id', 'base_url'], 'required'],
-            [['client_id', 'base_url', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
+            [['client_id', 'base_url', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_platform_type', 'client_user_id', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
             [['add_on'], 'safe'],
             [['client_id', 'client_secret'], 'string', 'max' => 32],
             [['base_url'], 'string', 'max' => 255],
@@ -72,7 +70,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
-        $scenarios[self::SCENARIO_FARABOOM] = ['username', 'password', 'client_id', 'base_url', 'grant_types', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_ip_address', 'client_platform_type', 'client_user_agent', 'client_user_id', 'device_id', 'token_id'];
+        $scenarios[self::SCENARIO_FARABOOM] = ['username', 'password', 'client_id', 'base_url', 'grant_types', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_platform_type', 'client_user_id', 'device_id', 'token_id'];
         $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
 
         return $scenarios;
@@ -97,9 +95,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
             'app_secret' => Yii::t('openBanking', 'App Secret'),
             'client_device_id' => Yii::t('openBanking', 'Client Device ID'),
             'bank_id' => Yii::t('openBanking', 'Bank ID'),
-            'client_ip_address' => Yii::t('openBanking', 'Client Ip Address'),
             'client_platform_type' => Yii::t('openBanking', 'Client Platform Type'),
-            'client_user_agent' => Yii::t('openBanking', 'Client User Agent'),
             'client_user_id' => Yii::t('openBanking', 'Client User ID'),
             'device_id' => Yii::t('openBanking', 'Device ID'),
             'token_id' => Yii::t('openBanking', 'Token ID'),
