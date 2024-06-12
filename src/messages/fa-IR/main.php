@@ -55,6 +55,6 @@ return [
     'Slave ID' => 'شناسه درخواست',
     'Update Ob Oauth Clients: {name}' => 'ویرایش اطلاعات سرویس دهنده: {name}',
     'Update' => 'ویرایش',
-    '' => '',
+    'Delete' => 'حذف کردن',
     '' => '',
 ];
