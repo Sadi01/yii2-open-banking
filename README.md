@@ -75,7 +75,8 @@ return [
     //....
     'components' => [
        'openBanking' => [
-            'class' => 'sadi01\openbanking\components\OpenBanking'
+            'class' => 'sadi01\openbanking\components\OpenBanking',
+            'bsVersion' => 4 //your project bs version
         ],
     ]
 ];

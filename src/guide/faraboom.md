@@ -27,10 +27,18 @@ depositToShaba(تبدیل شماره حساب به شماره شبا)
     <td>سرویس تبدیل شماره سپرده به شبا</td>
   </tr>
   <tr>
-    <th rowspan="2">data</th>
+    <th rowspan="6">data</th>
   </tr>
   <tr>
-    <td>deposit_number</td>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
+  </tr>
+  <tr>
+    <td>*deposit_number</td>
     <td>شماره سپرده</td>
   </tr>
 <tr>
@@ -65,8 +73,16 @@ shabaToDeposit
     <td rowspan="5">data</td>
   </tr>
   <tr>
-    <td>iban</td>
- <td>شماره شبا</td>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
+  </tr>
+  <tr>
+    <td>*iban</td>
+    <td>شماره شبا</td>
   </tr>
 <tr>
 </tr>
@@ -98,12 +114,20 @@ matchNationalCodeAccount
   <tr>
     <td rowspan="5">data</td>
   </tr>
+<tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
   <tr>
-    <td>national_code</td>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
+  </tr>
+  <tr>
+    <td>*national_code</td>
  <td>شماره ملی</td>
   </tr>
  <tr>
-    <td>account</td>
+    <td>*account</td>
  <td>شماره حساب</td>
   </tr>
 <tr>
@@ -134,10 +158,18 @@ depositHolder:
  <th>سرویس دریافت نام صاحب سپرده</th>
   </tr>
   <tr>
-    <td rowspan="2">data</td>
+    <td rowspan="6">data</td>
   </tr>
   <tr>
-    <td>deposit_number</td>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
+  </tr>
+  <tr>
+    <td>*deposit_number</td>
     <td>شماره سپرده</td>
   </tr>
 <tr>
@@ -168,7 +200,15 @@ paya
     <th>انتقال وجه بین بانکی پایا</th>
   </tr>
   <tr>
-    <td rowspan="12">data</td>
+    <td rowspan="16">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*source_deposit_number</td>
@@ -245,7 +285,15 @@ batchPaya
     <th>انتقال وجه پایا گروهی</th>
   </tr>
   <tr>
-    <td rowspan="8">data</td>
+    <td rowspan="12">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*transactions</td>
@@ -342,7 +390,15 @@ internalTransfer
     <th>سرویس انتقال وجه داخلی</th>
   </tr>
   <tr>
-    <td rowspan="11">data</td>
+    <td rowspan="15">data</td>
+  </tr>
+ <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*source_deposit</td>
@@ -405,7 +461,15 @@ batchInternalTransfer
     <th>انتقال وجه دسته ای</th>
   </tr>
   <tr>
-    <td rowspan="9">data</td>
+    <td rowspan="13">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*source_deposit_number</td>
@@ -477,7 +541,15 @@ satna
     <th>انتقال وجه ساتنا</th>
   </tr>
   <tr>
-    <td rowspan="12">data</td>
+    <td rowspan="16">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*amount</td>
@@ -544,7 +616,15 @@ checkinquiryReceiver
     <th>استعلام چک توسط گیرنده</th>
   </tr>
   <tr>
-    <td rowspan="9">data</td>
+    <td rowspan="5">data</td>
+  </tr>
+ <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*sayad_id</td>
@@ -578,7 +658,15 @@ shabainquiry
     <th>استعلام شماره شبا</th>
   </tr>
   <tr>
-    <td rowspan="2">data</td>
+    <td rowspan="6">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*iban</td>
@@ -600,7 +688,15 @@ matchNationalCodeMobile
     <th>تطبیق کد ملی و شماره موبایل</th>
   </tr>
   <tr>
-    <td rowspan="3">data</td>
+    <td rowspan="7">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>*national_code</td>
@@ -631,7 +727,15 @@ cartToShaba
     <td>شماره کارت به شبا</td>
   </tr>
   <tr>
-    <td rowspan="113">data</td>
+    <td rowspan="4">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>pan</td>
@@ -658,7 +762,15 @@ reportPayaTransactions
     <td>سرویس گزارش لیست تراکنش های انتقال وجه پایا</td>
   </tr>
   <tr>
-    <td rowspan="113">data</td>
+    <td rowspan="22">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>source_deposit_iban</td>
@@ -757,7 +869,15 @@ reportPayaTransfer
     <td>سرویس گزارش لیست انتقال وجه های پایا</td>
   </tr>
   <tr>
-    <td rowspan="113">data</td>
+    <td rowspan="22">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>source_deposit_iban</td>
@@ -856,7 +976,15 @@ cancelPaya
     <td>لغو انتقال وجه پایا</td>
   </tr>
   <tr>
-    <td rowspan="113">data</td>
+    <td rowspan="6">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>customer_number</td>
@@ -891,7 +1019,15 @@ reportSatnaTransfer
     <td>گزارش انتقال وجه ساتنا</td>
   </tr>
   <tr>
-    <td rowspan="113">data</td>
+    <td rowspan="13">data</td>
+  </tr>
+  <tr>
+    <td>*slave_id</td>
+    <td>شناسه کسب و کار</td>
+  </tr>
+  <tr>
+    <td>*track_id</td>
+    <td>شماره یکتا پیگیری</td>
   </tr>
   <tr>
     <td>customer_number</td>
