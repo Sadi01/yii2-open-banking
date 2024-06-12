@@ -17,6 +17,7 @@ use yii\widgets\Pjax;
 /** @var ActiveDataProvider $dataProvider */
 
 $this->title = Yii::t('openBanking', 'Ob Oauth Clients');
+$this->params['breadcrumbs'][] = ['label' => 'سرویس های بانکی', 'url' => '/openbanking'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ob-oauth-clients-index card">
