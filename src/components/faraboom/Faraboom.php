@@ -229,7 +229,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function shabainquiry($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_INQUIRY)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['iban']), $data, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['iban']), null, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -397,14 +397,8 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     {
         $this->model->scenario = $scenario;
         if ($this->model->load($data, '') && $this->model->validate()) {
-            /*return [
-                'success' => true,
-                'status' => true,
-                'data' => ''
-            ];*/
             return true;
         }
-        $this->model->loadDefaults();
         $this->model->validate();
 
         return false;

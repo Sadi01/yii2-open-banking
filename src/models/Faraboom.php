@@ -201,7 +201,7 @@ class Faraboom extends Model
         $scenarios[self::SCENARIO_INTERNAL_TRANSFER] = ['slave_id', 'track_id', 'source_deposit', 'destination_deposit', 'amount', 'customer_number', 'source_comment', 'destination_comment', 'pay_id', 'reference_number', 'additional_document_desc', 'transaction_reason'];
         $scenarios[self::SCENARIO_SATNA] = ['slave_id', 'track_id', 'amount', 'source_deposit_number', 'receiver_name', 'receiver_family', 'destination_iban_number', 'customer_number', 'receiver_phone_number', 'factor_number', 'description', 'tranaction_reason', 'pay_id'];
         $scenarios[self::SCENARIO_CHECK_INQUIRY_RECEIVER] = ['slave_id', 'track_id', 'sayad_id', 'customer_number'];
-        $scenarios[self::SCENARIO_SHABA_INQUIRY] = ['slave_id', 'track_id', 'shaba_number'];
+        $scenarios[self::SCENARIO_SHABA_INQUIRY] = ['slave_id', 'track_id', 'iban'];
         $scenarios[self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE] = ['slave_id', 'track_id', 'national_code', 'mobile'];
         $scenarios[self::SCENARIO_BATCH_PAYA] = ['slave_id', 'track_id', 'transfer_description', 'customer_number', 'source_deposit_number', 'ignore_error', 'transactions', 'additional_document_desc', 'transaction_reason'];
         $scenarios[self::SCENARIO_REPORT_PAYA_TRANSACTIONS] = ['slave_id', 'track_id', 'source_deposit_iban', 'transfer_description', 'customer_number', 'offset', 'length', 'reference_id', 'traco_no', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'from_transaction_amount', 'to_transaction_amount', 'iban_number', 'iban_owner_name', 'factor_number', 'description', 'include_transaction_status'];
