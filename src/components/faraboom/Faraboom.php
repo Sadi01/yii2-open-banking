@@ -39,7 +39,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function depositToShaba($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, $data['deposit_number']), null, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_TO_SHABA, $data['deposit_number']), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -51,7 +51,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function shabaToDeposit($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_TO_DEPOSIT)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, $data['iban']), null, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_TO_DEPOSIT, $data['iban']), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -78,7 +78,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function depositHolder($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_DEPOSIT_HOLDER)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, $data['deposit_number']), null, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_DEPOSIT_HOLDER, $data['deposit_number']), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -229,7 +229,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function shabainquiry($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_SHABA_INQUIRY)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['iban']), null, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_SHABA_INQUIRY, $data['iban']), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -260,7 +260,7 @@ class Faraboom extends OpenBanking implements FaraboomInterface
     public function cartToShaba($data)
     {
         if ($this->load($data, FaraboomBaseModel::SCENARIO_CART_TO_SHABA)) {
-            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CART_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CART_TO_SHABA, $data['pan']), null, $this->getHeaders()));
+            return ResponseHelper::mapFaraboom(Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_CART_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FARABOOM_CART_TO_SHABA, $data['pan']), $data, $this->getHeaders()));
         } else return $this->setErrors($this->model->errors);
 
     }
