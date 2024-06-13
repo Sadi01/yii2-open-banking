@@ -69,6 +69,7 @@ class ApiClient extends Component
 
     private function sendRequest($clientId, $serviceType, $method, $url, $data = [], $headers = [])
     {
+        var_dump($data);die('eee');
         $attempt = 0;
         while ($attempt < $this->maxRetries) {
             $attempt++;
@@ -108,6 +109,7 @@ class ApiClient extends Component
 
     private function logRequest($method, $url, $data, $response, $headers, $clientId, $serviceType)
     {
+        var_dump($data);die;
         $model = new ObRequestLog([
             'status' => $response->statusCode,
             'url' => $url,
@@ -118,8 +120,8 @@ class ApiClient extends Component
             'client_id' => $clientId,
             'service_type' => $serviceType,
             'message' => '',
-            'track_id' => $data['track_id'],
-            'slave_id' => $data['slave_id'],
+            'track_id' => isset($data['track_id']) ? $data['track_id'] : null,
+            'slave_id' => isset($data['slave_id']) ? $data['slave_id'] : null,
         ]);
 
         $model->save();
