@@ -91,25 +91,25 @@ class Faraboom extends Model
     const SCENARIO_BATCH_INTERNAL_TRANSFER = 'batch_internal-transfer';
     const SCENARIO_DEPOSITS = 'deposits';
 
-    const POSA = 'posa';
-    const IOSP = 'posa';
-    const HIPA = 'posa';
-    const ISAP = 'posa';
-    const FXAP = 'posa';
-    const DRPA = 'posa';
-    const RTAP = 'posa';
-    const MPTP = 'posa';
-    const IMPT = 'posa';
-    const LMAP = 'posa';
-    const CDAP = 'posa';
-    const TCAP = 'posa';
-    const GEAC = 'posa';
-    const LRPA = 'posa';
-    const CCPA = 'posa';
-    const GPAC = 'posa';
-    const CPAC = 'posa';
-    const GPPC = 'posa';
-    const SPAC = 'posa';
+    const POSA = 'POSA';
+    const IOSP = 'IOSP';
+    const HIPA = 'HIPA';
+    const ISAP = 'ISAP';
+    const FXAP = 'FXAP';
+    const DRPA = 'DRPA';
+    const RTAP = 'RTAP';
+    const MPTP = 'MPTP';
+    const IMPT = 'IMPT';
+    const LMAP = 'LMAP';
+    const CDAP = 'CDAP';
+    const TCAP = 'TCAP';
+    const GEAC = 'GEAC';
+    const LRPA = 'LRPA';
+    const CCPA = 'CCPA';
+    const GPAC = 'GPAC';
+    const CPAC = 'CPAC';
+    const GPPC = 'GPPC';
+    const SPAC = 'SPAC';
 
     public function rules()
     {
@@ -128,16 +128,11 @@ class Faraboom extends Model
             [['national_code', 'mobile'], 'required', 'on' => [self::SCENARIO_MATCH_NATIONAL_CODE_MOBILE]],
             [['source_deposit', 'destination_deposit', 'amount'], 'required', 'on' => [self::SCENARIO_INTERNAL_TRANSFER]],
             [['ignore_error'], 'required', 'on' => [self::SCENARIO_BATCH_INTERNAL_TRANSFER]],
-            // [[], 'required' , 'on' => [self::SCENARIO_REPORT_SATNA_TRANSFER]],
-            // [[], 'required' , 'on' => [self::SCENARIO_CANCLE_PAYA]],
-            //[[], 'required' , 'on' => [self::SCENARIO_REPORT_PAYA_TRANSACTIONS]],
             [['iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
             [['deposit_number', 'iban', 'national_code', 'account', 'deposit_number', 'source_deposit_number', 'iban_number', 'owner_name', 'transfer_description', 'customer_number', 'description', 'factor_number'
                 , 'additional_document_desc', 'pay_id', 'receiver_name', 'receiver_family', 'destination_iban_number', 'receiver_phone_number', 'branch_name', 'from_date', 'serial', 'trace_no', 'to_date'
                 , 'transfer_id', 'comment', 'source_deposit_iban', 'reference_id', 'transaction_id', 'from_register_date', 'to_register_date', 'from_issue_date', 'To_issue_date', 'iban_owner_name'
                 , 'source_deposit_iban', 'destination_owner_name', 'additional_document_desc', 'pan', 'sayad_id', 'shaba_number', 'mobile'], 'string'],
-            //    [['amount','from_transaction_amount','to_transaction_amount'], 'decimal'],
-            //  [['signers','transactions','include_transaction_status'.'status_set','transaction_status_set'], 'array'],
             [['source_deposit_number'], 'required', 'on' => [self::SCENARIO_BATCH_PAYA, self::SCENARIO_BATCH_SATNA, self::SCENARIO_BATCH_INTERNAL_TRANSFER, self::SCENARIO_PAYA, self::SCENARIO_SATNA]],
             [['transactions'], 'validatePayaTransaction', 'on' => self::SCENARIO_BATCH_PAYA],
             [['destination_batch_transfers'], 'validateInternalTransaction', 'on' => self::SCENARIO_BATCH_INTERNAL_TRANSFER],
@@ -147,7 +142,6 @@ class Faraboom extends Model
             [['amount'], 'number', 'min' => 10000],
             [['source_deposit', 'destination_deposit'], 'number'],
             [['length', 'offset'], 'integer', 'max' => 64],
-            //  [['transaction_reason','status'], 'enum'],
         ];
 
     }

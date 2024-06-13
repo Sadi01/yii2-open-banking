@@ -118,8 +118,8 @@ class ApiClient extends Component
             'client_id' => $clientId,
             'service_type' => $serviceType,
             'message' => '',
-            'track_id' => null,
-            'slave_id' => 1,
+            'track_id' => $data['track_id'],
+            'slave_id' => $data['slave_id'],
         ]);
 
         $model->save();
