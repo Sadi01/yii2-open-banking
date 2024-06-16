@@ -39,6 +39,12 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FARABOOM_BATCH_INTERNAL_TRANSFER = 19;
     const FARABOOM_DEPOSITS = 20;
     const FINNOTECH_TRANSFER = 21;
+    const FINNOTECH_PAYA_TRANSFER = 22;
+    const FINNOTECH_INTERNAL_TRANSFER = 23;
+    const FINNOTECH_SHABA_INQUIRY = 24;
+    const FINNOTECH_DEPOSIT_TO_SHABA = 25;
+    const FINNOTECH_CHECK_INQUIRY = 26;
+    const FINNOTECH_GET_TOKEN = 27;
 
 
     public function rules()
@@ -63,7 +69,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     {
         $_items = [
             'PlatformMap' => [
-                self::PLATFORM_FINNOTECH => 'Finnotech',
+                self::PLATFORM_FINNOTECH => 'finnotech',
                 self::PLATFORM_FARABOOM => 'faraboom',
                 self::PLATFORM_SHAHIN => 'Shahin',
                 self::PLATFORM_SHAHKAR => 'Shahkar'
@@ -96,9 +102,16 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => Yii::t('openBanking', 'Batch Internal Transfer'),
                 self::FARABOOM_DEPOSITS => Yii::t('openBanking', 'Deposits'),
                 self::FINNOTECH_TRANSFER => Yii::t('openBanking', 'Transfer'),
+                self::FINNOTECH_PAYA_TRANSFER => Yii::t('openBanking', 'Paya Transfer'),
+                self::FINNOTECH_INTERNAL_TRANSFER => Yii::t('openBanking', 'Internal Transfer'),
+                self::FINNOTECH_SHABA_INQUIRY => Yii::t('openBanking', 'Shaba Inquiry'),
+                self::FINNOTECH_DEPOSIT_TO_SHABA => Yii::t('openBanking', 'Deposit To Shaba'),
+                self::FINNOTECH_CHECK_INQUIRY => Yii::t('openBanking', 'Check Inquiry'),
+                self::FINNOTECH_GET_TOKEN => Yii::t('openBanking', 'Get finnotech token'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
+                self::FINNOTECH_GET_TOKEN => 'token',
                 self::FARABOOM_DEPOSIT_TO_SHABA => 'depositToShaba',
                 self::FARABOOM_SHABA_TO_DEPOSIT => 'shabaToDeposit',
                 self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => 'matchNationalCodeAccount',
@@ -118,10 +131,16 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => 'internalTransfer',
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => 'batchInternalTransfer',
                 self::FARABOOM_DEPOSITS => 'deposits',
-                self::FINNOTECH_TRANSFER => 'transfer'
+                self::FINNOTECH_TRANSFER => 'transfer',
+                self::FINNOTECH_PAYA_TRANSFER => 'payaTransfer',
+                self::FINNOTECH_INTERNAL_TRANSFER => 'InternalTransfer',
+                self::FINNOTECH_SHABA_INQUIRY => 'ShabaInquiry',
+                self::FINNOTECH_DEPOSIT_TO_SHABA => 'DepositToShaba',
+                self::FINNOTECH_CHECK_INQUIRY => 'CheckInquiry',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL . '',
+                self::FINNOTECH_GET_TOKEN => self::FARABOOM_BASE_URL . '',
                 self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits/' . $params,
                 self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . 'ibans/' . $params,
                 self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => self::FARABOOM_BASE_URL . 'deposits/account/national-code',
@@ -142,6 +161,11 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/batch',
                 self::FARABOOM_DEPOSITS => self::FARABOOM_BASE_URL . 'deposits',
                 self::FINNOTECH_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . 'transferTo?trackId=' . (is_array($params) && $params['trackId'] ?: ''),
+                self::FINNOTECH_PAYA_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . 'payaTransferRequest?trackId=' . (is_array($params) && $params['trackId'] ?: ''),
+                self::FINNOTECH_INTERNAL_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . 'internalTransferRequest?trackId=' . (is_array($params) && $params['trackId'] ?: ''),
+                self::FINNOTECH_SHABA_INQUIRY => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . 'ibanInquiry',
+                self::FINNOTECH_DEPOSIT_TO_SHABA => self::FINNOTECH_BASE_URL . '/facility/v2/clients' . (is_array($params) && $params['clientId'] ?: '') . 'depositToIban',
+                self::FINNOTECH_CHECK_INQUIRY => self::FINNOTECH_BASE_URL . '/credit/v2/clients' . (is_array($params) && $params['clientId'] ?: '') . 'sayadSerialInquiry',
             ],
         ];
 

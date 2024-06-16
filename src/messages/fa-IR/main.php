@@ -56,5 +56,8 @@ return [
     'Update Ob Oauth Clients: {name}' => 'ویرایش اطلاعات سرویس دهنده: {name}',
     'Update' => 'ویرایش',
     'Delete' => 'حذف کردن',
+    'Nid' => 'کدملی (nid)',
+    'App Key' => 'شناسه برنامه (App Key)',
+    'App Password' => 'رمز برنامه (App Password)',
     '' => '',
 ];

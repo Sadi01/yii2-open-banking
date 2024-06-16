@@ -13,20 +13,21 @@ use sadi01\openbanking\models\ObOauthClients;
 <div class="ob-oauth-clients-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <div class="row">
-        <div class="col-sm-4">
-            <?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-        </div>
-    </div>
+
     <?php
 
     if ($platform == ObOauthClients::PLATFORM_FARABOOM) { ?>
+        <div class="row">
+            <div class="col-sm-4">
+                <?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-4">
                 <?= $form->field($model, 'app_key')->textInput(['maxlength' => true]) ?>
@@ -62,6 +63,25 @@ use sadi01\openbanking\models\ObOauthClients;
             </div>
         </div>
 
+
+    <?php } elseif ($platform == ObOauthClients::PLATFORM_FINNOTECH) { ?>
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'base_url')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <?= $form->field($model, 'app_key')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'app_password')->textInput(['maxlength' => true]) ?>
+            </div>
+
+            <div class="col-sm-4">
+                <?= $form->field($model, 'nid')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
 
     <?php } ?>
 

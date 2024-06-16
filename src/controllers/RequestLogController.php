@@ -4,6 +4,7 @@ namespace sadi01\openbanking\controllers;
 
 use sadi01\openbanking\models\ObRequestLog;
 use sadi01\openbanking\models\ObRequestLogSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,20 @@ class RequestLogController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => [
+                                'index', 'view'
+                            ],
+                            'roles' => [
+                                '@'
+                            ],
+                            'allow' => true,
+                        ],
+                    ]
+                ],
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [

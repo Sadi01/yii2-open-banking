@@ -42,7 +42,7 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
             [['refresh_token', 'client_id','user_id'], 'required'],
             [['expires', 'add_on'], 'safe'],
             [['user_id'], 'integer'],
-            [['refresh_token'], 'string', 'max' => 40],
+            [['refresh_token'], 'string', 'max' => 2048],
             [['client_id'], 'string', 'max' => 32],
             [['scope'], 'string', 'max' => 2000],
             [['refresh_token'], 'unique'],
