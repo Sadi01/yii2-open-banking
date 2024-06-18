@@ -414,9 +414,9 @@ class Faraboom extends OpenBanking implements FaraboomInterface
         $headers['Authorization'] = 'Bearer ' . $token;
         $headers['bank-id'] = $this->client->bank_id;
         $headers['CLIENT-DEVICE-ID'] = $this->client->client_device_id;
-        $headers['CLIENT-IP-ADDRESS'] = Yii::$app->request->userIP;
+        $headers['CLIENT-IP-ADDRESS'] = Yii::$app->request->userIP ?? $this->client->client_device_id;
         $headers['CLIENT-PLATFORM-TYPE'] = 'WEB';
-        $headers['CLIENT-USER-AGENT'] = Yii::$app->request->userAgent;
+        $headers['CLIENT-USER-AGENT'] = Yii::$app->request->userAgent ?? '';
         $headers['CLIENT-USER-ID'] = $this->client->client_user_id;
         $headers['Content-Type'] = Client::FORMAT_JSON;
         $headers['Device-Id'] = $this->client->device_id;
