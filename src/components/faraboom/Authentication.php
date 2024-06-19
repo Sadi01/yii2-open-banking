@@ -93,11 +93,11 @@ class Authentication extends BaseAuthentication
 
         $headers['Authorization'] = $client->authorization;
         $headers['Device-Id'] = $client->device_id;
-        $headers['CLIENT-IP-ADDRESS'] = Yii::$app->request->userIP;
+        $headers['CLIENT-IP-ADDRESS'] = Yii::$app->request->userIP ?? $client->client_device_id;
         $headers['CLIENT-PLATFORM-TYPE'] = $client->client_platform_type;
         $headers['CLIENT-DEVICE-ID'] = $client->client_device_id;
         $headers['CLIENT-USER-ID'] = $client->client_user_id;
-        $headers['CLIENT-USER-AGENT'] = Yii::$app->request->userAgent;
+        $headers['CLIENT-USER-AGENT'] = Yii::$app->request->userAgent ?? '';
 
         $response = Yii::$app->apiClient->post($url, $param, $headers);
         if ($response['status'] === 200) {
