@@ -45,6 +45,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_DEPOSIT_TO_SHABA = 25;
     const FINNOTECH_CHECK_INQUIRY = 26;
     const FINNOTECH_GET_TOKEN = 27;
+    const FINNOTECH_BANKS_INFO = 28;
 
 
     public function rules()
@@ -108,6 +109,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSIT_TO_SHABA => Yii::t('openBanking', 'Deposit To Shaba'),
                 self::FINNOTECH_CHECK_INQUIRY => Yii::t('openBanking', 'Check Inquiry'),
                 self::FINNOTECH_GET_TOKEN => Yii::t('openBanking', 'Get finnotech token'),
+                self::FINNOTECH_BANKS_INFO => Yii::t('openBanking', 'Banks Info'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -137,6 +139,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SHABA_INQUIRY => 'ShabaInquiry',
                 self::FINNOTECH_DEPOSIT_TO_SHABA => 'DepositToShaba',
                 self::FINNOTECH_CHECK_INQUIRY => 'CheckInquiry',
+                self::FINNOTECH_BANKS_INFO => 'BanksInfo',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -160,12 +163,13 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/normal',
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/batch',
                 self::FARABOOM_DEPOSITS => self::FARABOOM_BASE_URL . 'deposits',
-                self::FINNOTECH_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . '/transferTo?trackId=' . (is_array($params) && $params['trackId'] ? $params['trackId'] : ''),
-                self::FINNOTECH_PAYA_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . '/payaTransferRequest?trackId=' . (is_array($params) && $params['trackId'] ? $params['trackId'] : ''),
-                self::FINNOTECH_INTERNAL_TRANSFER => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ?: '') . '/internalTransferRequest?trackId=' . (is_array($params) && $params['trackId'] ? $params['trackId'] : ''),
-                self::FINNOTECH_SHABA_INQUIRY => self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . (is_array($params) && $params['clientId'] ? $params['clientId'] : '') . '/ibanInquiry?iban='. (is_array($params) && $params['iban'] ? $params['iban'] : ''),
-                self::FINNOTECH_DEPOSIT_TO_SHABA => self::FINNOTECH_BASE_URL . '/facility/v2/clients' . (is_array($params) && $params['clientId'] ?: '') . '/depositToIban',
-                self::FINNOTECH_CHECK_INQUIRY => self::FINNOTECH_BASE_URL . '/credit/v2/clients' . (is_array($params) && $params['clientId'] ?: '') . '/sayadSerialInquiry',
+                self::FINNOTECH_DEPOSIT_TO_SHABA => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/depositToIban', 'trackId' => $params['track_id'] ?? '', 'bankCode' => $params['bank_code'] ?? '', 'deposit' => $params['deposit'] ?? ''],
+                self::FINNOTECH_TRANSFER => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/cc/transferTo', 'trackId' => $params['trackId'] ?? ''],
+                self::FINNOTECH_PAYA_TRANSFER => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/payaTransferRequest', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_INTERNAL_TRANSFER => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/internalTransferRequest', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_SHABA_INQUIRY => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/ibanInquiry', 'trackId' => $params['track_id'] ?? '', 'iban' => $params['iban'] ?? ''],
+                self::FINNOTECH_CHECK_INQUIRY => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/sayadSerialInquiry', 'trackId' => $params['track_id'] ?? '', 'sayadId' => $params['sayad_id'] ?? ''],
+                self::FINNOTECH_BANKS_INFO => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/banksInfo', 'trackId' => $params['track_id'] ?? ''],
             ],
         ];
 

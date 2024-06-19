@@ -34,6 +34,7 @@ class Finnotech extends Model
     const SCENARIO_SHABA_INQUIRY = 'shaba-inquiry';
     const SCENARIO_CHECK_INQUIRY = 'check-inquiry';
     const SCENARIO_DEPOSIT_TO_SHABA = 'deposit_to_shaba';
+    const SCENARIO_BANKS_INFO = 'banks_info';
 
     public  function rules()
     {
@@ -87,7 +88,7 @@ class Finnotech extends Model
         $scenarios = parent::scenarios();
 
         $scenarios[self::SCENARIO_TRANSFER] = ['slave_id', 'track_id', 'amount','description','destinationFirstname','destinationLastname',
-            'destinationNumber','paymentNumber','reasonDescription','deposit','sourceFirstName','sourceLastName','secondPassword','reasonDescription','merchantName','merchantIban','client_id'];
+            'destinationNumber','paymentNumber','deposit','sourceFirstName','sourceLastName','secondPassword','reasonDescription','merchantName','merchantIban','client_id'];
         $scenarios[self::SCENARIO_PAYA_TRANSFER] = ['slave_id', 'track_id', 'destinationNumber','amount','description','reasonDescription',
             'paymentNumber','destinationFirstname','destinationLastname','customerRef','client_id'];
         $scenarios[self::SCENARIO_INTERNAL_TRANSFER] = ['slave_id', 'track_id', 'amount','description','destinationFirstname','destinationLastname',
@@ -95,6 +96,7 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_SHABA_INQUIRY] = ['slave_id', 'track_id','client_id','iban'];
         $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['slave_id', 'track_id','client_id','deposit','bank_code'];
         $scenarios[self::SCENARIO_CHECK_INQUIRY] = ['sayad_id'];
+        $scenarios[self::SCENARIO_BANKS_INFO] = ['client_id','track_id'];
 
 
         return $scenarios;

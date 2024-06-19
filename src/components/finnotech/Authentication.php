@@ -28,7 +28,7 @@ class Authentication extends BaseAuthentication
             $body = array(
                 'grant_type' => 'client_credentials',
                 'nid' => $client->nid,
-                'scopes' => 'oak:iban-inquiry:get',
+                'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get',
             );
             // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
             $headers['Content-Type'] = Client::FORMAT_JSON;

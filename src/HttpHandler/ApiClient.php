@@ -109,7 +109,7 @@ class ApiClient extends Component
     {
         $model = new ObRequestLog([
             'status' => $response->statusCode,
-            'url' => $url,
+            'url' => is_array($url) ? $url[0] : $url,
             'method' => $method,
             'data' => $data ?: json_decode("{}"),
             'headers' => $headers ?: json_decode("{}"),
@@ -117,8 +117,8 @@ class ApiClient extends Component
             'client_id' => $clientId,
             'service_type' => $serviceType,
             'message' => '',
-            'track_id' => (string)$data['track_id'] ?? null,
-            'slave_id' => (string)$data['slave_id'] ?? null,
+            'track_id' => isset($data['track_id']) ? (string)$data['track_id'] : '0',
+            'slave_id' => isset($data['slave_id']) ? $data['slave_id'] : 0,
         ]);
 
         $model->save();

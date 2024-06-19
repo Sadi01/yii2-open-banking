@@ -47,7 +47,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function transfer($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_TRANSFER, ['clientId' => $data['clientId'],'trackId' => $data['trackId']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_TRANSFER, ['clientId' => $data['client_id'],'trackId' => $data['track_id']]), $data, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -66,7 +66,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function payaTransfer($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_PAYA_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_PAYA_TRANSFER, ['clientId' => $data['clientId'],'trackId' => $data['trackId']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_PAYA_TRANSFER, ['clientId' => $data['client_id'],'trackId' => $data['track_id']]), $data, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -89,7 +89,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function internalTransfer($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_INTERNAL_TRANSFER)) {
-            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER, ['clientId' => $data['clientId'],'trackId' => $data['trackId']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER, ['clientId' => $data['client_id'],'trackId' => $data['track_id']]), $data, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -114,7 +114,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function depositToShaba($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, ['clientId' => $data['clientId'],'trackId' => $data['trackId'],'deposit' => $data['deposit'],'bankCode' => $data['bankCode']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, ['clientId' => $data['client_id'],'trackId' => $data['track_id'],'deposit' => $data['deposit'],'bank_code' => $data['bank_code']]), $data, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -126,7 +126,15 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function checkInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CHECK_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, ['clientId' => $data['clientId'],'trackId' => $data['trackId'],'sayadId' => $data['sayadId']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, ['clientId' => $data['client_id'],'trackId' => $data['track_id'],'sayadId' => $data['sayad_id']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+
+    public function banksInfo($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_BANKS_INFO)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BANKS_INFO, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BANKS_INFO, ['clientId' => $data['client_id'],'trackId' => $data['track_id']]), null, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
 
