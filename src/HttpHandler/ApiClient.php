@@ -48,8 +48,7 @@ class ApiClient extends Component
      * */
     public function get($clientId, $serviceType, $url, $params = [], $headers = [])
     {
-        $response = $this->sendRequest($clientId, $serviceType, 'GET', $url, $params, $headers);
-        return $response;
+        return $this->sendRequest($clientId, $serviceType, 'GET', $url, $params, $headers);
     }
 
     public function post($clientId, $serviceType, $url, $data = [], $headers = [])
@@ -112,14 +111,14 @@ class ApiClient extends Component
             'status' => $response->statusCode,
             'url' => $url,
             'method' => $method,
-            'data' => $data ? $data : json_decode("{}"),
-            'headers' => $headers ? $headers : json_decode("{}"),
+            'data' => $data ?: json_decode("{}"),
+            'headers' => $headers ?: json_decode("{}"),
             'response' => $response->data,
             'client_id' => $clientId,
             'service_type' => $serviceType,
             'message' => '',
-            'track_id' => isset($data['track_id']) ? $data['track_id'] : null,
-            'slave_id' => isset($data['slave_id']) ? $data['slave_id'] : null,
+            'track_id' => (string)$data['track_id'] ?? null,
+            'slave_id' => (string)$data['slave_id'] ?? null,
         ]);
 
         $model->save();

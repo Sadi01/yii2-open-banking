@@ -48,7 +48,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_TRANSFER)) {
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_TRANSFER, ['clientId' => $data['clientId'],'trackId' => $data['trackId']]), $data, $this->getHeaders());
-        } else return $this->setErrors($this->model);
+        } else return $this->setErrors($this->model->errors);
     }
 
     /**
@@ -67,7 +67,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_PAYA_TRANSFER)) {
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_PAYA_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_PAYA_TRANSFER, ['clientId' => $data['clientId'],'trackId' => $data['trackId']]), $data, $this->getHeaders());
-        } else return $this->setErrors($this->model);
+        } else return $this->setErrors($this->model->errors);
     }
 
     /**
@@ -90,7 +90,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_INTERNAL_TRANSFER)) {
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER, ['clientId' => $data['clientId'],'trackId' => $data['trackId']]), $data, $this->getHeaders());
-        } else return $this->setErrors($this->model);
+        } else return $this->setErrors($this->model->errors);
     }
 
     /**
@@ -101,8 +101,8 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function shabaInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SHABA_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, ['clientId' => $data['client_id'],'trackId' => $data['track_id'],'iban' => $data['iban']]), null, $this->getHeaders());
-        } else return $this->setErrors($this->model);
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, ['clientId' => $data['client_id'],'trackId' => $data['track_id'],'iban' => $data['iban']]),  $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
     }
 
     /**
@@ -115,7 +115,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
             return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, ['clientId' => $data['clientId'],'trackId' => $data['trackId'],'deposit' => $data['deposit'],'bankCode' => $data['bankCode']]), null, $this->getHeaders());
-        } else return $this->setErrors($this->model);
+        } else return $this->setErrors($this->model->errors);
     }
 
     /**
@@ -127,7 +127,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CHECK_INQUIRY)) {
             return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, ['clientId' => $data['clientId'],'trackId' => $data['trackId'],'sayadId' => $data['sayadId']]), null, $this->getHeaders());
-        } else return $this->setErrors($this->model);
+        } else return $this->setErrors($this->model->errors);
     }
 
 
@@ -138,7 +138,6 @@ class Finnotech extends OpenBanking implements FinnotechInterface
             return true;
         }
         $this->model->validate();
-
         return false;
     }
 
