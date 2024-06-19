@@ -35,6 +35,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
 
     public ?string $app_key = null;
     public ?string $app_secret = null;
+    public ?string $app_password = null;
+    public ?string $nid = null;
     public ?string $client_device_id = null;
     public ?string $bank_id = null;
     public ?string $client_platform_type = null;
@@ -57,6 +59,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
     {
         return [
             [['client_id', 'base_url'], 'required'],
+            [['app_key', 'app_password', 'nid'], 'required','on' => self::SCENARIO_FINNOTECH],
             [['client_id', 'base_url', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_platform_type', 'client_user_id', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
             [['add_on'], 'safe'],
             [['client_id', 'client_secret'], 'string', 'max' => 32],
@@ -71,7 +74,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
         $scenarios[self::SCENARIO_FARABOOM] = ['username', 'password', 'client_id', 'base_url', 'grant_types', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_platform_type', 'client_user_id', 'device_id', 'token_id'];
-        $scenarios[self::SCENARIO_FINNOTECH] = ['!status'];
+        $scenarios[self::SCENARIO_FINNOTECH] = ['app_key','app_password','nid','client_id', 'base_url'];
 
         return $scenarios;
     }
@@ -99,6 +102,9 @@ class ObOauthClients extends \yii\db\ActiveRecord
             'client_user_id' => Yii::t('openBanking', 'Client User ID'),
             'device_id' => Yii::t('openBanking', 'Device ID'),
             'token_id' => Yii::t('openBanking', 'Token ID'),
+            'app_key' => Yii::t('openBanking', 'App Key'),
+            'app_password' => Yii::t('openBanking', 'App Password'),
+            'nid' => Yii::t('openBanking', 'Nid'),
         ];
     }
 
@@ -155,6 +161,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
                         'client_user_id',
                         'device_id',
                         'token_id',
+                        'app_password',
+                        'nid',
                     ],
                 ],
             ],

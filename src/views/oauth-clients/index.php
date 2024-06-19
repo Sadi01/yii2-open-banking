@@ -1,6 +1,4 @@
 <?php
-
-use Yii;
 use sadi01\openbanking\models\ObOauthClients;
 use sadi01\openbanking\components\OpenBanking;
 use yii\helpers\Html;
@@ -31,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </button>
             <div class="dropdown-menu">
                 <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a></li>
-                <li><a class="dropdown-item" href="">فینوتک</a></li>
+                <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FINNOTECH]) ?>">فینوتک</a></li>
             </div>
         </div>
         <?php endif; ?>
@@ -43,10 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ثبت سرویس دهنده
             </button>
             <ul class="dropdown-menu" style="">
-                <li>
-                    <a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a>
-                </li>
-                <li><a class="dropdown-item" href="">فینوتک</a></li>
+                <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FARABOOM]) ?>">فرابوم</a></li>
+                <li><a class="dropdown-item" href="<?= Url::to(['create', 'platform' => ObOauthClients::PLATFORM_FINNOTECH]) ?>">فینوتک</a></li>
             </ul>
         </div>
         <?php endif; ?>
