@@ -25,6 +25,10 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         $this->client = ObOauthClients::find()
             ->byClient(ObOauthClients::PLATFORM_FINNOTECH)
             ->one();
+
+        if (!($this->client instanceof ObOauthClients)) {
+            throw new InvalidConfigException(Yii::t('openBanking', 'The Service Provider is not set'));
+        }
     }
 
     /**
@@ -151,7 +155,8 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     public function getHeaders()
     {
-        $token = Authentication::getToken($this->client);
+        $token = Authentication::getAuthorizeToken($this->client);
+     //   $token = Authentication::getToken($this->client);
 
         $headers = [];
         $headers['Accept-Language'] = 'fa';

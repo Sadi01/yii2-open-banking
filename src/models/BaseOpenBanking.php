@@ -45,7 +45,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_DEPOSIT_TO_SHABA = 25;
     const FINNOTECH_CHECK_INQUIRY = 26;
     const FINNOTECH_GET_TOKEN = 27;
-    const FINNOTECH_BANKS_INFO = 28;
+    const FINNOTECH_GET_AUTHORIZE_TOKEN = 28;
+    const FINNOTECH_BANKS_INFO = 29;
 
 
     public function rules()
