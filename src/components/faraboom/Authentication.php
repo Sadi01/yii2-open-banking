@@ -24,11 +24,11 @@ class Authentication extends BaseAuthentication
 
         if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
 
-            $body = array(
+            $body = [
                 'grant_type' => 'password',
                 'username' => $client->username,
                 'password' => $client->password,
-            );
+            ];
 
             // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
             $headers['App-Key'] = $client->app_key;
@@ -81,17 +81,15 @@ class Authentication extends BaseAuthentication
         return null;
     }
 
-    public function refreshToken($refresh_token, ObOauthClients $client)
+    public static function refreshToken($refresh_token, ObOauthClients $client)
     {
-        $path = $this->get_token_path('token');
-        $params = array(
+        $body = [
             'grant_type' => 'refresh_token',
             'refresh_token' => $refresh_token->refresh_token,
-            'redirect_uri' => 'null',
+            'redirect_uri' => null,
+        ];
 
-        );
-
-        $headers['Authorization'] = $client->authorization;
+        $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_secret");;
         $headers['Device-Id'] = $client->device_id;
         $headers['CLIENT-IP-ADDRESS'] = Yii::$app->request->userIP ?? $client->client_device_id;
         $headers['CLIENT-PLATFORM-TYPE'] = $client->client_platform_type;
@@ -99,7 +97,8 @@ class Authentication extends BaseAuthentication
         $headers['CLIENT-USER-ID'] = $client->client_user_id;
         $headers['CLIENT-USER-AGENT'] = Yii::$app->request->userAgent ?? '';
 
-        $response = Yii::$app->apiClient->post($url, $param, $headers);
+        $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FARABOOM, BaseOpenBanking::FARABOOM_REFRESH_TOKEN, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
+
         if ($response['status'] === 200) {
             $result = $response['body']->result;
             $accessToken = new ObOauthAccessTokens([

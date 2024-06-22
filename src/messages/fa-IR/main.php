@@ -32,7 +32,6 @@ return [
     'Scope' => 'Scope',
     'Username' => 'نام کاربری',
     'Password' => 'کلمه عبور',
-    'App Key' => 'App Key',
     'Authorization' => 'Authorization',
     'Client Device ID' => 'Client Device ID',
     'Bank ID' => 'Bank ID',
@@ -59,5 +58,10 @@ return [
     'Nid' => 'کدملی (nid)',
     'App Key' => 'شناسه برنامه (App Key)',
     'App Password' => 'رمز برنامه (App Password)',
+    'Finno Limit' => 'حداکثر مبلغ انتقال وجه (اسکوپ برداشت مستقیم یا مسدودی)',
+    'Finno Count' => 'تعداد درخواست های انتقال وجه (اسکوپ برداشت مستقیم یا مسدودی)',
+    'maxAmountPerDay' => 'حداکثر مبلغ برداشت از حساب کاربر در روز ',
+    'maxAmountPerMonth' => 'حداکثر میزان برداشت از حساب کاربر در ماه',
+    'expireMonth' => 'تعداد ماه های دسترسی به حساب کاربر',
     '' => '',
 ];

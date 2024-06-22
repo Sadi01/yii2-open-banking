@@ -26,11 +26,11 @@ class Authentication extends BaseAuthentication
 
         if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
 
-            $body = array(
+            $body = [
                 'grant_type' => 'client_credentials',
                 'nid' => $client->nid,
                 'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get',
-            );
+            ];
             // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
             $headers['Content-Type'] = Client::FORMAT_JSON;
             $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_password");
@@ -74,79 +74,18 @@ class Authentication extends BaseAuthentication
         return null;
     }
 
-    /**
-     * @var ObOauthClients $client
-     * */
-    public static function getAuthorizeToken($client)
+    public static function refreshToken($refresh_token, ObOauthClients $client)
     {
-        $accessToken = ObOauthAccessTokens::find()->notExpire()->byClientId($client->client_id)->one();
-        $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byClientId($client->client_id)->one();
-
-        if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
-
-            $params = array(
-                'client_id' => $client->app_key,
-                'response_type' => 'code',
-                'redirect_uri' => 'https://backend.mobit.ir/accounting/finno/callback',
-                'bank' => '062',
-                'scope' => 'credit:ac-sayad-issue-cheque:post',
-            );
-            // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
-            $headers['Content-Type'] = Client::FORMAT_JSON;
-            $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_password");
-            $response = Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_GET_AUTHORIZE_TOKEN, self::getUrl($client->base_url, self::OAUTH_AUTHORIZE_URL, $params), $params, $headers);
-            if ($response['status'] == 200) {
-                $result = $response['data']->result;
-                $scopes = null;
-                foreach ($result->scopes as $scope) {
-                    $scopes .= $scope . ' ';
-                }
-                $accessToken = new ObOauthAccessTokens([
-                    'access_token' => $result->value,
-                    'client_id' => (string)ObOauthClients::PLATFORM_FINNOTECH,
-                    'user_id' => Yii::$app->user->id,
-                    'expires' => date('Y-m-d H:i:s', time() + ($result->lifeTime / 1000)),
-                    'scope' => $scopes,
-                ]);
-                if (!$accessToken->save()) {
-                    print_r($accessToken->errors);
-                    die;
-                }
-                $refreshToken = new ObOauthRefreshTokens([
-                    'refresh_token' => $result->refreshToken,
-                    'user_id' => Yii::$app->user->id,
-                    'client_id' => (string)ObOauthClients::PLATFORM_FINNOTECH,
-                    'expires' => date('Y-m-d H:i:s', time() + ($result->lifeTime / 1000)),
-                    'scope' => $scopes,
-                ]);
-                /* $refreshToken->save();*/
-                if (!$refreshToken->save()) {
-                    print_r($refreshToken->errors);
-                    die;
-                }
-                return $accessToken->access_token;
-            }
-        } else if ($accessToken instanceof ObOauthAccessTokens) {
-            return $accessToken->access_token;
-        } else if ($refreshToken instanceof ObOauthRefreshTokens) {
-            return self::refreshToken($refreshToken, $client);
-        }
-        return null;
-    }
-
-    public function refreshToken($refresh_token, ObOauthClients $client)
-    {
-        $path = $this->get_token_path('token');
-        $params = array(
+        $params = [
             'grant_type' => 'refresh_token',
             'refresh_token' => $refresh_token->refresh_token,
             'bank' => $refresh_token->refresh_token,
+        ];
 
-        );
-        $headers['Content-Type'] = 'application/json';
-        $headers['Authorization'] = $client->app_key . ':' . $client->app_password;
+        $headers['Content-Type'] = Client::FORMAT_JSON;
+        $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_password");
 
-        $response = Yii::$app->apiClient->post($url, $param, $headers);
+        $response = Yii::$app->apiClient->post('url', $params, $headers);
         if ($response['status'] === 200) {
             $result = $response['body']->result;
             $accessToken = new ObOauthAccessTokens([

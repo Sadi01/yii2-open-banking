@@ -38,15 +38,18 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FARABOOM_INTERNAL_TRANSFER = 18;
     const FARABOOM_BATCH_INTERNAL_TRANSFER = 19;
     const FARABOOM_DEPOSITS = 20;
-    const FINNOTECH_TRANSFER = 21;
-    const FINNOTECH_PAYA_TRANSFER = 22;
-    const FINNOTECH_INTERNAL_TRANSFER = 23;
-    const FINNOTECH_SHABA_INQUIRY = 24;
-    const FINNOTECH_DEPOSIT_TO_SHABA = 25;
-    const FINNOTECH_CHECK_INQUIRY = 26;
-    const FINNOTECH_GET_TOKEN = 27;
-    const FINNOTECH_GET_AUTHORIZE_TOKEN = 28;
-    const FINNOTECH_BANKS_INFO = 29;
+
+    const FARABOOM_REFRESH_TOKEN = 21;
+    const FINNOTECH_TRANSFER = 22;
+    const FINNOTECH_PAYA_TRANSFER = 23;
+    const FINNOTECH_INTERNAL_TRANSFER = 24;
+    const FINNOTECH_SHABA_INQUIRY = 25;
+    const FINNOTECH_DEPOSIT_TO_SHABA = 26;
+    const FINNOTECH_CHECK_INQUIRY = 27;
+    const FINNOTECH_GET_TOKEN = 28;
+    const FINNOTECH_GO_TO_AUTHORIZE = 29;
+    const FINNOTECH_GET_AUTHORIZE_TOKEN = 30;
+    const FINNOTECH_BANKS_INFO = 31;
 
 
     public function rules()
@@ -84,6 +87,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             ],
             'ServiceType' => [
                 self::FARABOOM_GET_TOKEN => Yii::t('openBanking', 'Get faraboom token'),
+                self::FARABOOM_REFRESH_TOKEN => Yii::t('openBanking', 'refresh faraboom token'),
                 self::FARABOOM_DEPOSIT_TO_SHABA => Yii::t('openBanking', 'Deposit To Shaba'),
                 self::FARABOOM_SHABA_TO_DEPOSIT => Yii::t('openBanking', 'Shaba To Deposit'),
                 self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => Yii::t('openBanking', 'Match National Code Account'),
@@ -103,6 +107,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => Yii::t('openBanking', ' Internal Transfer'),
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => Yii::t('openBanking', 'Batch Internal Transfer'),
                 self::FARABOOM_DEPOSITS => Yii::t('openBanking', 'Deposits'),
+                self::FINNOTECH_GO_TO_AUTHORIZE => Yii::t('openBanking', 'goToAuthorize'),
+                self::FINNOTECH_GET_AUTHORIZE_TOKEN => Yii::t('openBanking', 'Get Finnot Auth Token'),
                 self::FINNOTECH_TRANSFER => Yii::t('openBanking', 'Transfer'),
                 self::FINNOTECH_PAYA_TRANSFER => Yii::t('openBanking', 'Paya Transfer'),
                 self::FINNOTECH_INTERNAL_TRANSFER => Yii::t('openBanking', 'Internal Transfer'),
@@ -114,6 +120,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
+                self::FARABOOM_REFRESH_TOKEN => 'token',
                 self::FINNOTECH_GET_TOKEN => 'token',
                 self::FARABOOM_DEPOSIT_TO_SHABA => 'depositToShaba',
                 self::FARABOOM_SHABA_TO_DEPOSIT => 'shabaToDeposit',
@@ -134,6 +141,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => 'internalTransfer',
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => 'batchInternalTransfer',
                 self::FARABOOM_DEPOSITS => 'deposits',
+                self::FINNOTECH_GO_TO_AUTHORIZE => 'goToAuthorize',
+                self::FINNOTECH_GET_AUTHORIZE_TOKEN => 'getAuthorizeToken',
                 self::FINNOTECH_TRANSFER => 'transfer',
                 self::FINNOTECH_PAYA_TRANSFER => 'payaTransfer',
                 self::FINNOTECH_INTERNAL_TRANSFER => 'InternalTransfer',
@@ -144,6 +153,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
+                self::FARABOOM_REFRESH_TOKEN => self::FARABOOM_BASE_URL,
                 self::FINNOTECH_GET_TOKEN => self::FARABOOM_BASE_URL,
                 self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits/' . (is_array($params) ? null : $params),
                 self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . 'ibans/' . (is_array($params) ? null : $params),
@@ -164,6 +174,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FARABOOM_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/normal',
                 self::FARABOOM_BATCH_INTERNAL_TRANSFER => self::FARABOOM_BASE_URL . 'deposits/transfer/batch',
                 self::FARABOOM_DEPOSITS => self::FARABOOM_BASE_URL . 'deposits',
+                self::FINNOTECH_GO_TO_AUTHORIZE => self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/authorize?' . (is_array($params) ? http_build_query($params) : ''),
+                self::FINNOTECH_GET_AUTHORIZE_TOKEN => self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/token',
                 self::FINNOTECH_DEPOSIT_TO_SHABA => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/depositToIban', 'trackId' => $params['track_id'] ?? '', 'bankCode' => $params['bank_code'] ?? '', 'deposit' => $params['deposit'] ?? ''],
                 self::FINNOTECH_TRANSFER => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/cc/transferTo', 'trackId' => $params['trackId'] ?? ''],
                 self::FINNOTECH_PAYA_TRANSFER => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/payaTransferRequest', 'trackId' => $params['track_id'] ?? ''],

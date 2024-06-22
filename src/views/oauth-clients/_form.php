@@ -82,6 +82,14 @@ use sadi01\openbanking\models\ObOauthClients;
                 <?= $form->field($model, 'nid')->textInput(['maxlength' => true]) ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <?= $form->field($model, 'finno_limit')->textInput() ?>
+            </div>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'finno_count')->textInput() ?>
+            </div>
+        </div>
 
     <?php } ?>
 

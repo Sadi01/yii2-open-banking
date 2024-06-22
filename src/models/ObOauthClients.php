@@ -34,6 +34,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
 
 
     public ?string $app_key = null;
+    public ?int $finno_limit = null;
+    public ?int $finno_count = null;
     public ?string $app_secret = null;
     public ?string $app_password = null;
     public ?string $nid = null;
@@ -62,6 +64,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
             [['app_key', 'app_password', 'nid'], 'required','on' => self::SCENARIO_FINNOTECH],
             [['client_id', 'base_url', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_platform_type', 'client_user_id', 'device_id', 'token_id'], 'required', 'on' => [self::SCENARIO_FARABOOM]],
             [['add_on'], 'safe'],
+            [['finno_limit','finno_count'], 'integer'],
             [['client_id', 'client_secret'], 'string', 'max' => 32],
             [['base_url'], 'string', 'max' => 255],
             [['grant_types', 'username'], 'string', 'max' => 100],
@@ -74,7 +77,7 @@ class ObOauthClients extends \yii\db\ActiveRecord
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DELETE] = ['!status'];
         $scenarios[self::SCENARIO_FARABOOM] = ['username', 'password', 'client_id', 'base_url', 'grant_types', 'app_key', 'app_secret', 'bank_id', 'client_device_id', 'client_platform_type', 'client_user_id', 'device_id', 'token_id'];
-        $scenarios[self::SCENARIO_FINNOTECH] = ['app_key','app_password','nid','client_id', 'base_url'];
+        $scenarios[self::SCENARIO_FINNOTECH] = ['app_key','app_password','nid','client_id', 'base_url','finno_limit','finno_count'];
 
         return $scenarios;
     }
@@ -102,7 +105,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
             'client_user_id' => Yii::t('openBanking', 'Client User ID'),
             'device_id' => Yii::t('openBanking', 'Device ID'),
             'token_id' => Yii::t('openBanking', 'Token ID'),
-            'app_key' => Yii::t('openBanking', 'App Key'),
+            'finno_limit' => Yii::t('openBanking', 'Finno Limit'),
+            'finno_count' => Yii::t('openBanking', 'Finno Count'),
             'app_password' => Yii::t('openBanking', 'App Password'),
             'nid' => Yii::t('openBanking', 'Nid'),
         ];
@@ -163,6 +167,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
                         'token_id',
                         'app_password',
                         'nid',
+                        'finno_limit',
+                        'finno_count'
                     ],
                 ],
             ],

@@ -28,6 +28,16 @@ class Finnotech extends Model
     public $merchantIban;
 
 
+    const AYANDEH_BANK_CODE = '062';
+    const SCOPE_TRANSFER_TO = 'oak:transfer-to:execute';
+    const SCOPE_IBAN_INQUIRY_GET = 'oak:iban-inquiry:get'; //استعلام شماره شبا
+    const SCOPE_SAYAD_CHEQUE_INQUIRY = 'credit:sms-sayady-cheque-inquiry:get'; //استعلام چک صیادی
+    const SCOPE_FACILITY_NID_VERIFICATION = 'facility:sms-nid-verification:get'; //احراز هویت
+    const SCOPE_SAYAD_ACCEPT_CHEQUE = 'credit:sms-sayad-accept-cheque:post'; //تایید چک صیاد توسط گیرنده
+    const SCOPE_SMS_BACK_CHEQUES = 'credit:sms-back-cheques:get'; //استعلام پیامکی چک برگشتی
+    const SCOPE_SMS_DEBTS = 'credit:sms-facility-inquiry:get'; //استعلام پیامکی تسهیلات
+
+
     const SCENARIO_TRANSFER = 'transfer';
     const SCENARIO_PAYA_TRANSFER = 'paya-transfer';
     const SCENARIO_INTERNAL_TRANSFER = 'internal-transfer';
