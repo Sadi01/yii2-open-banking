@@ -154,7 +154,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
                 self::FARABOOM_REFRESH_TOKEN => self::FARABOOM_BASE_URL,
-                self::FINNOTECH_GET_TOKEN => self::FARABOOM_BASE_URL,
+                self::FINNOTECH_GET_TOKEN => self::FINNOTECH_BASE_URL,
                 self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits/' . (is_array($params) ? null : $params),
                 self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . 'ibans/' . (is_array($params) ? null : $params),
                 self::FARABOOM_MATCH_NATIONAL_CODE_ACCOUNT => self::FARABOOM_BASE_URL . 'deposits/account/national-code',

@@ -31,7 +31,7 @@ class Authentication extends BaseAuthentication
                 'nid' => $client->nid,
                 'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get',
             ];
-            // $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
             $headers['Content-Type'] = Client::FORMAT_JSON;
             $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_password");
             $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_GET_TOKEN, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
