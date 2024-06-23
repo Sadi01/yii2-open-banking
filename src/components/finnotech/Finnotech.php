@@ -175,6 +175,36 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
+    public function cardToDeposit($data)
+    {
+
+    }
+
+    public function cardToShaba($data)
+    {
+
+    }
+
+    public function nidVerification($data)
+    {
+
+    }
+
+    public function matchMobileNid($data)
+    {
+
+    }
+
+    public function cardInfo($data)
+    {
+
+    }
+
+    public function deposits($data)
+    {
+
+    }
+
     /**
      * @param array $data The data array containing:
      *     - string 'iban' => شماره شبا
