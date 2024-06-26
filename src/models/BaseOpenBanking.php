@@ -50,6 +50,11 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_GO_TO_AUTHORIZE = 29;
     const FINNOTECH_GET_AUTHORIZE_TOKEN = 30;
     const FINNOTECH_BANKS_INFO = 31;
+    const FINNOTECH_CARD_TO_DEPOSIT = 32;
+    const FINNOTECH_CARD_TO_SHABA = 33;
+    const FINNOTECH_NID_VERIFICATION = 34;
+    const FINNOTECH_MATCH_MOBILE_NID = 35;
+    const FINNOTECH_CARD_INFO = 36;
 
 
     public function rules()
@@ -117,6 +122,11 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_CHECK_INQUIRY => Yii::t('openBanking', 'Check Inquiry'),
                 self::FINNOTECH_GET_TOKEN => Yii::t('openBanking', 'Get finnotech token'),
                 self::FINNOTECH_BANKS_INFO => Yii::t('openBanking', 'Banks Info'),
+                self::FINNOTECH_CARD_TO_DEPOSIT => Yii::t('openBanking', 'Card To Deposit'),
+                self::FINNOTECH_CARD_TO_SHABA => Yii::t('openBanking', 'Card To Shaba'),
+                self::FINNOTECH_NID_VERIFICATION => Yii::t('openBanking', 'Nid Verification'),
+                self::FINNOTECH_MATCH_MOBILE_NID => Yii::t('openBanking', 'Match Mobile Nid'),
+                self::FINNOTECH_CARD_INFO => Yii::t('openBanking', 'Card Info'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -150,6 +160,11 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSIT_TO_SHABA => 'DepositToShaba',
                 self::FINNOTECH_CHECK_INQUIRY => 'CheckInquiry',
                 self::FINNOTECH_BANKS_INFO => 'BanksInfo',
+                self::FINNOTECH_CARD_TO_DEPOSIT => 'CardToDeposit',
+                self::FINNOTECH_CARD_TO_SHABA => 'CardToShaba',
+                self::FINNOTECH_NID_VERIFICATION => 'NidVerification',
+                self::FINNOTECH_MATCH_MOBILE_NID => 'MatchMobileNid',
+                self::FINNOTECH_CARD_INFO => 'CardInfo',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -183,6 +198,11 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SHABA_INQUIRY => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/ibanInquiry', 'trackId' => $params['track_id'] ?? '', 'iban' => $params['iban'] ?? ''],
                 self::FINNOTECH_CHECK_INQUIRY => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/sayadSerialInquiry', 'trackId' => $params['track_id'] ?? '', 'sayadId' => $params['sayad_id'] ?? ''],
                 self::FINNOTECH_BANKS_INFO => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/banksInfo', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_CARD_TO_DEPOSIT => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToDeposit', 'trackId' => $params['track_id'] ?? '','card' => $params['card'] ?? ''],
+                self::FINNOTECH_CARD_TO_SHABA => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToIban', 'trackId' => $params['track_id'] ?? '','card' => $params['card'] ?? ''],
+                self::FINNOTECH_NID_VERIFICATION => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['nid'] ?? '') . '/cc/nidVerification'],
+                self::FINNOTECH_MATCH_MOBILE_NID => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/shahkar/verify'],
+                self::FINNOTECH_CARD_INFO => [self::FINNOTECH_BASE_URL . '/mpg/v2/clients/' . ($params['clientId'] ?? '') . '/cards'. ($params['card'] ?? ''), 'trackId' => $params['track_id'] ?? ''],
             ],
         ];
 

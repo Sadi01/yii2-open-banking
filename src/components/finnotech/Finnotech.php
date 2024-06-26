@@ -177,26 +177,53 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     public function cardToDeposit($data)
     {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_TO_DEPOSIT)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card'] ]), $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
 
     }
 
     public function cardToShaba($data)
     {
-
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_TO_SHABA)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_SHABA, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card'], 'version' => $data['version']]), $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
     }
 
     public function nidVerification($data)
     {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_NID_VERIFICATION)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'],  'fullName' => $data['full_name'],'firstName' => $data['first_name'],'lastName' => $data['last_name'],'fatherName' => $data['father_name'],'gender' => $data['gender']]), $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
 
     }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'mobile' => شماره موبایل
+     *     - string 'nationalCode' =>  کدملی
+     * @return mixed The result of the processing.
+     * */
 
     public function matchMobileNid($data)
     {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_MATCH_MOBILE_NID)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, ['clientId' => $data['client_id'], 'mobile' => $data['mobile'], 'nationalCode' => $data['national_code'], 'trackId' => $data['track_id']]), $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
 
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - string 'card' => شماره کارت ۱۶ رقمی
+     * @return mixed The result of the processing.
+     * */
+
     public function cardInfo($data)
     {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_INFO)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_INFO, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_INFO, ['clientId' => $data['client_id'], 'card' => $data['card'], 'trackId' => $data['track_id']]), $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
 
     }
 

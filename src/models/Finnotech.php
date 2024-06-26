@@ -27,6 +27,18 @@ class Finnotech extends Model
     public $merchantName;
     public $merchantIban;
 
+    public $card;
+    public $version;
+    public $users;
+    public $birth_date;
+    public $full_name;
+    public $first_name;
+    public $last_name;
+    public $father_name;
+    public $gender;
+    public $mobile;
+    public $national_code;
+
 
     const AYANDEH_BANK_CODE = '062';
     const SCOPE_TRANSFER_TO = 'oak:transfer-to:execute';
@@ -45,6 +57,11 @@ class Finnotech extends Model
     const SCENARIO_CHECK_INQUIRY = 'check-inquiry';
     const SCENARIO_DEPOSIT_TO_SHABA = 'deposit_to_shaba';
     const SCENARIO_BANKS_INFO = 'banks_info';
+    const SCENARIO_CARD_TO_DEPOSIT = 'card-to-deposit';
+    const SCENARIO_CARD_TO_SHABA = 'card-to-shaba';
+    const SCENARIO_NID_VERIFICATION = 'nid-verification';
+    const SCENARIO_MATCH_MOBILE_NID = 'match_mobile_nid';
+    const SCENARIO_CARD_INFO = 'card_info';
 
     public  function rules()
     {
@@ -57,7 +74,12 @@ class Finnotech extends Model
             [['amount','description','destinationFirstname','destinationLastname','destinationNumber'
                 ,'paymentNumber','customerRef','deposit','sourceFirstName','sourceLastName','reasonDescription','note'], 'required', 'on' => [self::SCENARIO_INTERNAL_TRANSFER]],
             [['iban'], 'required', 'on' => [self::SCENARIO_SHABA_INQUIRY]],
+            [['card','version'], 'required', 'on' => [self::SCENARIO_CARD_TO_SHABA]],
+            [['card'], 'required', 'on' => [self::SCENARIO_CARD_TO_DEPOSIT]],
+            [['card'], 'required', 'on' => [self::SCENARIO_CARD_INFO]],
             [['sayad_id'], 'required', 'on' => [self::SCENARIO_CHECK_INQUIRY]],
+            [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
+            [['users','birth_date','full_name','first_name','last_name','father_name','gender'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit','bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
             [['merchantName','merchantIban'],'string'],
             [['merchantIban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
@@ -88,8 +110,16 @@ class Finnotech extends Model
             'note' => Yii::t('openBanking', 'Note'),
             'iban' => Yii::t('openBanking', 'Iban'),
             'bankCode' => Yii::t('openBanking', 'Bank Code'),
-            'merchantIban' => Yii::t('openBanking', 'Merchant Iban'),
-            'merchantIban' => Yii::t('openBanking', 'Merchant Iban'),
+            'card' => Yii::t('openBanking', 'Card'),
+            'version' => Yii::t('openBanking', 'Version'),
+            'birthDate' => Yii::t('openBanking', 'Birth Date'),
+            'fullName' => Yii::t('openBanking', 'Full Name'),
+            'firstName' => Yii::t('openBanking', 'First Name'),
+            'lastName' => Yii::t('openBanking', 'Last Name'),
+            'fatherName' => Yii::t('openBanking', 'Father Name'),
+            'gender' => Yii::t('openBanking', 'Gender'),
+            'mobile' => Yii::t('openBanking', 'Mobile'),
+            'nationalCode' => Yii::t('openBanking', 'National Code'),
         ];
     }
 
@@ -107,6 +137,11 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_DEPOSIT_TO_SHABA] = ['slave_id', 'track_id','client_id','deposit','bank_code'];
         $scenarios[self::SCENARIO_CHECK_INQUIRY] = ['sayad_id'];
         $scenarios[self::SCENARIO_BANKS_INFO] = ['client_id','track_id'];
+        $scenarios[self::SCENARIO_CARD_TO_DEPOSIT] = ['client_id','track_id','card'];
+        $scenarios[self::SCENARIO_CARD_TO_SHABA] = ['client_id','track_id','card','version'];
+        $scenarios[self::SCENARIO_NID_VERIFICATION] = ['client_id','track_id','users','birth_date','full_name','last_name','first_name','father_name','gender'];
+        $scenarios[self::SCENARIO_MATCH_MOBILE_NID] = ['client_id','track_id','mobile','national_code'];
+        $scenarios[self::SCENARIO_CARD_INFO] = ['client_id','track_id','card'];
 
 
         return $scenarios;
