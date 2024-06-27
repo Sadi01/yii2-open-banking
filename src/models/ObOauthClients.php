@@ -31,6 +31,8 @@ class ObOauthClients extends \yii\db\ActiveRecord
 
     const PLATFORM_FARABOOM = 1;
     const PLATFORM_FINNOTECH = 2;
+    const PLATFORM_SHAHIN = 3;
+    const PLATFORM_SHAHKAR = 4;
 
 
     public ?string $app_key = null;
@@ -139,7 +141,9 @@ class ObOauthClients extends \yii\db\ActiveRecord
             ],
             'Client' => [
                 self::PLATFORM_FARABOOM => Yii::t('openBanking', 'Faraboom'),
-                self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech')
+                self::PLATFORM_FINNOTECH => Yii::t('openBanking', 'Finnotech'),
+                self::PLATFORM_SHAHIN => Yii::t('openBanking', 'Shahin'),
+                self::PLATFORM_SHAHKAR => Yii::t('openBanking', 'Shahkar'),
             ],
         ];
 

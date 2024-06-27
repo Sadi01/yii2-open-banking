@@ -184,7 +184,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function cardToDeposit($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_TO_DEPOSIT)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card'] ]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card']]), $data, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -206,7 +206,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function nidVerification($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_NID_VERIFICATION)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'],  'fullName' => $data['full_name'],'firstName' => $data['first_name'],'lastName' => $data['last_name'],'fatherName' => $data['father_name'],'gender' => $data['gender']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'], 'fullName' => $data['full_name'], 'firstName' => $data['first_name'], 'lastName' => $data['last_name'], 'fatherName' => $data['father_name'], 'gender' => $data['gender']]), $data, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -310,9 +310,9 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         return false;
     }
 
-    public function getHeaders()
+    public function getHeaders($scope = null)
     {
-        $token = Authentication::getToken($this->client);
+        $token = Authentication::getToken($this->client,$scope);
 
         $headers = [];
         $headers['Accept-Language'] = 'fa';

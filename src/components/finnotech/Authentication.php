@@ -4,11 +4,11 @@ namespace sadi01\openbanking\components\finnotech;
 
 use sadi01\openbanking\models\BaseOpenBanking;
 use Yii;
+use yii\httpclient\Client;
 use sadi01\openbanking\models\ObOauthAccessTokens;
 use sadi01\openbanking\models\ObOauthRefreshTokens;
 use sadi01\openbanking\components\BaseAuthentication;
 use sadi01\openbanking\models\ObOauthClients;
-use yii\httpclient\Client;
 
 class Authentication extends BaseAuthentication
 {
@@ -19,9 +19,9 @@ class Authentication extends BaseAuthentication
     /**
      * @var ObOauthClients $client
      * */
-    public static function getToken($client)
+    public static function getToken($client, $scope = null)
     {
-        $accessToken = ObOauthAccessTokens::find()->notExpire()->byClientId($client->client_id)->one();
+        $accessToken = ObOauthAccessTokens::find()->notExpire()->byScope($scope)->byClientId($client->client_id)->one();
         $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byClientId($client->client_id)->one();
 
         if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
