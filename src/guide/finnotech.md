@@ -362,6 +362,291 @@ banksInfo
 </table>
 
 
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT,[
+'clientId' => your client id,'trackId' => your track id,'card' => your card
+])
+```
+
+cardToDeposit
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT</th>
+    <th>تبدیل شماره کارت به شماره حساب</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+  <tr>
+    <td>*trackId</td>
+    <td>رشته ای اختیاری با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد</td>
+  </tr>
+  <tr>
+    <td>*card</td>
+    <td>شماره کارت</td>
+  </tr>
+
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CARD_TO_SHABA,[
+'clientId' => your client id,'trackId' => your track id,'card' => your card,'version' => your version
+])
+```
+
+cardToShaba
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_CARD_TO_SHABA</th>
+    <th>تبدیل شماره کارت به شبا</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+ <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*trackId</td>
+    <td> رشته ای اختیاری با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد</td>
+  </tr>
+  <tr>
+    <td>*card</td>
+    <td>شماره کارت</td>
+  </tr>
+ <tr>
+    <td>*version</td>
+    <td>ورژن API که باید برابر عدد دو باشد</td>
+</tr>
+</table>
+
+
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_NID_VERIFICATION,[
+'clientId' => your client id,'trackId' => your track id,'birthDate' => your birthDate,'users' => your users,
+'fullName' => your fullName,'firstName' => your firstName,'lastName' => your lastName,'fatherName' => your fatherName,
+'gender' => your gender
+])
+```
+
+nidVerification
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_NID_VERIFICATION</th>
+    <th>احراز هویت با کد ملی</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+  <tr>
+    <td>*users</td>
+    <td>کد ملی که میخواهید صحت آن را بررسی کنید و اجباری است</td>
+  </tr>
+ <tr>
+    <td>*birthDate</td>
+    <td> تاریخ تولد صاحب این کد ملی </td>
+</tr>
+ <tr>
+    <td>*fullName</td>
+    <td> نام و نام خانوادگی که میخواهید صحت آن را بررسی کنید </td>
+</tr>
+ <tr>
+    <td>*firstName</td>
+    <td> نام کوچک صاحب کد ملی </td>
+</tr>
+ <tr>
+    <td>*lastName</td>
+    <td> نام خانوادگی صاحب کد ملی </td>
+</tr>
+ <tr>
+    <td>*fatherName</td>
+    <td> نام پدر صاحب کد ملی </td>
+</tr>
+ <tr>
+    <td>*gender</td>
+    <td> جنسیت صاحب کد ملی که یکی از دو مقدار زن یا مرد است </td>
+</tr>
+
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID,[
+'clientId' => your client id,'trackId' => your track id,'mobile' => your mobile,'nationalCode' => your nationalCode
+])
+```
+
+matchMobileNid
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID</th>
+    <th>تطبیق کد ملی و شماره موبایل</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+ <tr>
+    <td>*clientId</td>
+    <td> شناسه کلاینت</td>
+  </tr>
+  <tr>
+    <td>*trackId</td>
+    <td> کد پیگیری</td>
+  </tr>
+  <tr>
+    <td>*mobile</td>
+    <td>شماره موبایل</td>
+  </tr>
+ <tr>
+    <td>*nationalCode</td>
+    <td>کدملی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CARD_INFO,[
+'clientId' => your client id,'trackId' => your track id,'card' => your card
+])
+```
+
+cardInfo
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_CARD_INFO</th>
+    <th>استعلام کارت</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*trackId</td>
+    <td>کد پیگیری</td>
+</tr>
+ <tr>
+    <td>*card</td>
+    <td>شماره کارت ۱۶ رقمی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSITS,[
+'clientId' => your client id,'trackId' => your track id,'card' => your card
+])
+```
+
+deposits
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_DEPOSITS</th>
+    <th>اعلام شماره حساب با دریافت کد ملی</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*users</td>
+    <td>کد ملی ۱۰ رقمی</td>
+</tr>
+ <tr>
+    <td>trackId</td>
+    <td>رشته ای با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد</td>
+</tr>
+</table>
+
+
+
+
 
 
 

@@ -55,6 +55,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_NID_VERIFICATION = 34;
     const FINNOTECH_MATCH_MOBILE_NID = 35;
     const FINNOTECH_CARD_INFO = 36;
+    const FINNOTECH_DEPOSITS = 37;
 
 
     public function rules()
@@ -127,6 +128,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_NID_VERIFICATION => Yii::t('openBanking', 'Nid Verification'),
                 self::FINNOTECH_MATCH_MOBILE_NID => Yii::t('openBanking', 'Match Mobile Nid'),
                 self::FINNOTECH_CARD_INFO => Yii::t('openBanking', 'Card Info'),
+                self::FINNOTECH_DEPOSITS => Yii::t('openBanking', 'Deposits'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -165,6 +167,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_NID_VERIFICATION => 'nidVerification',
                 self::FINNOTECH_MATCH_MOBILE_NID => 'matchMobileNid',
                 self::FINNOTECH_CARD_INFO => 'cardInfo',
+                self::FINNOTECH_DEPOSITS => 'deposits',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -203,6 +206,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_NID_VERIFICATION => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['nid'] ?? '') . '/cc/nidVerification'],
                 self::FINNOTECH_MATCH_MOBILE_NID => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/shahkar/verify','mobile' => ($params['mobile'] ?? ''), 'nationalCode' => ($params['nationalCode'] ?? '')],
                 self::FINNOTECH_CARD_INFO => [self::FINNOTECH_BASE_URL . '/mpg/v2/clients/' . ($params['clientId'] ?? '') . '/cards'. ($params['card'] ?? ''), 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_DEPOSITS => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/users/'. ($params['users'] ?? '') .'/deposits', 'trackId' => $params['track_id'] ?? ''],
             ],
         ];
 

@@ -40,6 +40,7 @@ class Finnotech extends Model
     public $national_code;
 
 
+
     const AYANDEH_BANK_CODE = '062';
     const SCOPE_TRANSFER_TO = 'oak:transfer-to:execute';
     const SCOPE_IBAN_INQUIRY_GET = 'oak:iban-inquiry:get'; //استعلام شماره شبا
@@ -63,6 +64,7 @@ class Finnotech extends Model
     const SCENARIO_NID_VERIFICATION = 'nid-verification';
     const SCENARIO_MATCH_MOBILE_NID = 'match_mobile_nid';
     const SCENARIO_CARD_INFO = 'card_info';
+    const SCENARIO_DEPOSITS = 'deposits';
 
     public  function rules()
     {
@@ -79,6 +81,7 @@ class Finnotech extends Model
             [['card'], 'required', 'on' => [self::SCENARIO_CARD_TO_DEPOSIT]],
             [['card'], 'required', 'on' => [self::SCENARIO_CARD_INFO]],
             [['sayad_id'], 'required', 'on' => [self::SCENARIO_CHECK_INQUIRY]],
+            [['users'], 'required', 'on' => [self::SCENARIO_DEPOSITS]],
             [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
             [['users','birth_date','full_name','first_name','last_name','father_name','gender'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit','bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
@@ -121,6 +124,7 @@ class Finnotech extends Model
             'gender' => Yii::t('openBanking', 'Gender'),
             'mobile' => Yii::t('openBanking', 'Mobile'),
             'national_code' => Yii::t('openBanking', 'National Code'),
+            'users' => Yii::t('openBanking', 'Users'),
         ];
     }
 
@@ -143,6 +147,7 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_NID_VERIFICATION] = ['client_id','track_id','users','birth_date','full_name','last_name','first_name','father_name','gender'];
         $scenarios[self::SCENARIO_MATCH_MOBILE_NID] = ['client_id','track_id','mobile','national_code'];
         $scenarios[self::SCENARIO_CARD_INFO] = ['client_id','track_id','card'];
+        $scenarios[self::SCENARIO_DEPOSITS] = ['client_id','track_id','users'];
 
 
         return $scenarios;

@@ -175,6 +175,12 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - string 'card' => شماره کارت
+     * @return mixed The result of the processing.
+     * */
+
     public function cardToDeposit($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_TO_DEPOSIT)) {
@@ -182,6 +188,13 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
 
     }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'card' => شماره کارت
+     *     - string 'version' => که باید برابر عدد دو باشدAPI ورژن
+     * @return mixed The result of the processing.
+     * */
 
     public function cardToShaba($data)
     {
@@ -227,8 +240,17 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - string 'users' => کد ملی ۱۰ رقمی
+     * @return mixed The result of the processing.
+     * */
+
     public function deposits($data)
     {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSITS)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSITS, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSITS, ['clientId' => $data['client_id'], 'users' => $data['users'], 'trackId' => $data['track_id']]), $data, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
 
     }
 
