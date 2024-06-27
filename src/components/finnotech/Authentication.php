@@ -29,7 +29,7 @@ class Authentication extends BaseAuthentication
             $body = [
                 'grant_type' => 'client_credentials',
                 'nid' => $client->nid,
-                'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get',
+                'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get,facility:shahkar:get',
             ];
 
             $headers['Content-Type'] = Client::FORMAT_JSON;
