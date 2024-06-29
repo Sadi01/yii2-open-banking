@@ -22,14 +22,14 @@ class Authentication extends BaseAuthentication
     public static function getToken($client, $scope = null)
     {
         $accessToken = ObOauthAccessTokens::find()->notExpire()->byScope($scope)->byClientId($client->client_id)->one();
-        $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byClientId($client->client_id)->one();
+        $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byScope($scope)->byClientId($client->client_id)->one();
 
         if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
-
             $body = [
                 'grant_type' => 'client_credentials',
                 'nid' => $client->nid,
-                'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get,facility:shahkar:get',
+                //'scopes' => 'oak:iban-inquiry:get,facility:cc-deposit-iban:get,facility:cc-bank-info:get,facility:shahkar:get,facility:card-to-deposit:get',
+                'scopes' => $scope,
             ];
 
             $headers['Content-Type'] = Client::FORMAT_JSON;
@@ -76,7 +76,7 @@ class Authentication extends BaseAuthentication
 
     public static function refreshToken($refresh_token, ObOauthClients $client)
     {
-        $params = [
+        $body = [
             'grant_type' => 'refresh_token',
             'refresh_token' => $refresh_token->refresh_token,
             'bank' => $refresh_token->refresh_token,
@@ -85,7 +85,7 @@ class Authentication extends BaseAuthentication
         $headers['Content-Type'] = Client::FORMAT_JSON;
         $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_password");
 
-        $response = Yii::$app->apiClient->post('url', $params, $headers);
+        $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_REFRESH_TOKEN, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
         if ($response['status'] === 200) {
             $result = $response['body']->result;
             $accessToken = new ObOauthAccessTokens([

@@ -203,10 +203,24 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - string 'clientId' => شناسه کلاینت
+     *     - string 'users' =>  کدملی
+     *     - string 'trackId' =>  رشته ای اختیاری با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد
+     *     - string 'birthDate' =>  تاریخ تولد صاحب این کد ملی
+     *     - string 'fullName' =>   نام و نام خانوادگی که میخواهید صحت آن را بررسی کنید
+     *     - string 'firstName' =>  نام کوچک صاحب کد ملی
+     *     - string 'lastName' =>   نام خانوادگی صاحب کد ملی
+     *     - ?string 'fatherName' =>  نام پدر صاحب کد ملی
+     *     - ?string 'gender' =>  جنسیت صاحب کد ملی که یکی از دو مقدار زن یا مرد است
+     * @return mixed The result of the processing.
+     * */
+
     public function nidVerification($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_NID_VERIFICATION)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'], 'fullName' => $data['full_name'], 'firstName' => $data['first_name'], 'lastName' => $data['last_name'], 'fatherName' => $data['father_name'], 'gender' => $data['gender']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_NID_VERIFICATION));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'], 'fullName' => $data['full_name'], 'firstName' => $data['first_name'], 'lastName' => $data['last_name'], 'fatherName' => $data['father_name'], 'gender' => $data['gender'] ?? '']), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_NID_VERIFICATION));
         } else return $this->setErrors($this->model->errors);
 
     }

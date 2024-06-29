@@ -90,7 +90,7 @@ class Finnotech extends Model
             [['sayad_id'], 'required', 'on' => [self::SCENARIO_CHECK_INQUIRY]],
             [['users'], 'required', 'on' => [self::SCENARIO_DEPOSITS]],
             [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
-            [['users','birth_date','full_name','first_name','last_name','father_name','gender'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
+            [['users','birth_date','full_name','first_name','last_name','father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit','bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
             [['merchant_name','merchant_iban'],'string'],
             [['merchant_iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],

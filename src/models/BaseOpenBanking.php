@@ -40,22 +40,23 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FARABOOM_DEPOSITS = 20;
 
     const FARABOOM_REFRESH_TOKEN = 21;
-    const FINNOTECH_TRANSFER = 22;
-    const FINNOTECH_PAYA_TRANSFER = 23;
-    const FINNOTECH_INTERNAL_TRANSFER = 24;
-    const FINNOTECH_SHABA_INQUIRY = 25;
-    const FINNOTECH_DEPOSIT_TO_SHABA = 26;
-    const FINNOTECH_CHECK_INQUIRY = 27;
-    const FINNOTECH_GET_TOKEN = 28;
-    const FINNOTECH_GO_TO_AUTHORIZE = 29;
-    const FINNOTECH_GET_AUTHORIZE_TOKEN = 30;
-    const FINNOTECH_BANKS_INFO = 31;
-    const FINNOTECH_CARD_TO_DEPOSIT = 32;
-    const FINNOTECH_CARD_TO_SHABA = 33;
-    const FINNOTECH_NID_VERIFICATION = 34;
-    const FINNOTECH_MATCH_MOBILE_NID = 35;
-    const FINNOTECH_CARD_INFO = 36;
-    const FINNOTECH_DEPOSITS = 37;
+    const FINNOTECH_REFRESH_TOKEN = 22;
+    const FINNOTECH_TRANSFER = 23;
+    const FINNOTECH_PAYA_TRANSFER = 24;
+    const FINNOTECH_INTERNAL_TRANSFER = 25;
+    const FINNOTECH_SHABA_INQUIRY = 26;
+    const FINNOTECH_DEPOSIT_TO_SHABA = 27;
+    const FINNOTECH_CHECK_INQUIRY = 28;
+    const FINNOTECH_GET_TOKEN = 29;
+    const FINNOTECH_GO_TO_AUTHORIZE = 30;
+    const FINNOTECH_GET_AUTHORIZE_TOKEN = 31;
+    const FINNOTECH_BANKS_INFO = 32;
+    const FINNOTECH_CARD_TO_DEPOSIT = 33;
+    const FINNOTECH_CARD_TO_SHABA = 34;
+    const FINNOTECH_NID_VERIFICATION = 35;
+    const FINNOTECH_MATCH_MOBILE_NID = 36;
+    const FINNOTECH_CARD_INFO = 37;
+    const FINNOTECH_DEPOSITS = 38;
 
 
     public function rules()
@@ -172,6 +173,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
                 self::FARABOOM_REFRESH_TOKEN => self::FARABOOM_BASE_URL,
+                self::FINNOTECH_REFRESH_TOKEN => self::FINNOTECH_BASE_URL,
                 self::FINNOTECH_GET_TOKEN => self::FINNOTECH_BASE_URL,
                 self::FARABOOM_DEPOSIT_TO_SHABA => self::FARABOOM_BASE_URL . 'deposits/' . (is_array($params) ? null : $params),
                 self::FARABOOM_SHABA_TO_DEPOSIT => self::FARABOOM_BASE_URL . 'ibans/' . (is_array($params) ? null : $params),
@@ -201,11 +203,12 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SHABA_INQUIRY => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/ibanInquiry', 'trackId' => $params['track_id'] ?? '', 'iban' => $params['iban'] ?? ''],
                 self::FINNOTECH_CHECK_INQUIRY => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/sayadSerialInquiry', 'trackId' => $params['track_id'] ?? '', 'sayadId' => $params['sayad_id'] ?? ''],
                 self::FINNOTECH_BANKS_INFO => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/banksInfo', 'trackId' => $params['track_id'] ?? ''],
-                self::FINNOTECH_CARD_TO_DEPOSIT => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToDeposit', 'trackId' => $params['track_id'] ?? '','card' => $params['card'] ?? ''],
+                self::FINNOTECH_CARD_TO_DEPOSIT => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToDeposit', 'trackId' => ($params['track_id'] ?? ''),'card' => ($params['card'] ?? '')],
                 self::FINNOTECH_CARD_TO_SHABA => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToIban', 'trackId' => $params['track_id'] ?? '','card' => $params['card'] ?? ''],
-                self::FINNOTECH_NID_VERIFICATION => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['nid'] ?? '') . '/cc/nidVerification'],
+                self::FINNOTECH_NID_VERIFICATION => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['users'] ?? '') . '/cc/nidVerification','trackId' => $params['track_id'] ?? '','birthDate' => $params['birthDate'] ?? '',
+                    'gender' => $params['gender'] ?? '','fullName' => $params['fullName'] ?? '','firstName' => $params['firstName'] ?? '','lastName' => $params['lastName'] ?? '','fatherName' => $params['fatherName'] ?? ''],
                 self::FINNOTECH_MATCH_MOBILE_NID => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/shahkar/verify','mobile' => ($params['mobile'] ?? ''), 'nationalCode' => ($params['nationalCode'] ?? '')],
-                self::FINNOTECH_CARD_INFO => [self::FINNOTECH_BASE_URL . '/mpg/v2/clients/' . ($params['clientId'] ?? '') . '/cards'. ($params['card'] ?? ''), 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_CARD_INFO => [self::FINNOTECH_BASE_URL . '/mpg/v2/clients/' . ($params['clientId'] ?? '') . '/cards/'. ($params['card'] ?? ''), 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_DEPOSITS => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/users/'. ($params['users'] ?? '') .'/deposits', 'trackId' => $params['track_id'] ?? ''],
             ],
         ];
