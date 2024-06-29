@@ -184,7 +184,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function cardToDeposit($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_TO_DEPOSIT)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_CARD_TO_DEPOSIT));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -199,14 +199,14 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function cardToShaba($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_TO_SHABA)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_SHABA, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card'], 'version' => $data['version']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_TO_SHABA, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'card' => $data['card'], 'version' => $data['version']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_CARD_TO_SHABA));
         } else return $this->setErrors($this->model->errors);
     }
 
     public function nidVerification($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_NID_VERIFICATION)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'], 'fullName' => $data['full_name'], 'firstName' => $data['first_name'], 'lastName' => $data['last_name'], 'fatherName' => $data['father_name'], 'gender' => $data['gender']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_NID_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_NID_VERIFICATION, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'users' => $data['users'], 'birthDate' => $data['birth_date'], 'fullName' => $data['full_name'], 'firstName' => $data['first_name'], 'lastName' => $data['last_name'], 'fatherName' => $data['father_name'], 'gender' => $data['gender']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_NID_VERIFICATION));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -221,7 +221,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function matchMobileNid($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_MATCH_MOBILE_NID)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, ['clientId' => $data['client_id'], 'mobile' => $data['mobile'], 'nationalCode' => $data['national_code'], 'trackId' => $data['track_id']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, ['clientId' => $data['client_id'], 'mobile' => $data['mobile'], 'nationalCode' => $data['national_code'], 'trackId' => $data['track_id']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_FACILITY_SHAHKAR));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -235,7 +235,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function cardInfo($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CARD_INFO)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_INFO, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_INFO, ['clientId' => $data['client_id'], 'card' => $data['card'], 'trackId' => $data['track_id']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CARD_INFO, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CARD_INFO, ['clientId' => $data['client_id'], 'card' => $data['card'], 'trackId' => $data['track_id']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_CARD_INFO));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -249,7 +249,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function deposits($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSITS)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSITS, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSITS, ['clientId' => $data['client_id'], 'users' => $data['users'], 'trackId' => $data['track_id']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSITS, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSITS, ['clientId' => $data['client_id'], 'users' => $data['users'], 'trackId' => $data['track_id']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_DEPOSITS));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -262,7 +262,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function shabaInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SHABA_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'iban' => $data['iban']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SHABA_INQUIRY, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'iban' => $data['iban']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_IBAN_INQUIRY));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -275,7 +275,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function depositToShaba($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSIT_TO_SHABA)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'deposit' => $data['deposit'], 'bank_code' => $data['bank_code']]), $data, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'deposit' => $data['deposit'], 'bank_code' => $data['bank_code']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_FACILITY_DEPOSIT_TO_SHABA));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -295,7 +295,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function banksInfo($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_BANKS_INFO)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BANKS_INFO, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BANKS_INFO, ['clientId' => $data['client_id'], 'trackId' => $data['track_id']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BANKS_INFO, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BANKS_INFO, ['clientId' => $data['client_id'], 'trackId' => $data['track_id']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_FACILITY_BANK_INFO));
         } else return $this->setErrors($this->model->errors);
     }
 
