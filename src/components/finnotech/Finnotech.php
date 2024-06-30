@@ -36,14 +36,14 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function goToAuthorize($data)
     {
         $scopes = is_array($data['scopes']) ? implode(',', $data['scopes']) : $data['scopes'];
-        $params = array(
+        $params = [
             'client_id' => $this->client->app_key,
             'response_type' => 'code',
             'redirect_uri' => $data['redirect_uri'],
             'scope' => $scopes,
             'bank' => $data['bank'] ?? '062',
             'state' => $data['state'] ?? null,
-        );
+        ];
 
         if (preg_match('/\b' . FinnotechBaseModel::SCOPE_TRANSFER_TO . '\b/', $scopes)) {
             $params['limit'] = (int)$this->client->finno_limit;
@@ -51,6 +51,40 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         }
 
         return BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_GO_TO_AUTHORIZE, $params);
+    }
+
+    public function sendOtpAuthorizeCode($data)
+    {
+        $scopes = is_array($data['scopes']) ? implode(',', $data['scopes']) : $data['scopes'];
+
+        $params = [
+            'client_id' => $this->client->app_key,
+            'redirect_uri' => $data['redirect_uri'],
+            'response_type' => 'code',
+            'scope' => $scopes,
+           // 'bank' => $data['bank'] ?? '062',
+            'mobile' => $data['mobile'],
+            'state' => $data['state'] ?? null,
+            'auth_type' => 'SMS',
+        ];
+
+        $headers['Content-Type'] = Client::FORMAT_JSON;
+        $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
+        return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SEND_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SEND_OTP,$params), $params, $headers);
+    }
+
+    public function verifyOtpCode($data)
+    {
+        $body = [
+            'otp' => $data['otp'],
+            'mobile' => $data['mobile'],
+            'nid' => $data['nid'],
+            'trackId' => $data['trackId'],
+        ];
+
+        $headers['Content-Type'] = Client::FORMAT_JSON;
+        $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
+        return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_VERIFY_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_VERIFY_OTP), $body, $headers);
     }
 
     public function getAuthorizeToken($data)
@@ -326,7 +360,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     public function getHeaders($scope = null)
     {
-        $token = Authentication::getToken($this->client,$scope);
+        $token = Authentication::getToken($this->client, $scope);
 
         $headers = [];
         $headers['Accept-Language'] = 'fa';

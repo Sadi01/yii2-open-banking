@@ -57,6 +57,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_MATCH_MOBILE_NID = 36;
     const FINNOTECH_CARD_INFO = 37;
     const FINNOTECH_DEPOSITS = 38;
+    const FINNOTECH_SEND_OTP = 39;
+    const FINNOTECH_VERIFY_OTP = 40;
 
 
     public function rules()
@@ -130,6 +132,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_MATCH_MOBILE_NID => Yii::t('openBanking', 'Match Mobile Nid'),
                 self::FINNOTECH_CARD_INFO => Yii::t('openBanking', 'Card Info'),
                 self::FINNOTECH_DEPOSITS => Yii::t('openBanking', 'Deposits'),
+                self::FINNOTECH_SEND_OTP => Yii::t('openBanking', 'Send Otp Request'),
+                self::FINNOTECH_VERIFY_OTP => Yii::t('openBanking', 'Verify Otp Request'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -169,6 +173,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_MATCH_MOBILE_NID => 'matchMobileNid',
                 self::FINNOTECH_CARD_INFO => 'cardInfo',
                 self::FINNOTECH_DEPOSITS => 'deposits',
+                self::FINNOTECH_SEND_OTP => 'sendOtpAuthorizeCode',
+                self::FINNOTECH_VERIFY_OTP => 'verifyOtpCode',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -203,13 +209,15 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SHABA_INQUIRY => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/ibanInquiry', 'trackId' => $params['track_id'] ?? '', 'iban' => $params['iban'] ?? ''],
                 self::FINNOTECH_CHECK_INQUIRY => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/sayadSerialInquiry', 'trackId' => $params['track_id'] ?? '', 'sayadId' => $params['sayad_id'] ?? ''],
                 self::FINNOTECH_BANKS_INFO => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/banksInfo', 'trackId' => $params['track_id'] ?? ''],
-                self::FINNOTECH_CARD_TO_DEPOSIT => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToDeposit', 'trackId' => ($params['track_id'] ?? ''),'card' => ($params['card'] ?? '')],
-                self::FINNOTECH_CARD_TO_SHABA => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToIban', 'trackId' => $params['track_id'] ?? '','card' => $params['card'] ?? ''],
-                self::FINNOTECH_NID_VERIFICATION => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['users'] ?? '') . '/cc/nidVerification','trackId' => $params['track_id'] ?? '','birthDate' => $params['birthDate'] ?? '',
-                    'gender' => $params['gender'] ?? '','fullName' => $params['fullName'] ?? '','firstName' => $params['firstName'] ?? '','lastName' => $params['lastName'] ?? '','fatherName' => $params['fatherName'] ?? ''],
-                self::FINNOTECH_MATCH_MOBILE_NID => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/shahkar/verify','mobile' => ($params['mobile'] ?? ''), 'nationalCode' => ($params['nationalCode'] ?? '')],
-                self::FINNOTECH_CARD_INFO => [self::FINNOTECH_BASE_URL . '/mpg/v2/clients/' . ($params['clientId'] ?? '') . '/cards/'. ($params['card'] ?? ''), 'trackId' => $params['track_id'] ?? ''],
-                self::FINNOTECH_DEPOSITS => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/users/'. ($params['users'] ?? '') .'/deposits', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_CARD_TO_DEPOSIT => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToDeposit', 'trackId' => ($params['track_id'] ?? ''), 'card' => ($params['card'] ?? '')],
+                self::FINNOTECH_CARD_TO_SHABA => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/cardToIban', 'trackId' => $params['track_id'] ?? '', 'card' => $params['card'] ?? ''],
+                self::FINNOTECH_NID_VERIFICATION => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['users'] ?? '') . '/cc/nidVerification', 'trackId' => $params['track_id'] ?? '', 'birthDate' => $params['birthDate'] ?? '',
+                    'gender' => $params['gender'] ?? '', 'fullName' => $params['fullName'] ?? '', 'firstName' => $params['firstName'] ?? '', 'lastName' => $params['lastName'] ?? '', 'fatherName' => $params['fatherName'] ?? ''],
+                self::FINNOTECH_MATCH_MOBILE_NID => [self::FINNOTECH_BASE_URL . '/facility/v2/clients/' . ($params['clientId'] ?? '') . '/shahkar/verify', 'mobile' => ($params['mobile'] ?? ''), 'nationalCode' => ($params['nationalCode'] ?? '')],
+                self::FINNOTECH_CARD_INFO => [self::FINNOTECH_BASE_URL . '/mpg/v2/clients/' . ($params['clientId'] ?? '') . '/cards/' . ($params['card'] ?? ''), 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_DEPOSITS => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['users'] ?? '') . '/deposits', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_SEND_OTP => [self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/authorize', 'client_id' => ($params['client_id'] ?? ''), 'response_type' => $params['response_type'] ?? '','redirect_uri' => $params['redirect_uri'] ?? '','scope' => $params['scope'] ?? '','mobile' => $params['mobile'] ?? '','auth_type' => $params['auth_type'] ?? '','state' => $params['state'] ?? ''],
+                self::FINNOTECH_VERIFY_OTP => self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/verify/sms',
             ],
         ];
 
