@@ -226,7 +226,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     /**
      * @param array $data The data array containing:
      *     - string 'card' => شماره کارت
-     *     - string 'version' => که باید برابر عدد دو باشدAPI ورژن
+     *     - string 'version' => که باید برابر عدد دو باشد API ورژن
      * @return mixed The result of the processing.
      * */
 
