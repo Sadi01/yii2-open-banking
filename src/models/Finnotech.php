@@ -39,6 +39,8 @@ class Finnotech extends Model
     public $mobile;
     public $national_code;
 
+    public $user;
+
 
 
     const AYANDEH_BANK_CODE = '062';
@@ -57,6 +59,11 @@ class Finnotech extends Model
     const SCOPE_NID_VERIFICATION = 'facility:cc-nid-verification:get'; //سرویس پایه اطلاعات بانکی
     const SCOPE_CARD_TO_SHABA = 'facility:card-to-iban:get'; //سرویس پایه اطلاعات بانکی
     const SCOPE_CARD_TO_DEPOSIT = 'facility:card-to-deposit:get'; //سرویس پایه اطلاعات بانکی
+    const SCOPE_BACK_CHEQUES = 'credit:sms-back-cheques:get'; //استعلام پیامکی چک برگشتی
+    const SCOPE_ACCEPT_CHEQUES = 'credit:sms-sayad-accept-cheque:post'; //تایید پیامکی چک صیاد
+    const SCOPE_CANCEL_CHEQUES = 'credit:sms-sayad-cancel-cheque:post'; //لغو پیامکی چک صیاد
+    const SCOPE_CHEQUE_INQUIRY_BY_RECEIVER = 'credit:sms-sayad-issuer-inquiry-cheque:post'; //استعلام پیامکی چک صیاد توسط صادرکننده
+    const SCOPE_CHEQUE_INQUIRY_BY_SMS = 'credit:sms-sayady-cheque-inquiry:get'; //استعلام پیامکی چک صیاد
 
 
     const SCENARIO_TRANSFER = 'transfer';
@@ -72,6 +79,11 @@ class Finnotech extends Model
     const SCENARIO_MATCH_MOBILE_NID = 'match_mobile_nid';
     const SCENARIO_CARD_INFO = 'card_info';
     const SCENARIO_DEPOSITS = 'deposits';
+    const SCENARIO_BACK_CHEQUES = 'back_cheques';
+    const SCENARIO_SAYAD_ACCEPT_CHEQUE = 'sayad_accept_cheque';
+    const SCENARIO_SAYAD_CANCEL_CHEQUE = 'sayad_cancel_cheque';
+    const SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE = 'sayad_issuer_inquiry_cheque';
+    const SCENARIO_SAYAD_CHEQUE_INQUIRY = 'sayad_cheque_Inquiry';
 
     public  function rules()
     {
@@ -89,6 +101,11 @@ class Finnotech extends Model
             [['card'], 'required', 'on' => [self::SCENARIO_CARD_INFO]],
             [['sayad_id'], 'required', 'on' => [self::SCENARIO_CHECK_INQUIRY]],
             [['users'], 'required', 'on' => [self::SCENARIO_DEPOSITS]],
+            [['user'], 'required', 'on' => [self::SCENARIO_BACK_CHEQUES]],
+            [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ACCEPT_CHEQUE]],
+            [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_CANCEL_CHEQUE]],
+            [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE]],
+            [['user','id_type','sayad_id'], 'required', 'on' => [self::SCENARIO_SAYAD_CHEQUE_INQUIRY]],
             [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
             [['users','birth_date','full_name','first_name','last_name','father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit','bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
@@ -132,6 +149,7 @@ class Finnotech extends Model
             'mobile' => Yii::t('openBanking', 'Mobile'),
             'national_code' => Yii::t('openBanking', 'National Code'),
             'users' => Yii::t('openBanking', 'Users'),
+            'user' => Yii::t('openBanking', 'User'),
         ];
     }
 
@@ -155,6 +173,11 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_MATCH_MOBILE_NID] = ['client_id','track_id','mobile','national_code'];
         $scenarios[self::SCENARIO_CARD_INFO] = ['client_id','track_id','card'];
         $scenarios[self::SCENARIO_DEPOSITS] = ['client_id','track_id','users'];
+        $scenarios[self::SCENARIO_BACK_CHEQUES] = ['client_id','track_id','user'];
+        $scenarios[self::SCENARIO_SAYAD_ACCEPT_CHEQUE] = ['client_id','track_id','user'];
+        $scenarios[self::SCENARIO_SAYAD_CANCEL_CHEQUE] = ['client_id','track_id','user'];
+        $scenarios[self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE] = ['client_id','track_id','user'];
+        $scenarios[self::SCENARIO_SAYAD_CHEQUE_INQUIRY] = ['client_id','track_id','user','id_code','shahab_id','id_type','sayad_id'];
 
 
         return $scenarios;

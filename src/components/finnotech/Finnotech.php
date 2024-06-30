@@ -347,6 +347,73 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - string 'user' => کد ملی کاربر صاحب توکن
+     * @return mixed The result of the processing.
+     * */
+    public function backCheques($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_BACK_CHEQUES)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'user' => کد ملی
+     * @return mixed The result of the processing.
+     * */
+    public function sayadAcceptCheque($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_ACCEPT_CHEQUE)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'user' => کد ملی
+     * @return mixed The result of the processing.
+     * */
+    public function sayadCancelCheque($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_CANCEL_CHEQUE)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'clientId' => شناسه کلاینت
+     *     - string 'user' => کد ملی کاربر
+     *     - string 'idType' => نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲
+     *     - string 'sayadId' => شناسه صیاد چک
+     *     - string 'trackId' =>  کد پیگیری
+     *     - ?string 'idCode' =>  کد شناسایی
+     *     - ?string 'shahabId' => کد شهاب
+     * @return mixed The result of the processing.
+     * */
+    public function sayadChequeInquiry($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_CHEQUE_INQUIRY)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user'], 'idCode' => $data['id_code'], 'shahabId' => $data['shahab_id'], 'idType' => $data['id_type'], 'sayadId' => $data['sayad_id']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'user' => کد ملی
+     * @return mixed The result of the processing.
+     * */
+    public function sayadIssuerInquiryCheque($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+
 
     public function load($data, $scenario)
     {
