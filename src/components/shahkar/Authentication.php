@@ -76,10 +76,10 @@ class Authentication extends BaseAuthentication
         $body = [
             'grant_type' => 'refresh_token',
             'refresh_token' => $refresh_token->refresh_token,
-            'redirect_uri' => null,
         ];
 
         $headers['Authorization'] = 'Basic ' . base64_encode("$client->app_key:$client->app_secret");;
+        $headers['Content-Type'] = Client::FORMAT_URLENCODED;
 
         $response = Yii::$app->apiClient->post(ObOauthClients::PLATFORM_SHAHKAR, BaseOpenBanking::SHAHKAR_REFRESH_TOKEN, self::getUrl($client->base_url, self::OAUTH_URL), $body, $headers);
 
