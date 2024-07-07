@@ -88,7 +88,7 @@ class Finnotech extends Model
     public  function rules()
     {
         return [
-            [['slave_id', 'track_id','client_id'], 'required'],
+            [['slave_id', 'track_id'], 'required'],
             [['amount','description','destination_firstname','destination_lastname','destination_number'
                 ,'payment_number','reason_description','deposit','source_firstname','source_lastname','second_password'], 'required', 'on' => [self::SCENARIO_TRANSFER]],
             [['destination_number','amount','description','reason_description','payment_number'
