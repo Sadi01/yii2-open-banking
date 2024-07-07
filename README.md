@@ -125,3 +125,5 @@ Advanced config
 - [Installation Guide](./src/guide/installation.md)
 
 - [Faraboom Description Guide](./src/guide/faraboom.md)
+
+- [Finnotech Description Guide](./src/guide/finnotech.md)
