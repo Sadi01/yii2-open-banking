@@ -355,7 +355,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function backCheques($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_BACK_CHEQUES)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_BACK_CHEQUES));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -383,7 +383,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
-    /**
+   /**
      * @param array $data The data array containing:
      *     - string 'clientId' => شناسه کلاینت
      *     - string 'user' => کد ملی کاربر
@@ -412,7 +412,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
             return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE, ['clientId' => $data['client_id'], 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
-
+    
 
 
     public function load($data, $scenario)

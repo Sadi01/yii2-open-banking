@@ -644,6 +644,238 @@ deposits
 </tr>
 </table>
 
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_BACK_CHEQUES,[
+'clientId' => your client id,'trackId' => your track id,'user' => your user
+])
+```
+
+backCheques
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_BACK_CHEQUES</th>
+    <th>استعلام پیامکی چک برگشتی</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>trackId</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی ۱۰ رقمی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE,[
+'clientId' => your client id,'trackId' => your track id,'user' => your user
+])
+```
+
+sayadAcceptCheque
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE</th>
+    <th>تایید چک صیاد توسط گیرنده</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*trackId</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی ۱۰ رقمی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE,[
+'clientId' => your client id,'trackId' => your track id,'user' => your user
+])
+```
+
+sayadCancelCheque
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE</th>
+    <th>لغو چک صیاد</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*trackId</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی ۱۰ رقمی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
+'clientId' => your client id,'trackId' => your track id,'user' => your user
+])
+```
+
+sayadIssuerInquiryCheque
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE</th>
+    <th>استعلام چک صیاد توسط صادرکننده</th>
+  </tr>
+  <tr>
+    <td rowspan="5">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*trackId</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی ۱۰ رقمی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY,[
+'clientId' => your client id,'trackId' => your track id,'user' => your user,
+'idCode' => your id code,'shahabId' => your shahab id,'idType' => your id type,'sayadId' => your sayad id
+
+])
+```
+
+sayadChequeInquiry
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_SAYAD_CHEQUEـINQUIRY</th>
+    <th>استعلام چک صیاد</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+  <tr>
+    <td>*clientId</td>
+    <td>شناسه کلاینت</td>
+  </tr>
+ <tr>
+    <td>*trackId</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی ۱۰ رقمی</td>
+</tr>
+<tr>
+    <td>idCode</td>
+    <td>کد شناسایی</td>
+</tr>
+<tr>
+    <td>shahabId</td>
+    <td>کد شهاب</td>
+</tr>
+<tr>
+    <td>*idType</td>
+    <td>نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲</td>
+</tr>
+<tr>
+    <td>*sayadId</td>
+    <td>شناسه صیاد چک</td>
+</tr>
+</table>
+
+
+
+
+
 
 
 
