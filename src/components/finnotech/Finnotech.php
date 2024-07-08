@@ -335,7 +335,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function checkInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_CHECK_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'sayadId' => $data['sayad_id']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_CHECK_INQUIRY, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'sayadId' => $data['sayad_id']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_CHEQUE_INQUIRY_BY_RECEIVER));
         } else return $this->setErrors($this->model->errors);
     }
 

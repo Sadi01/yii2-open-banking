@@ -38,23 +38,23 @@ depositToShaba(تبدیل شماره حساب به شماره شبا)
     <td>شرح انتقال وجه</td>
   </tr>
   <tr>
-    <td>*destinationFirstname</td>
+    <td>*destination_firstname</td>
     <td>نام صاحب حساب مقصد</td>
   </tr>
  <tr>
-    <td>*destinationLastname</td>
+    <td>*destination_lastname</td>
     <td>نام خانوادگی صاحب حساب مقصد</td>
   </tr>
  <tr>
-    <td>*destinationNumber</td>
+    <td>*destination_number</td>
     <td>شماره حساب مقصد</td>
   </tr>
  <tr>
-    <td>*paymentNumber</td>
+    <td>*payment_number</td>
     <td>شناسه پرداخت</td>
   </tr>
  <tr>
-    <td>*reasonDescription</td>
+    <td>*reason_description</td>
     <td>بابت</td>
   </tr>
  <tr>
@@ -62,23 +62,23 @@ depositToShaba(تبدیل شماره حساب به شماره شبا)
     <td>شماره حساب مبدا</td>
   </tr>
  <tr>
-    <td>*sourceFirstName</td>
+    <td>*source_firstname</td>
     <td>نام صاحب حساب مبدا</td>
   </tr>
  <tr>
-    <td>*sourceLastName</td>
+    <td>*source_lastname</td>
     <td>نام خانوادگی صاحب حساب مبدا</td>
   </tr>
  <tr>
-    <td>*secondPassword</td>
+    <td>*second_password</td>
     <td>رمز انتقال وجه</td>
   </tr>
  <tr>
-    <td>*merchantName</td>
+    <td>*merchant_name</td>
     <td>نام پذیرنده</td>
   </tr>
  <tr>
-    <td>*merchantIban</td>
+    <td>*merchant_iban</td>
     <td>شماره شبا پذیرنده</td>
   </tr>
 <tr>
@@ -113,7 +113,7 @@ payaTransfer
     <td rowspan="9">data</td>
   </tr>
   <tr>
-    <td>*destinationNumber</td>
+    <td>*destination_number</td>
     <td>شماره شبای بانک مقصد</td>
   </tr>
   <tr>
@@ -125,23 +125,23 @@ payaTransfer
     <td>شرح انتقال وجه</td>
   </tr>
  <tr>
-    <td>*reasonDescription</td>
+    <td>*reason_description</td>
     <td>اطلاعات بیشتر</td>
   </tr>
  <tr>
-    <td>*paymentNumber</td>
+    <td>*payment_number</td>
     <td>شناسه پرداخت</td>
   </tr>
  <tr>
-    <td>*destinationFirstname</td>
+    <td>*destination_firstname</td>
     <td>نام صاحب حساب مقصد</td>
   </tr>
  <tr>
-    <td>*destinationLastname</td>
+    <td>*destination_lastname</td>
     <td>نام خانوادگی صاحب حساب مقصد</td>
   </tr>
  <tr>
-    <td>*customerRef</td>
+    <td>*customer_ref</td>
     <td>شناسه ارجاع</td>
   </tr>
 <tr>
@@ -183,27 +183,27 @@ internalTransfer
     <td>شرح تراکنش</td>
   </tr>
   <tr>
-    <td>*destinationNumber</td>
+    <td>*destination_number</td>
  <td>شماره شبا مقصد</td>
   </tr>
  <tr>
-    <td>*paymentNumber</td>
+    <td>*payment_number</td>
  <td>شناسه پرداخت</td>
   </tr>
  <tr>
-    <td>*customerRef</td>
+    <td>*customer_ref</td>
  <td>شماره مرجع تراکنش که توسط کاربر وارد می شود</td>
   </tr>
  <tr>
-    <td>*sourceFirstName</td>
+    <td>*source_firstname</td>
  <td>نام صاحب حساب مبدا</td>
   </tr>
  <tr>
-    <td>*sourceLastName</td>
+    <td>*source_lastname</td>
  <td>نام خانوادگی صاحب حساب مبدا</td>
   </tr>
  <tr>
-    <td>*reasonDescription</td>
+    <td>*reason_description</td>
  <td>دلیل تراکنش</td>
   </tr>
  <tr>
@@ -211,11 +211,11 @@ internalTransfer
  <td>شناسه پرداخت</td>
   </tr>
  <tr>
-    <td>destinationFirstname</td>
+    <td>destination_firstname</td>
  <td>نام صاحب حساب مقصد</td>
   </tr>
  <tr>
-    <td>destinationLastname</td>
+    <td>destination_lastname</td>
  <td>نام خانوادگی صاحب حساب مقصد</td>
   </tr>
  <tr>
@@ -291,7 +291,7 @@ depositToShaba
     <td>شماره حسابی که قصد دریافت شماره شبا آن را دارید</td>
   </tr>
   <tr>
-    <td>*bankCode</td>
+    <td>*bank_code</td>
     <td>کد بانک صاحب حساب</td>
   </tr>
 </table>
@@ -325,7 +325,7 @@ checkInquiry
     <td rowspan="12">data</td>
   </tr>
   <tr>
-    <td>*sayadId</td>
+    <td>*sayad_id</td>
     <td>شناسه صیاد چک</td>
   </tr>
 </table>
