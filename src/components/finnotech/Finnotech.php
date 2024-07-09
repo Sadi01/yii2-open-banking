@@ -55,36 +55,42 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     public function sendOtpAuthorizeCode($data)
     {
-        $scopes = is_array($data['scopes']) ? implode(',', $data['scopes']) : $data['scopes'];
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_SEND_OTP)) {
 
-        $params = [
-            'client_id' => $this->client->app_key,
-            'redirect_uri' => $data['redirect_uri'],
-            'response_type' => 'code',
-            'scope' => $scopes,
-           // 'bank' => $data['bank'] ?? '062',
-            'mobile' => $data['mobile'],
-            'state' => $data['state'] ?? null,
-            'auth_type' => 'SMS',
-        ];
+            $scopes = is_array($data['scopes']) ? implode(',', $data['scopes']) : $data['scopes'];
+            $params = [
+                'client_id' => $this->client->app_key,
+                'redirect_uri' => $data['redirect_uri'],
+                'response_type' => 'code',
+                'scope' => $scopes,
+                // 'bank' => $data['bank'] ?? '062',
+                'mobile' => $data['mobile'],
+                'state' => $data['state'] ?? null,
+                'auth_type' => 'SMS',
+            ];
 
-        $headers['Content-Type'] = Client::FORMAT_JSON;
-        $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
-        return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SEND_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SEND_OTP,$params), $params, $headers);
+            $headers['Content-Type'] = Client::FORMAT_JSON;
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SEND_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SEND_OTP, $params), $params, $headers);
+
+        } else return $this->setErrors($this->model->errors);
     }
 
     public function verifyOtpCode($data)
     {
-        $body = [
-            'otp' => $data['otp'],
-            'mobile' => $data['mobile'],
-            'nid' => $data['nid'],
-            'trackId' => $data['trackId'],
-        ];
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_VERIFY_OTP_CODE)) {
+            $body = [
+                'otp' => $data['otp'],
+                'mobile' => $data['mobile'],
+                'nid' => $data['nid'],
+                'trackId' => $data['trackId'],
+            ];
 
-        $headers['Content-Type'] = Client::FORMAT_JSON;
-        $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
-        return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_VERIFY_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_VERIFY_OTP), $body, $headers);
+            $headers['Content-Type'] = Client::FORMAT_JSON;
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
+            return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_VERIFY_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_VERIFY_OTP), $body, $headers);
+
+        } else return $this->setErrors($this->model->errors);
     }
 
     public function getAuthorizeToken($data)
@@ -383,7 +389,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
-   /**
+    /**
      * @param array $data The data array containing:
      *     - string 'clientId' => شناسه کلاینت
      *     - string 'user' => کد ملی کاربر
@@ -412,7 +418,6 @@ class Finnotech extends OpenBanking implements FinnotechInterface
             return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
-    
 
 
     public function load($data, $scenario)

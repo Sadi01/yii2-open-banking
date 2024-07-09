@@ -84,6 +84,8 @@ class Finnotech extends Model
     const SCENARIO_SAYAD_CANCEL_CHEQUE = 'sayad_cancel_cheque';
     const SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE = 'sayad_issuer_inquiry_cheque';
     const SCENARIO_SAYAD_CHEQUE_INQUIRY = 'sayad_cheque_Inquiry';
+    const SCENARIO_SEND_OTP = 'send_otp';
+    const SCENARIO_VERIFY_OTP_CODE = 'verify_otp_code';
 
     public  function rules()
     {
@@ -105,14 +107,14 @@ class Finnotech extends Model
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ACCEPT_CHEQUE]],
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_CANCEL_CHEQUE]],
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE]],
+            [['redirect_uri','mobile','state'], 'required', 'on' => [self::SCENARIO_SEND_OTP]],
+            [['otp','mobile','nid'], 'required', 'on' => [self::SCENARIO_VERIFY_OTP_CODE]],
             [['user','id_type','sayad_id'], 'required', 'on' => [self::SCENARIO_SAYAD_CHEQUE_INQUIRY]],
             [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
             [['users','birth_date','full_name','first_name','last_name','father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit','bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
             [['merchant_name','merchant_iban'],'string'],
             [['merchant_iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
-
-
         ];
     }
 
@@ -178,6 +180,8 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_SAYAD_CANCEL_CHEQUE] = ['client_id','track_id','user'];
         $scenarios[self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE] = ['client_id','track_id','user'];
         $scenarios[self::SCENARIO_SAYAD_CHEQUE_INQUIRY] = ['client_id','track_id','user','id_code','shahab_id','id_type','sayad_id'];
+        $scenarios[self::SCENARIO_SEND_OTP] = ['client_id','track_id','redirect_uri','mobile','state'];
+        $scenarios[self::SCENARIO_VERIFY_OTP_CODE] = ['client_id','track_id','otp','mobile','nid'];
 
 
         return $scenarios;
