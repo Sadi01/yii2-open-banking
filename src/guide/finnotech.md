@@ -391,7 +391,7 @@ cardToDeposit
     <td rowspan="5">data</td>
   </tr>
   <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td>رشته ای اختیاری با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد</td>
   </tr>
   <tr>
@@ -430,7 +430,7 @@ cardToShaba
     <td rowspan="5">data</td>
   </tr>
  <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td> رشته ای اختیاری با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد</td>
   </tr>
   <tr>
@@ -480,23 +480,23 @@ nidVerification
     <td>کد ملی که میخواهید صحت آن را بررسی کنید و اجباری است</td>
   </tr>
  <tr>
-    <td>*birthDate</td>
+    <td>*birth_date</td>
     <td> تاریخ تولد صاحب این کد ملی </td>
 </tr>
  <tr>
-    <td>*fullName</td>
+    <td>*full_name</td>
     <td> نام و نام خانوادگی که میخواهید صحت آن را بررسی کنید </td>
 </tr>
  <tr>
-    <td>*firstName</td>
+    <td>*first_name</td>
     <td> نام کوچک صاحب کد ملی </td>
 </tr>
  <tr>
-    <td>*lastName</td>
+    <td>*last_name</td>
     <td> نام خانوادگی صاحب کد ملی </td>
 </tr>
  <tr>
-    <td>*fatherName</td>
+    <td>*father_name</td>
     <td> نام پدر صاحب کد ملی </td>
 </tr>
  <tr>
@@ -535,7 +535,7 @@ matchMobileNid
     <td rowspan="5">data</td>
   </tr>
   <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td> کد پیگیری</td>
   </tr>
   <tr>
@@ -543,7 +543,7 @@ matchMobileNid
     <td>شماره موبایل</td>
   </tr>
  <tr>
-    <td>*nationalCode</td>
+    <td>*national_code</td>
     <td>کدملی</td>
 </tr>
 </table>
@@ -577,7 +577,7 @@ cardInfo
     <td rowspan="5">data</td>
   </tr>
  <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td>کد پیگیری</td>
 </tr>
  <tr>
@@ -619,7 +619,7 @@ deposits
     <td>کد ملی ۱۰ رقمی</td>
 </tr>
  <tr>
-    <td>trackId</td>
+    <td>track_id</td>
     <td>رشته ای با طول حداکثر ۴۰ کاراکتر شامل حرف و عدد</td>
 </tr>
 </table>
@@ -653,7 +653,7 @@ backCheques
     <td rowspan="5">data</td>
   </tr>
  <tr>
-    <td>trackId</td>
+    <td>track_id</td>
     <td> کد پیگیری</td>
 </tr>
 <tr>
@@ -691,7 +691,7 @@ sayadAcceptCheque
     <td rowspan="5">data</td>
   </tr>
  <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td> کد پیگیری</td>
 </tr>
 <tr>
@@ -729,7 +729,7 @@ sayadCancelCheque
     <td rowspan="5">data</td>
   </tr>
  <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td> کد پیگیری</td>
 </tr>
 <tr>
@@ -767,7 +767,7 @@ sayadIssuerInquiryCheque
     <td rowspan="5">data</td>
   </tr>
  <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td> کد پیگیری</td>
 </tr>
 <tr>
@@ -815,19 +815,19 @@ sayadChequeInquiry
     <td>کد ملی ۱۰ رقمی</td>
 </tr>
 <tr>
-    <td>idCode</td>
+    <td>id_code</td>
     <td>کد شناسایی</td>
 </tr>
 <tr>
-    <td>shahabId</td>
+    <td>shahab_id</td>
     <td>کد شهاب</td>
 </tr>
 <tr>
-    <td>*idType</td>
+    <td>*id_type</td>
     <td>نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲</td>
 </tr>
 <tr>
-    <td>*sayadId</td>
+    <td>*sayad_id</td>
     <td>شناسه صیاد چک</td>
 </tr>
 </table>
