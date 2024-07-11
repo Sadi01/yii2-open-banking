@@ -2,6 +2,7 @@
 
 namespace sadi01\openbanking\components\finnotech;
 
+use common\models\User;
 use sadi01\openbanking\models\BaseOpenBanking;
 use Yii;
 use yii\httpclient\Client;
@@ -77,12 +78,20 @@ class Authentication extends BaseAuthentication
     /**
      * @var ObOauthClients $client
      * */
-    public static function getSmsToken($client, $code,$redirect_uri)
+    public static function getSmsToken($client, $scope, $code, $redirect_uri, $national_code)
     {
-        /*$accessToken = ObOauthAccessTokens::find()->notExpire()->byScope($scope)->byClientId($client->client_id)->one();
-        $refreshToken = ObOauthRefreshTokens::find()->notExpire()->byScope($scope)->byClientId($client->client_id)->one();
+        $scopes = is_array($scope) ? implode(',', $scope) : $scope;
 
-        if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {*/
+        $accessToken = ObOauthAccessTokens::find()
+            ->notExpire()
+            ->andWhere(['JSON_EXTRACT(add_on, "$.national_code")' => $national_code])
+            ->byScope($scopes)->byClientId($client->client_id)->one();
+        $refreshToken = ObOauthRefreshTokens::find()
+            ->notExpire()
+            ->andWhere(['JSON_EXTRACT(add_on, "$.national_code")' => $national_code])
+            ->byScope($scopes)->byClientId($client->client_id)->one();
+
+        if (!$accessToken instanceof ObOauthAccessTokens && !$refreshToken instanceof ObOauthRefreshTokens) {
             $body = [
                 'grant_type' => 'authorization_code',
                 'code' => $code,
@@ -104,6 +113,7 @@ class Authentication extends BaseAuthentication
                     'client_id' => (string)ObOauthClients::PLATFORM_FINNOTECH,
                     'user_id' => Yii::$app->user->id,
                     'expires' => date('Y-m-d H:i:s', time() + ($result->lifeTime / 1000)),
+                    'national_code' => $national_code,
                     'scope' => $scopes,
                 ]);
                 if (!$accessToken->save()) {
@@ -115,6 +125,7 @@ class Authentication extends BaseAuthentication
                     'user_id' => Yii::$app->user->id,
                     'client_id' => (string)ObOauthClients::PLATFORM_FINNOTECH,
                     'expires' => date('Y-m-d H:i:s', time() + ($result->lifeTime / 1000)),
+                    'national_code' => $national_code,
                     'scope' => $scopes,
                 ]);
                 /* $refreshToken->save();*/
@@ -124,11 +135,11 @@ class Authentication extends BaseAuthentication
                 }
                 return $accessToken->access_token;
             }
-        /*} else if ($accessToken instanceof ObOauthAccessTokens) {
+        } else if ($accessToken instanceof ObOauthAccessTokens) {
             return $accessToken->access_token;
         } else if ($refreshToken instanceof ObOauthRefreshTokens) {
             return self::refreshToken($refreshToken, $client);
-        }*/
+        }
         return null;
     }
 

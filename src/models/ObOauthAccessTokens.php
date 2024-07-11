@@ -26,7 +26,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
 
     const SCENARIO_DELETE = 'delete';
 
-    public ?string $test = null;
+    public ?string $national_code = null;
 
     /**
      * {@inheritdoc}
@@ -47,6 +47,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
             [['user_id'], 'integer'],
             [['access_token'], 'string', 'max' => 2048],
             [['client_id'], 'string', 'max' => 32],
+            [['national_code'], 'string', 'max' => 10],
             [['scope'], 'string', 'max' => 2000],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -72,6 +73,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
             'expires' => Yii::t('openBanking', 'Expires'),
             'scope' => Yii::t('openBanking', 'Scope'),
             'user_id' => Yii::t('openBanking', 'User ID'),
+            'national_code' => Yii::t('openBanking', 'National Code'),
             'add_on' => Yii::t('openBanking', 'Ad On'),
         ];
     }
@@ -116,7 +118,7 @@ class ObOauthAccessTokens extends \yii\db\ActiveRecord
                 'class' => Jsonable::class,
                 'jsonAttributes' => [
                     'add_on' => [
-                        'test'
+                        'national_code'
                         // Your json attributes
                     ],
                 ],

@@ -88,6 +88,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
             $headers['Content-Type'] = Client::FORMAT_JSON;
             $headers['Authorization'] = 'Basic ' . base64_encode($this->client->app_key . ':' . $this->client->app_password);
+
             return Yii::$app->apiClient->post(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_VERIFY_OTP, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_VERIFY_OTP), $body, $headers);
 
         } else return $this->setErrors($this->model->errors);
@@ -361,7 +362,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function backCheques($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_BACK_CHEQUES)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_BACK_CHEQUES));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_BACK_CHEQUES,true, $data['userz'], $data['code'], $data['redirect_uri']));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -430,9 +431,9 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         return false;
     }
 
-    public function getHeaders($scope = null)
+    public function getHeaders($scope = null, $smsToken = false, $national_code = null, $code = null, $redirect_uri = null)
     {
-        $token = Authentication::getToken($this->client, $scope);
+        $token = $smsToken ? Authentication::getSmsToken($this->client, $scope, $code, $redirect_uri, $national_code) : Authentication::getToken($this->client, $scope);
 
         $headers = [];
         $headers['Accept-Language'] = 'fa';

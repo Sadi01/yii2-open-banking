@@ -40,6 +40,8 @@ class Finnotech extends Model
     public $national_code;
 
     public $user;
+    public $redirect_uri;
+    public $state;
 
 
 
@@ -107,13 +109,13 @@ class Finnotech extends Model
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ACCEPT_CHEQUE]],
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_CANCEL_CHEQUE]],
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE]],
-            [['redirect_uri','mobile','state'], 'required', 'on' => [self::SCENARIO_SEND_OTP]],
+            [['redirect_uri','mobile'], 'required', 'on' => [self::SCENARIO_SEND_OTP]],
             [['otp','mobile','nid'], 'required', 'on' => [self::SCENARIO_VERIFY_OTP_CODE]],
             [['user','id_type','sayad_id'], 'required', 'on' => [self::SCENARIO_SAYAD_CHEQUE_INQUIRY]],
             [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
             [['users','birth_date','full_name','first_name','last_name','father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit','bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
-            [['merchant_name','merchant_iban'],'string'],
+            [['merchant_name','merchant_iban','state'],'string'],
             [['merchant_iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
         ];
     }
