@@ -25,6 +25,8 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
 
     const SCENARIO_DELETE = 'delete';
 
+    public ?string $national_code = null;
+
     /**
      * {@inheritdoc}
      */
@@ -44,6 +46,7 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
             [['user_id'], 'integer'],
             [['refresh_token'], 'string', 'max' => 2048],
             [['client_id'], 'string', 'max' => 32],
+            [['national_code'], 'string', 'max' => 10],
             [['scope'], 'string', 'max' => 2000],
             [['refresh_token'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -113,7 +116,7 @@ class ObOauthRefreshTokens extends \yii\db\ActiveRecord
                 'class' => Jsonable::class,
                 'jsonAttributes' => [
                     'add_on' => [
-                        // Your json attributes
+                        'national_code'
                     ],
                 ],
             ],

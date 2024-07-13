@@ -38,7 +38,7 @@ class Finnotech extends Model
     public $gender;
     public $mobile;
     public $national_code;
-
+    public $otp;
     public $user;
     public $redirect_uri;
     public $state;
@@ -110,7 +110,7 @@ class Finnotech extends Model
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_CANCEL_CHEQUE]],
             [['user'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE]],
             [['redirect_uri','mobile'], 'required', 'on' => [self::SCENARIO_SEND_OTP]],
-            [['otp','mobile','nid'], 'required', 'on' => [self::SCENARIO_VERIFY_OTP_CODE]],
+            [['otp','mobile','national_code'], 'required', 'on' => [self::SCENARIO_VERIFY_OTP_CODE]],
             [['user','id_type','sayad_id'], 'required', 'on' => [self::SCENARIO_SAYAD_CHEQUE_INQUIRY]],
             [['mobile','national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
             [['users','birth_date','full_name','first_name','last_name','father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
@@ -183,7 +183,7 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_SAYAD_ISSUER_INQUIRY_CHEQUE] = ['client_id','track_id','user'];
         $scenarios[self::SCENARIO_SAYAD_CHEQUE_INQUIRY] = ['client_id','track_id','user','id_code','shahab_id','id_type','sayad_id'];
         $scenarios[self::SCENARIO_SEND_OTP] = ['client_id','track_id','redirect_uri','mobile','state'];
-        $scenarios[self::SCENARIO_VERIFY_OTP_CODE] = ['client_id','track_id','otp','mobile','nid'];
+        $scenarios[self::SCENARIO_VERIFY_OTP_CODE] = ['client_id','track_id','otp','mobile','national_code'];
 
 
         return $scenarios;

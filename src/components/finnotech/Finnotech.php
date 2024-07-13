@@ -82,7 +82,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
             $body = [
                 'otp' => $data['otp'],
                 'mobile' => $data['mobile'],
-                'nid' => $data['nid'],
+                'nid' => $data['national_code'],
                 'trackId' => $data['trackId'],
             ];
 
@@ -362,7 +362,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function backCheques($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_BACK_CHEQUES)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_BACK_CHEQUES,true, $data['userz'], $data['code'], $data['redirect_uri']));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_BACK_CHEQUES, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_BACK_CHEQUES, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_BACK_CHEQUES,true, $data['user'], $data['code'], $data['redirect_uri']));
         } else return $this->setErrors($this->model->errors);
     }
 
