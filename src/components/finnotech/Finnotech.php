@@ -417,9 +417,9 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     /**
      * @param array $data The data array containing:
-     *     - string 'clientId' => شناسه کلاینت
-     *     - string 'user' => کد ملی کاربر
-     *     - string 'idType' => نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲
+     *     - array 'account_owners' => (اجباری) لیست صاحبان حساب
+     *     - array 'receivers' => کد ملی کاربر
+     *     - array 'signers' => نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲
      *     - string 'sayadId' => شناسه صیاد چک
      *     - string 'trackId' =>  کد پیگیری
      *     - ?string 'idCode' =>  کد شناسایی
