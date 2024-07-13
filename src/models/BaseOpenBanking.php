@@ -64,6 +64,8 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_SAYAD_CANCEL_CHEQUE = 43;
     const FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE = 44;
     const FINNOTECH_SAYAD_CHEQUE_INQUIRY = 45;
+    const FINNOTECH_VERIFY_AC_TOKEN = 46;
+    const FINNOTECH_SAYAD_ISSUE_CHEQUE = 47;
 
 
     public function rules()
@@ -139,11 +141,13 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSITS => Yii::t('openBanking', 'Deposits'),
                 self::FINNOTECH_SEND_OTP => Yii::t('openBanking', 'Send Otp Request'),
                 self::FINNOTECH_VERIFY_OTP => Yii::t('openBanking', 'Verify Otp Request'),
+                self::FINNOTECH_VERIFY_AC_TOKEN => Yii::t('openBanking', 'Verify Authorize Token'),
                 self::FINNOTECH_BACK_CHEQUES => Yii::t('openBanking', 'Back Cheques'),
                 self::FINNOTECH_SAYAD_ACCEPT_CHEQUE => Yii::t('openBanking', 'Sayad Accept Cheque'),
                 self::FINNOTECH_SAYAD_CANCEL_CHEQUE => Yii::t('openBanking', 'Sayad Cancel Cheque'),
                 self::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE => Yii::t('openBanking', 'Sayad Issuer Inquiry Cheque'),
                 self::FINNOTECH_SAYAD_CHEQUE_INQUIRY => Yii::t('openBanking', 'Sayad Cheque Inquiry'),
+                self::FINNOTECH_SAYAD_ISSUE_CHEQUE => Yii::t('openBanking', 'Sayad Issue Cheque'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -185,11 +189,13 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSITS => 'deposits',
                 self::FINNOTECH_SEND_OTP => 'sendOtpAuthorizeCode',
                 self::FINNOTECH_VERIFY_OTP => 'verifyOtpCode',
+                self::FINNOTECH_VERIFY_AC_TOKEN => 'verifyAcToken',
                 self::FINNOTECH_BACK_CHEQUES => 'backCheques',
                 self::FINNOTECH_SAYAD_ACCEPT_CHEQUE => 'sayadAcceptCheque',
                 self::FINNOTECH_SAYAD_CANCEL_CHEQUE => 'sayadCancelCheque',
                 self::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE => 'sayadIssuerInquiryCheque',
                 self::FINNOTECH_SAYAD_CHEQUE_INQUIRY => 'sayadChequeInquiry',
+                self::FINNOTECH_SAYAD_ISSUE_CHEQUE => 'sayadIssueCheque',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -233,8 +239,10 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSITS => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['users'] ?? '') . '/deposits', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_SEND_OTP => [self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/authorize', 'client_id' => ($params['client_id'] ?? ''), 'response_type' => $params['response_type'] ?? '','redirect_uri' => $params['redirect_uri'] ?? '','scope' => $params['scope'] ?? '','mobile' => $params['mobile'] ?? '','auth_type' => $params['auth_type'] ?? '','state' => $params['state'] ?? ''],
                 self::FINNOTECH_VERIFY_OTP => self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/verify/sms',
+                self::FINNOTECH_VERIFY_AC_TOKEN => self::FINNOTECH_BASE_URL . '/dev/v2/oauth2/token',
                 self::FINNOTECH_BACK_CHEQUES => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/backCheques', 'trackId' => $params['track_id'] ?? ''],
-                self::FINNOTECH_SAYAD_ACCEPT_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadAcceptCheque', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_SAYAD_ACCEPT_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/ac/sayadIssueCheque', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_SAYAD_ISSUE_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadAcceptCheque', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_SAYAD_CANCEL_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadCancelCheque', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadIssuerInquiryCheque', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_SAYAD_CHEQUE_INQUIRY => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadChequeInquiry', 'trackId' => $params['track_id'] ?? '', 'sayadId' => $params['sayad_id'] ?? '','idCode' => $params['id_code'] ?? '','shahabId' => $params['shahab_id'] ?? '','idType' => $params['id_type'] ?? ''],
