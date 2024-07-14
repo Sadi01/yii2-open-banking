@@ -89,6 +89,7 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_PAYA_TRANSAFER,['track_id' => your track id])
 ```
+<br />
 
 payaTransfer
 -------------
@@ -152,6 +153,7 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER,['track_id' => your track id])
 ```
+<br />
 
 internalTransfer
 -------------
@@ -230,6 +232,7 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SHABA_INQUIRY,['track_id' => your track id])
 ```
+<br />
 
 shabaInquiry:
 -------------
@@ -264,6 +267,7 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA,['track_id' => your track id,'deposit' =>your deposit,'bank_code' => your bank code])
 ```
+<br />
 
 depositToShaba
 -------------
@@ -303,6 +307,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'sayad_id' =>your sayad id
 ])
 ```
+<br />
 
 checkInquiry
 -------------
@@ -337,6 +342,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'track_id' => your track id
 ])
 ```
+<br />
 
 banksInfo
 -------------
@@ -370,6 +376,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'card' => your card
 ])
 ```
+<br />
 
 cardToDeposit
 -------------
@@ -411,6 +418,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'version' => your version
 ])
 ```
+<br />
 
 cardToShaba
 -------------
@@ -462,6 +470,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'gender' => your gender
 ])
 ```
+<br />
 
 nidVerification
 -------------
@@ -523,6 +532,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'nationalCode' => your nationalCode
 ])
 ```
+<br />
 
 matchMobileNid
 -------------
@@ -566,6 +576,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'card' => your card
 ])
 ```
+<br />
 
 cardInfo
 -------------
@@ -605,6 +616,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'card' => your card
 ])
 ```
+<br />
 
 deposits
 -------------
@@ -644,6 +656,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'user' => your user
 ])
 ```
+<br />
 
 backCheques
 -------------
@@ -683,6 +696,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'user' => your user
 ])
 ```
+<br />
 
 sayadAcceptCheque
 -------------
@@ -722,6 +736,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'user' => your user
 ])
 ```
+<br />
 
 sayadCancelCheque
 -------------
@@ -761,6 +776,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
     'user' => your user
 ])
 ```
+<br />
 
 sayadIssuerInquiryCheque
 -------------
@@ -805,6 +821,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 
 ])
 ```
+<br />
 
 sayadChequeInquiry
 -------------
@@ -859,6 +876,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 'track_id' => your track id,'user' => your user
 ])
 ```
+<br />
 
 backCheques
 -------------
@@ -908,6 +926,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 'redirect_uri' => '',
 ])
 ```
+<br />
 
 
 sendOtpAuthorizeCode
@@ -963,6 +982,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 'state' => ''
 ])
 ```
+<br />
 
 
 sendOtpAuthorizeCode
