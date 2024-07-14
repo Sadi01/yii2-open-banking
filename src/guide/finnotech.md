@@ -779,8 +779,12 @@ sayadIssuerInquiryCheque
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY,[
-'trackId' => your track id,'user' => your user,
-'idCode' => your id code,'shahabId' => your shahab id,'idType' => your id type,'sayadId' => your sayad id
+'track_id' => your track id,
+'user' => your user,
+'id_code' => your id code,
+'shahab_id' => your shahab id,
+'id_type' => your id type,
+'sayad_id' => your sayad id
 
 ])
 ```
@@ -835,7 +839,56 @@ sayadChequeInquiry
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
-'trackId' => your track id,'user' => your user
+'track_id' => your track id,'user' => your user
+])
+```
+
+backCheques
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_BACK_CHEQUES</th>
+    <th>استعلام چک برگشتی</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی</td>
+</tr>
+<tr>
+    <td>*code</td>
+    <td>کد دریافتی در مرحله احراز هویت</td>
+</tr>
+<tr>
+    <td>*redirect_uri</td>
+    <td>آدرس بازگشتی کلاینت، دامنه این آدرس باید با دامنه ثبت شده به ازای آدرس بازگشتی کلاینت در فینوتک برابر باشد</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_BACK_CHEQUES,[
+'track_id' => your track id,
+'user' => '',
+'code' => '',
+'redirect_uri' => '',
 ])
 ```
 
