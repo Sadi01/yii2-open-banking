@@ -929,6 +929,68 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 <br />
 
 
+depositStatement
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT</th>
+    <th>دریافت گردش حساب</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*deposit</td>
+    <td>شماره حساب</td>
+</tr>
+<tr>
+    <td>to_date</td>
+    <td>فرمت تاریخ باید به صورت YYYYMMDD باشد . لازم به ذکر است بازه زمانی گردش حساب بیشتر از ۳۱ روز نمی تواند باشد و در صورت وارد کردن تاریخ شروع اعلام تاریخ پایان الزامی می باشد</td>
+</tr>
+<tr>
+    <td>from_date</td>
+    <td>فرمت تاریخ باید به صورت YYYYMMDD باشد اختیاری</td>
+</tr>
+<tr>
+    <td>to_time</td>
+    <td>فرمت زمان باید به صورت HHMMSS باشد اختیاری</td>
+</tr>
+<tr>
+    <td>from_time</td>
+    <td>زمان باید به صورت HHMMSS باشد اختیاری</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT,[
+    'track_id' => your track id,
+    'deposit' => '',
+    'to_date' => '',
+    'from_date' => '',
+    'to_time' => '',
+    'from_time' => '',
+])
+```
+
+<br>
+
+
 sendOtpAuthorizeCode
 -------------
 <table>
@@ -1031,67 +1093,6 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 'otp' => '',
 'mobile' => 'https://..........',
 'national_code' => '09123456789',
-])
-```
-<br />
-
-
-depositStatement
--------------
-<table>
-    <tr>
-        <th>Arguments</th>
-        <th>Values</th>
-        <th>Description</th>
-    </tr>
-  <tr>
-    <th>platform</th>
-    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
-    <th>پلتفرم</th>
-  </tr>
-  <tr>
-    <th>service</th>
-    <th>BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT</th>
-    <th>دریافت گردش حساب</th>
-  </tr>
-  <tr>
-    <td rowspan="8">data</td>
-  </tr>
- <tr>
-    <td>*track_id</td>
-    <td> کد پیگیری</td>
-</tr>
-<tr>
-    <td>*deposit</td>
-    <td>شماره حساب</td>
-</tr>
-<tr>
-    <td>to_date</td>
-    <td>فرمت تاریخ باید به صورت YYYYMMDD باشد . لازم به ذکر است بازه زمانی گردش حساب بیشتر از ۳۱ روز نمی تواند باشد و در صورت وارد کردن تاریخ شروع اعلام تاریخ پایان الزامی می باشد</td>
-</tr>
-<tr>
-    <td>from_date</td>
-    <td>فرمت تاریخ باید به صورت YYYYMMDD باشد اختیاری</td>
-</tr>
-<tr>
-    <td>to_time</td>
-    <td>فرمت زمان باید به صورت HHMMSS باشد اختیاری</td>
-</tr>
-<tr>
-    <td>from_time</td>
-    <td>زمان باید به صورت HHMMSS باشد اختیاری</td>
-</tr>
-</table>
-
-Usage Example:
-```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_VERIFY_OTP,[
-    'track_id' => your track id,
-    'deposit' => '',
-    'to_date' => '',
-    'from_date' => '',
-    'to_time' => '',
-    'from_time' => '',
 ])
 ```
 
