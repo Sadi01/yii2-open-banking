@@ -47,7 +47,6 @@ class Finnotech extends Model
     public $scope;
     public $code;
     public $bank;
-
     public $account_owners;
     public $receivers;
     public $signers;
@@ -60,6 +59,10 @@ class Finnotech extends Model
     public $cheque_type;
     public $cheque_media;
     public $reason;
+    public $to_date;
+    public $from_date;
+    public $to_time;
+    public $from_time;
 
 
     const AYANDEH_BANK_CODE = '062';
@@ -85,6 +88,7 @@ class Finnotech extends Model
     const SCOPE_CHEQUE_INQUIRY_BY_SMS = 'credit:sms-sayady-cheque-inquiry:get'; //استعلام پیامکی چک صیاد
     const SCOPE_PAYA_TRANSFER = 'oak:paya-transfer:execute'; //انتقال وجه پایا
     const SCOPE_ISSUE_CHEQUE = 'credit:ac-sayad-issue-cheque:post'; //ثبت چک
+    const SCOPE_DEPOSIT_STATEMENT = 'oak:statement:get'; //دریافت گردش حساب
 
 
     const SCENARIO_TRANSFER = 'transfer';
@@ -109,6 +113,7 @@ class Finnotech extends Model
     const SCENARIO_SEND_OTP = 'send-otp';
     const SCENARIO_VERIFY_OTP_CODE = 'verify-otp-code';
     const SCENARIO_VERIFY_AC_TOKEN = 'verify-ac-token';
+    const SCENARIO_DEPOSIT_STATEMENT = 'deposit-statement';
 
     public function rules()
     {
@@ -132,8 +137,9 @@ class Finnotech extends Model
             [['mobile', 'national_code'], 'required', 'on' => [self::SCENARIO_MATCH_MOBILE_NID]],
             [['users', 'birth_date', 'full_name', 'first_name', 'last_name', 'father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit', 'bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
+            [['deposit'], 'required', 'on' => [self::SCENARIO_DEPOSIT_STATEMENT]],
             [['account_owners','receivers','signers','sayad_id','series_no','serial_no','from_iban','amount','description','due_date','bank_code','branch_code','cheque_type','cheque_media','reason'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUE_CHEQUE]],
-            [['merchant_name', 'merchant_iban', 'state'], 'string'],
+            [['merchant_name', 'merchant_iban', 'state','to_date','from_date','to_time','from_time'], 'string'],
             [['signers'], 'validateSigners', 'on' => self::SCENARIO_SAYAD_ISSUE_CHEQUE],
             [['receivers','account_owners'], 'validateAccountOwnersAndReceivers', 'on' => self::SCENARIO_SAYAD_ISSUE_CHEQUE],
             [['merchant_iban'], 'match', 'pattern' => '/^(?:IR)(?=.{24}$)[0-9]*$/'],
@@ -266,6 +272,10 @@ class Finnotech extends Model
             'cheque_type' => Yii::t('openBanking', 'cheque_type'),
             'cheque_media' => Yii::t('openBanking', 'cheque_media'),
             'reason' => Yii::t('openBanking', 'reason'),
+            'to_date' => Yii::t('openBanking', 'to_date'),
+            'from_date' => Yii::t('openBanking', 'from_date'),
+            'to_time' => Yii::t('openBanking', 'to_time'),
+            'from_time' => Yii::t('openBanking', 'from_time'),
         ];
     }
 
@@ -297,6 +307,7 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_SEND_OTP] = ['client_id', 'track_id', 'redirect_uri', 'mobile', 'state'];
         $scenarios[self::SCENARIO_VERIFY_OTP_CODE] = ['client_id', 'track_id', 'otp', 'mobile', 'national_code'];
         $scenarios[self::SCENARIO_VERIFY_AC_TOKEN] = ['client_id', 'track_id', 'scope', 'code', 'redirect_uri','bank'];
+        $scenarios[self::SCENARIO_DEPOSIT_STATEMENT] = ['client_id', 'track_id', 'deposit', 'to_date', 'from_date','to_time','from_time'];
         $scenarios[self::SCENARIO_SAYAD_ISSUE_CHEQUE] = ['client_id', 'track_id','account_owners','receivers','signers','sayad_id','series_no','serial_no','from_iban','amount','description','due_date','to_iban','bank_code','branch_code','cheque_type','cheque_media','reason'];
 
 

@@ -445,6 +445,22 @@ class Finnotech extends OpenBanking implements FinnotechInterface
         } else return $this->setErrors($this->model->errors);
     }
 
+    /**
+     * @param array $data The data array containing:
+     *     - string 'deposit' => 
+     *     - string 'to_date' => 
+     *     - string 'from_date' => 
+     *     - string 'to_time' => 
+     *     - string 'from_time' =>
+     * @return mixed The result of the processing.
+     * */
+    public function depositStatement($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSIT_STATEMENT)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'toDate' => $data['to_date'], 'fromDate' => $data['from_date'], 'toTime' => $data['to_time'], 'fromTime' => $data['from_time']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
 
     public function load($data, $scenario)
     {

@@ -66,6 +66,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_SAYAD_CHEQUE_INQUIRY = 45;
     const FINNOTECH_VERIFY_AC_TOKEN = 46;
     const FINNOTECH_SAYAD_ISSUE_CHEQUE = 47;
+    const FINNOTECH_DEPOSIT_STATEMENT = 48;
 
 
     public function rules()
@@ -148,6 +149,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE => Yii::t('openBanking', 'Sayad Issuer Inquiry Cheque'),
                 self::FINNOTECH_SAYAD_CHEQUE_INQUIRY => Yii::t('openBanking', 'Sayad Cheque Inquiry'),
                 self::FINNOTECH_SAYAD_ISSUE_CHEQUE => Yii::t('openBanking', 'Sayad Issue Cheque'),
+                self::FINNOTECH_DEPOSIT_STATEMENT => Yii::t('openBanking', 'Dposit Statement'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -196,6 +198,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE => 'sayadIssuerInquiryCheque',
                 self::FINNOTECH_SAYAD_CHEQUE_INQUIRY => 'sayadChequeInquiry',
                 self::FINNOTECH_SAYAD_ISSUE_CHEQUE => 'sayadIssueCheque',
+                self::FINNOTECH_DEPOSIT_STATEMENT => 'depositStatement',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -246,6 +249,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_SAYAD_CANCEL_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadCancelCheque', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadIssuerInquiryCheque', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_SAYAD_CHEQUE_INQUIRY => [self::FINNOTECH_BASE_URL . '/credit/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/sayadChequeInquiry', 'trackId' => $params['track_id'] ?? '', 'sayadId' => $params['sayad_id'] ?? '','idCode' => $params['id_code'] ?? '','shahabId' => $params['shahab_id'] ?? '','idType' => $params['id_type'] ?? ''],
+                self::FINNOTECH_DEPOSIT_STATEMENT => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/deposits/' . ($params['deposit'] ?? '') . '/statement', 'trackId' => $params['track_id'] ?? '', 'toDate' => $params['to_date'] ?? '','fromDate' => $params['from_date'] ?? '','toTime' => $params['to_time'] ?? '','fromTime' => $params['from_time'] ?? ''],
             ],
         ];
 
