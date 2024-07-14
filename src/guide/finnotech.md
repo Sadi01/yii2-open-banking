@@ -3,7 +3,7 @@ How To Use Faraboom Services
 add to your code:
 
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_TRANSFER['trackId' => your track id])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_TRANSFER['track_id' => your track id])
 ```
 Available Faraboom Services:
 -------------
@@ -87,7 +87,7 @@ depositToShaba(تبدیل شماره حساب به شماره شبا)
 
 Usage Example:
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_PAYA_TRANSAFER,['trackId' => your track id])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_PAYA_TRANSAFER,['track_id' => your track id])
 ```
 
 payaTransfer
@@ -150,7 +150,7 @@ payaTransfer
 
 Usage Example:
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER,['trackId' => your track id])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_INTERNAL_TRANSFER,['track_id' => your track id])
 ```
 
 internalTransfer
@@ -228,7 +228,7 @@ internalTransfer
 
 Usage Example:
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SHABA_INQUIRY,['trackId' => your track id])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SHABA_INQUIRY,['track_id' => your track id])
 ```
 
 shabaInquiry:
@@ -262,7 +262,7 @@ shabaInquiry:
 
 Usage Example:
 ```php
-Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA,['trackId' => your track id,'deposit' =>your deposit,'bank_code' => your bank code])
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSIT_TO_SHABA,['track_id' => your track id,'deposit' =>your deposit,'bank_code' => your bank code])
 ```
 
 depositToShaba
@@ -299,7 +299,8 @@ depositToShaba
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CHECK_INQUIRY,[
-'trackId' => your track id,'sayadId' =>your sayad id
+    'track_id' => your track id,
+    'sayad_id' =>your sayad id
 ])
 ```
 
@@ -333,7 +334,7 @@ checkInquiry
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_BANKS_INFO,[
-'trackId' => your track id
+    'track_id' => your track id
 ])
 ```
 
@@ -365,7 +366,8 @@ banksInfo
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CARD_TO_DEPOSIT,[
-'trackId' => your track id,'card' => your card
+    'track_id' => your track id,
+    'card' => your card
 ])
 ```
 
@@ -404,7 +406,9 @@ cardToDeposit
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CARD_TO_SHABA,[
-'trackId' => your track id,'card' => your card,'version' => your version
+    'track_id' => your track id,
+    'card' => your card,
+    'version' => your version
 ])
 ```
 
@@ -448,9 +452,14 @@ cardToShaba
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_NID_VERIFICATION,[
-'trackId' => your track id,'birthDate' => your birthDate,'users' => your users,
-'fullName' => your fullName,'firstName' => your firstName,'lastName' => your lastName,'fatherName' => your fatherName,
-'gender' => your gender
+    'track_id' => your track id,
+    'birth_date' => your birthDate,
+    'users' => your users,
+    'full_name' => your fullName,
+    'first_name' => your firstName,
+    'last_name' => your lastName,
+    'father_name' => your fatherName,
+    'gender' => your gender
 ])
 ```
 
@@ -509,7 +518,9 @@ nidVerification
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID,[
-'trackId' => your track id,'mobile' => your mobile,'nationalCode' => your nationalCode
+    'track_id' => your track id,
+    'mobile' => your mobile,
+    'nationalCode' => your nationalCode
 ])
 ```
 
@@ -551,7 +562,8 @@ matchMobileNid
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_CARD_INFO,[
-'trackId' => your track id,'card' => your card
+    'track_id' => your track id,
+    'card' => your card
 ])
 ```
 
@@ -589,7 +601,8 @@ cardInfo
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSITS,[
-'trackId' => your track id,'card' => your card
+    'track_id' => your track id,
+    'card' => your card
 ])
 ```
 
@@ -627,7 +640,8 @@ deposits
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_BACK_CHEQUES,[
-'trackId' => your track id,'user' => your user
+    'track_id' => your track id,
+    'user' => your user
 ])
 ```
 
@@ -665,7 +679,8 @@ backCheques
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE,[
-'trackId' => your track id,'user' => your user
+    'track_id' => your track id,
+    'user' => your user
 ])
 ```
 
@@ -703,7 +718,8 @@ sayadAcceptCheque
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE,[
-'trackId' => your track id,'user' => your user
+    'track_id' => your track id,
+    'user' => your user
 ])
 ```
 
@@ -741,7 +757,8 @@ sayadCancelCheque
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
-'trackId' => your track id,'user' => your user
+    'trackId' => your track id,
+    'user' => your user
 ])
 ```
 
