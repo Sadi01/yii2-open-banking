@@ -1086,12 +1086,12 @@ depositStatement
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_VERIFY_OTP,[
-'track_id' => your track id,
-'deposit' => '',
-'to_date' => '',
-'from_date' => '',
-'to_time' => '',
-'from_time' => '',
+    'track_id' => your track id,
+    'deposit' => '',
+    'to_date' => '',
+    'from_date' => '',
+    'to_time' => '',
+    'from_time' => '',
 ])
 ```
 
