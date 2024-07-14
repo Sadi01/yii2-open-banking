@@ -114,6 +114,8 @@ class Finnotech extends Model
     const SCENARIO_VERIFY_OTP_CODE = 'verify-otp-code';
     const SCENARIO_VERIFY_AC_TOKEN = 'verify-ac-token';
     const SCENARIO_DEPOSIT_STATEMENT = 'deposit-statement';
+    const SCENARIO_DEPOSIT_BALANCE = 'deposit-balance';
+    const SCENARIO_FACILITY_INQUIRY = 'facility-inquiry';
 
     public function rules()
     {
@@ -138,6 +140,8 @@ class Finnotech extends Model
             [['users', 'birth_date', 'full_name', 'first_name', 'last_name', 'father_name'], 'required', 'on' => [self::SCENARIO_NID_VERIFICATION]],
             [['deposit', 'bank_code'], 'required', 'on' => [self::SCENARIO_DEPOSIT_TO_SHABA]],
             [['deposit'], 'required', 'on' => [self::SCENARIO_DEPOSIT_STATEMENT]],
+            [['deposit'], 'required', 'on' => [self::SCENARIO_DEPOSIT_BALANCE]],
+            [['user'], 'required', 'on' => [self::SCENARIO_FACILITY_INQUIRY]],
             [['account_owners','receivers','signers','sayad_id','series_no','serial_no','from_iban','amount','description','due_date','bank_code','branch_code','cheque_type','cheque_media','reason'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUE_CHEQUE]],
             [['merchant_name', 'merchant_iban', 'state','to_date','from_date','to_time','from_time'], 'string'],
             [['signers'], 'validateSigners', 'on' => self::SCENARIO_SAYAD_ISSUE_CHEQUE],
@@ -309,6 +313,8 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_VERIFY_AC_TOKEN] = ['client_id', 'track_id', 'scope', 'code', 'redirect_uri','bank'];
         $scenarios[self::SCENARIO_DEPOSIT_STATEMENT] = ['client_id', 'track_id', 'deposit', 'to_date', 'from_date','to_time','from_time'];
         $scenarios[self::SCENARIO_SAYAD_ISSUE_CHEQUE] = ['client_id', 'track_id','account_owners','receivers','signers','sayad_id','series_no','serial_no','from_iban','amount','description','due_date','to_iban','bank_code','branch_code','cheque_type','cheque_media','reason'];
+        $scenarios[self::SCENARIO_DEPOSIT_BALANCE] = ['client_id', 'track_id','deposit'];
+        $scenarios[self::SCENARIO_FACILITY_INQUIRY] = ['client_id', 'track_id','user'];
 
 
         return $scenarios;

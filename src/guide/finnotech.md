@@ -1047,7 +1047,7 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 <br />
 
 
-sendOtpAuthorizeCode
+verifyOtpCode
 -------------
 <table>
     <tr>
@@ -1096,7 +1096,100 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 ])
 ```
 
+<br>
 
+depositBalance
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_DEPOSIT_BALANCE</th>
+    <th>موجودی حساب</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*client_id</td>
+    <td>شناسه کلاینت</td>
+</tr>
+<tr>
+    <td>*deposit</td>
+    <td>شماره حساب معتبر</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_DEPOSIT_BALANCE,[
+'track_id' => your track id,
+'clientId' => your client id,
+'deposit' => your deposit,
+
+])
+```
+
+<br>
+
+
+facilityInquiry
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY</th>
+    <th>استعلام پیامکی تسهیلات</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*client_id</td>
+    <td>شناسه کلاینت</td>
+</tr>
+<tr>
+    <td>*user</td>
+    <td>کد ملی کاربر</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY,[
+'track_id' => your track id,
+'clientId' => your client id,
+'user' => your user,
+
+])
+```
 
 
 Advanced config

@@ -420,10 +420,19 @@ class Finnotech extends OpenBanking implements FinnotechInterface
      *     - array 'account_owners' => (اجباری) لیست صاحبان حساب
      *     - array 'receivers' => کد ملی کاربر
      *     - array 'signers' => نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲
-     *     - string 'sayadId' => شناسه صیاد چک
-     *     - string 'trackId' =>  کد پیگیری
-     *     - ?string 'idCode' =>  کد شناسایی
-     *     - ?string 'shahabId' => کد شهاب
+     *     - string 'sayad_id' => شناسه صیاد
+     *     - string 'series_no' =>  شماره سری
+     *     - string 'serial_no' =>  شماره سریال
+     *     - string 'from_iban' => شماره شبا دارنده چک
+     *     - string 'amount' => مبلغ
+     *     - string 'description' => شرح ثبت چک
+     *     - string 'due_date' => تاریخ سررسید چک
+     *     - ?string 'to_iban' => شماره شبا مقصد
+     *     - string 'bank_code' => کد بانک مبدا
+     *     - string 'branch_code' => کد شعبه مبدا
+     *     - string 'cheque_type' => نوع چک
+     *     - ?string 'cheque_media' => چک کاغذی1 چک دیجیتال2
+     *     - string 'reason' => اطلاعات بیشتر
      * @return mixed The result of the processing.
      * */
     public function sayadIssueCheque($data)
@@ -447,11 +456,11 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     /**
      * @param array $data The data array containing:
-     *     - string 'deposit' => 
-     *     - string 'to_date' => 
-     *     - string 'from_date' => 
-     *     - string 'to_time' => 
-     *     - string 'from_time' =>
+     *     - string 'deposit' => '',
+     *     - string 'to_date' => '',
+     *     - string 'from_date' => '',
+     *     - string 'to_time' => '',
+     *     - string 'from_time' =>'',
      * @return mixed The result of the processing.
      * */
     public function depositStatement($data)
@@ -460,6 +469,36 @@ class Finnotech extends OpenBanking implements FinnotechInterface
             return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'toDate' => $data['to_date'], 'fromDate' => $data['from_date'], 'toTime' => $data['to_time'], 'fromTime' => $data['from_time']]), null, $this->getHeaders());
         } else return $this->setErrors($this->model->errors);
     }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'deposit' => 'شماره حساب معتبر',
+     *     - string 'clientId' => 'شناسه کلاینت',
+     *     - string 'trackId' => 'کد پیگیری',
+     * @return mixed The result of the processing.
+     * */
+    public function depositBalance($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_DEPOSIT_BALANCE)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_DEPOSIT_BALANCE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'deposit' => $data['deposit']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+    /**
+     * @param array $data The data array containing:
+     *     - string 'user' => 'کد ملی کاربر',
+     *     - string 'clientId' => 'شناسه کلاینت',
+     *     - string 'trackId' => 'کد پیگیری',
+     * @return mixed The result of the processing.
+     * */
+    public function facilityInquiry($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_FACILITY_INQUIRY)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+        } else return $this->setErrors($this->model->errors);
+    }
+
+
 
 
     public function load($data, $scenario)
