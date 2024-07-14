@@ -90,7 +90,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
                 'otp' => $data['otp'],
                 'mobile' => $data['mobile'],
                 'nid' => $data['national_code'],
-                'trackId' => $data['trackId'],
+                'trackId' => $data['track_id'],
             ];
 
             $headers['Content-Type'] = Client::FORMAT_JSON;

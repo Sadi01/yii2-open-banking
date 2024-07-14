@@ -870,11 +870,11 @@ sendOtpAuthorizeCode
     <td>اسکوپ (دسترسی)هایی که کاربر باید مجوز دسترسی به آن‌ها را بدهد به صورت جدا شونده با کاما انگلیسی (comma separated) وارد شوند . تنها اسکوپ هایی که تایپ توکن ان ها از نوع sms هست در این جا می توانید استفاده کنید.</td>
 </tr>
 <tr>
-    <td>redirect_uri</td>
+    <td>*redirect_uri</td>
     <td>آدرس بازگشتی کلاینت، دامنه این آدرس باید با دامنه ثبت شده به ازای آدرس بازگشتی کلاینت در فینوتک برابر باشد</td>
 </tr>
 <tr>
-    <td>mobile</td>
+    <td>*mobile</td>
     <td>شماره موبایلی که کد احراز هویت به منظور تایید دسترسی برای سرویس مورد نظر به آن ارسال خواهد شد</td>
 </tr>
 <tr>
@@ -887,10 +887,60 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SEND_OTP,[
 'track_id' => your track id,
-'scopes' => ''
-'redirect_uri' => 'https://..........'
-'mobile' => '09123456789'
+'scopes' => '',
+'redirect_uri' => 'https://..........',
+'mobile' => '09123456789',
 'state' => ''
+])
+```
+
+
+sendOtpAuthorizeCode
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_SEND_OTP</th>
+    <th>درخواست احراز هویت پیامکی</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*otp</td>
+    <td>کد پیامکی</td>
+</tr>
+<tr>
+    <td>*mobile</td>
+    <td>شماره موبایل</td>
+</tr>
+<tr>
+    <td>*national_code</td>
+    <td>کدملی</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_VERIFY_OTP,[
+'track_id' => your track id,
+'otp' => '',
+'mobile' => 'https://..........',
+'national_code' => '09123456789',
 ])
 ```
 
