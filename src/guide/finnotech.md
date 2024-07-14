@@ -772,7 +772,7 @@ sayadCancelCheque
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
-    'trackId' => your track id,
+    'track_id' => your track id,
     'user' => your user
 ])
 ```
@@ -812,13 +812,12 @@ sayadIssuerInquiryCheque
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY,[
-'track_id' => your track id,
-'user' => your user,
-'id_code' => your id code,
-'shahab_id' => your shahab id,
-'id_type' => your id type,
-'sayad_id' => your sayad id
-
+    'track_id' => your track id,
+    'user' => your user,
+    'id_code' => your id code,
+    'shahab_id' => your shahab id,
+    'id_type' => your id type,
+    'sayad_id' => your sayad id
 ])
 ```
 <br />
@@ -873,7 +872,8 @@ sayadChequeInquiry
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
-'track_id' => your track id,'user' => your user
+    'track_id' => your track id,
+    'user' => your user
 ])
 ```
 <br />
@@ -920,10 +920,10 @@ backCheques
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_BACK_CHEQUES,[
-'track_id' => your track id,
-'user' => '',
-'code' => '',
-'redirect_uri' => '',
+    'track_id' => your track id,
+    'user' => '',
+    'code' => '',
+    'redirect_uri' => '',
 ])
 ```
 <br />
@@ -1033,9 +1033,6 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 'national_code' => '09123456789',
 ])
 ```
-
-
-
 
 
 
