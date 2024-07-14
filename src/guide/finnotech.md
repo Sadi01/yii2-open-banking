@@ -832,6 +832,13 @@ sayadChequeInquiry
 </tr>
 </table>
 
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
+'trackId' => your track id,'user' => your user
+])
+```
+
 
 sendOtpAuthorizeCode
 -------------
@@ -876,7 +883,16 @@ sendOtpAuthorizeCode
 </tr>
 </table>
 
-
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SEND_OTP,[
+'track_id' => your track id,
+'scopes' => ''
+'redirect_uri' => 'https://..........'
+'mobile' => '09123456789'
+'state' => ''
+])
+```
 
 
 
