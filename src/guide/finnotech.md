@@ -833,6 +833,48 @@ sayadChequeInquiry
 </table>
 
 
+sendOtpAuthorizeCode
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_SEND_OTP</th>
+    <th>درخواست احراز هویت پیامکی</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*scopes</td>
+    <td>اسکوپ (دسترسی)هایی که کاربر باید مجوز دسترسی به آن‌ها را بدهد به صورت جدا شونده با کاما انگلیسی (comma separated) وارد شوند . تنها اسکوپ هایی که تایپ توکن ان ها از نوع sms هست در این جا می توانید استفاده کنید.</td>
+</tr>
+<tr>
+    <td>redirect_uri</td>
+    <td>آدرس بازگشتی کلاینت، دامنه این آدرس باید با دامنه ثبت شده به ازای آدرس بازگشتی کلاینت در فینوتک برابر باشد</td>
+</tr>
+<tr>
+    <td>mobile</td>
+    <td>شماره موبایلی که کد احراز هویت به منظور تایید دسترسی برای سرویس مورد نظر به آن ارسال خواهد شد</td>
+</tr>
+<tr>
+    <td>state</td>
+    <td>(اختیاری) این کد برای ردگیری درخواست توسط کلاینت استفاده می‌شود و در صورت ارسال به همراه کد به آدرس بازگشتی کلاینت برگردانده می‌شود</td>
+</tr>
+</table>
 
 
 
