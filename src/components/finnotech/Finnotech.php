@@ -290,6 +290,24 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     /**
      * @param array $data The data array containing:
+     *     - string 'clientId' => شناسه کلاینت
+     *     - string 'trackId' =>  کد پیگیری
+     *     - string 'birthDate' =>  تاریخ تولد شمسی صاحب حساب
+     *     - string 'nationalCode' =>  کد ملی صاحب حساب
+     *     - string 'iban' =>  شماره شب
+     * @return mixed The result of the processing.
+     * */
+
+    public function ibanOwnerVerification($data)
+    {
+        if ($this->load($data, FinnotechBaseModel::SCENARIO_IBAN_OWNER_VERIFICATION)) {
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_IBAN_OWNER_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, ['clientId' => $this->client->app_key, 'birthDate' => $data['birth_date'], 'nid' => $data['national_code'], 'trackId' => $data['track_id'],'iban' => $data['iban']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_IBAN_OWNER_VERIFICATION));
+        } else return $this->setErrors($this->model->errors);
+
+    }
+
+    /**
+     * @param array $data The data array containing:
      *     - string 'card' => شماره کارت ۱۶ رقمی
      * @return mixed The result of the processing.
      * */
@@ -473,8 +491,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     /**
      * @param array $data The data array containing:
      *     - string 'deposit' => 'شماره حساب معتبر',
-     *     - string 'clientId' => 'شناسه کلاینت',
-     *     - string 'trackId' => 'کد پیگیری',
+     *     - string 'track_id' => 'کد پیگیری',
      * @return mixed The result of the processing.
      * */
     public function depositBalance($data)
@@ -487,8 +504,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     /**
      * @param array $data The data array containing:
      *     - string 'user' => 'کد ملی کاربر',
-     *     - string 'clientId' => 'شناسه کلاینت',
-     *     - string 'trackId' => 'کد پیگیری',
+     *     - string 'track_id' => 'کد پیگیری',
      * @return mixed The result of the processing.
      * */
     public function facilityInquiry($data)

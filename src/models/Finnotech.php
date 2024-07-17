@@ -89,6 +89,7 @@ class Finnotech extends Model
     const SCOPE_PAYA_TRANSFER = 'oak:paya-transfer:execute'; //انتقال وجه پایا
     const SCOPE_ISSUE_CHEQUE = 'credit:ac-sayad-issue-cheque:post'; //ثبت چک
     const SCOPE_DEPOSIT_STATEMENT = 'oak:statement:get'; //دریافت گردش حساب
+    const SCOPE_IBAN_OWNER_VERIFICATION = 'kyc:iban-owner-verification:get'; //تطبیق شماره شبا و کد ملی
 
 
     const SCENARIO_TRANSFER = 'transfer';
@@ -116,6 +117,7 @@ class Finnotech extends Model
     const SCENARIO_DEPOSIT_STATEMENT = 'deposit-statement';
     const SCENARIO_DEPOSIT_BALANCE = 'deposit-balance';
     const SCENARIO_FACILITY_INQUIRY = 'facility-inquiry';
+    const SCENARIO_IBAN_OWNER_VERIFICATION = 'iban-owner-verification';
 
     public function rules()
     {
@@ -142,6 +144,7 @@ class Finnotech extends Model
             [['deposit'], 'required', 'on' => [self::SCENARIO_DEPOSIT_STATEMENT]],
             [['deposit'], 'required', 'on' => [self::SCENARIO_DEPOSIT_BALANCE]],
             [['user'], 'required', 'on' => [self::SCENARIO_FACILITY_INQUIRY]],
+            [['birth_date','national_code','iban'], 'required', 'on' => [self::SCENARIO_IBAN_OWNER_VERIFICATION]],
             [['account_owners','receivers','signers','sayad_id','series_no','serial_no','from_iban','amount','description','due_date','bank_code','branch_code','cheque_type','cheque_media','reason'], 'required', 'on' => [self::SCENARIO_SAYAD_ISSUE_CHEQUE]],
             [['merchant_name', 'merchant_iban', 'state','to_date','from_date','to_time','from_time'], 'string'],
             [['signers'], 'validateSigners', 'on' => self::SCENARIO_SAYAD_ISSUE_CHEQUE],
@@ -315,6 +318,7 @@ class Finnotech extends Model
         $scenarios[self::SCENARIO_SAYAD_ISSUE_CHEQUE] = ['client_id', 'track_id','account_owners','receivers','signers','sayad_id','series_no','serial_no','from_iban','amount','description','due_date','to_iban','bank_code','branch_code','cheque_type','cheque_media','reason'];
         $scenarios[self::SCENARIO_DEPOSIT_BALANCE] = ['client_id', 'track_id','deposit'];
         $scenarios[self::SCENARIO_FACILITY_INQUIRY] = ['client_id', 'track_id','user'];
+        $scenarios[self::SCENARIO_IBAN_OWNER_VERIFICATION] = ['client_id', 'track_id','birth_date','nid','iban'];
 
 
         return $scenarios;
