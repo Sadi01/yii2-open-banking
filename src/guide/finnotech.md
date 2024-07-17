@@ -653,7 +653,9 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_BACK_CHEQUES,[
     'track_id' => your track id,
-    'user' => your user
+    'user' => your user,
+    'code' => '',
+    'redirect_uri' => '',
 ])
 ```
 <br />
