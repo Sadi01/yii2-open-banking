@@ -69,6 +69,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
     const FINNOTECH_DEPOSIT_STATEMENT = 48;
     const FINNOTECH_DEPOSIT_BALANCE = 49;
     const FINNOTECH_FACILITY_INQUIRY = 50;
+    const FINNOTECH_IBAN_OWNER_VERIFICATION = 51;
 
 
     public function rules()
@@ -154,6 +155,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSIT_STATEMENT => Yii::t('openBanking', 'Dposit Statement'),
                 self::FINNOTECH_DEPOSIT_BALANCE => Yii::t('openBanking', 'Dposit Balance'),
                 self::FINNOTECH_FACILITY_INQUIRY => Yii::t('openBanking', 'Facility Inquiry'),
+                self::FINNOTECH_IBAN_OWNER_VERIFICATION => Yii::t('openBanking', 'Iban Owner Verification'),
             ],
             'ServiceTypeMap' => [
                 self::FARABOOM_GET_TOKEN => 'token',
@@ -205,6 +207,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSIT_STATEMENT => 'depositStatement',
                 self::FINNOTECH_DEPOSIT_BALANCE => 'depositBalance',
                 self::FINNOTECH_FACILITY_INQUIRY => 'facilityInquiry',
+                self::FINNOTECH_IBAN_OWNER_VERIFICATION => 'ibanOwnerVerification',
             ],
             'ServiceUrl' => [
                 self::FARABOOM_GET_TOKEN => self::FARABOOM_BASE_URL,
@@ -258,6 +261,7 @@ class BaseOpenBanking extends \yii\db\ActiveRecord
                 self::FINNOTECH_DEPOSIT_STATEMENT => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/deposits/' . ($params['deposit'] ?? '') . '/statement', 'trackId' => $params['track_id'] ?? '', 'toDate' => $params['to_date'] ?? '','fromDate' => $params['from_date'] ?? '','toTime' => $params['to_time'] ?? '','fromTime' => $params['from_time'] ?? ''],
                 self::FINNOTECH_DEPOSIT_BALANCE => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/deposits/' . ($params['deposit'] ?? '') . '/balance', 'trackId' => $params['track_id'] ?? ''],
                 self::FINNOTECH_FACILITY_INQUIRY => [self::FINNOTECH_BASE_URL . '/oak/v2/clients/' . ($params['clientId'] ?? '') . '/users/' . ($params['user'] ?? '') . '/sms/facilityInquiry', 'trackId' => $params['track_id'] ?? ''],
+                self::FINNOTECH_IBAN_OWNER_VERIFICATION => [self::FINNOTECH_BASE_URL . '/kyc/v2/clients/' . ($params['clientId'] ?? '') . '/ibanOwnerVerification', 'trackId' => $params['track_id'] ?? '', 'birthDate' => $params['birth_date'] ?? '', 'nationalCode' => $params['national_code'] ?? '','iban' => $params['iban'] ?? ''],
             ],
         ];
 

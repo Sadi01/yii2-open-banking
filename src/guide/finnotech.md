@@ -1191,6 +1191,63 @@ Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking
 ])
 ```
 
+<br>
+
+
+ibanOwnerVerification
+-------------
+<table>
+    <tr>
+        <th>Arguments</th>
+        <th>Values</th>
+        <th>Description</th>
+    </tr>
+  <tr>
+    <th>platform</th>
+    <th>BaseOpenBanking::PLATFORM_FINNOTECH</th>
+    <th>پلتفرم</th>
+  </tr>
+  <tr>
+    <th>service</th>
+    <th>BaseOpenBanking::FINNOTECH_IBAN_OWNER_VERIFICATION</th>
+    <th>تطبیق شماره شبا و کدملی</th>
+  </tr>
+  <tr>
+    <td rowspan="8">data</td>
+  </tr>
+ <tr>
+    <td>*track_id</td>
+    <td> کد پیگیری</td>
+</tr>
+<tr>
+    <td>*client_id</td>
+    <td>شناسه کلاینت</td>
+</tr>
+<tr>
+    <td>*birthDate</td>
+    <td> تاریخ تولد شمسی صاحب حساب</td>
+</tr>
+<tr>
+    <td>*national_code</td>
+    <td> کد ملی صاحب حساب</td>
+</tr>
+<tr>
+    <td>*iban</td>
+    <td>شماره شبا</td>
+</tr>
+</table>
+
+Usage Example:
+```php
+Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_IBAN_OWNER_VERIFICATION,[
+    'track_id' => your track id,
+    'birth_date' => your birth_date,
+    'national_code' => your national_code,
+    'iban' => your iban,
+
+])
+```
+
 
 Advanced config
 -------------
