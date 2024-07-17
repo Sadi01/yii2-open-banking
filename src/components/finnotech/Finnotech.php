@@ -399,7 +399,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function sayadAcceptCheque($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_ACCEPT_CHEQUE)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_ACCEPT_CHEQUES));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -411,7 +411,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function sayadCancelCheque($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_CANCEL_CHEQUE)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders());
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_CANCEL_CHEQUES));
         } else return $this->setErrors($this->model->errors);
     }
 
