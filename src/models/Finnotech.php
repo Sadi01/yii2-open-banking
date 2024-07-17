@@ -84,11 +84,14 @@ class Finnotech extends Model
     const SCOPE_BACK_CHEQUES = 'credit:sms-back-cheques:get'; //استعلام پیامکی چک برگشتی
     const SCOPE_ACCEPT_CHEQUES = 'credit:sms-sayad-accept-cheque:post'; //تایید پیامکی چک صیاد
     const SCOPE_CANCEL_CHEQUES = 'credit:sms-sayad-cancel-cheque:post'; //لغو پیامکی چک صیاد
-    const SCOPE_CHEQUE_INQUIRY_BY_RECEIVER = 'credit:sms-sayad-issuer-inquiry-cheque:post'; //استعلام پیامکی چک صیاد توسط صادرکننده
+    const SCOPE_CHEQUE_INQUIRY_BY_RECEIVER = 'credit:sms-sayad-issuer-inquiry-cheque:post'; //استعلام پیامکی چک صیاد توسط گیرنده
+    const SCOPE_CHEQUE_INQUIRY_BY_ISSUER = 'credit:sms-sayad-issuer-inquiry-cheque:post'; //استعلام پیامکی چک صیاد توسط صادرکننده
     const SCOPE_CHEQUE_INQUIRY_BY_SMS = 'credit:sms-sayady-cheque-inquiry:get'; //استعلام پیامکی چک صیاد
     const SCOPE_PAYA_TRANSFER = 'oak:paya-transfer:execute'; //انتقال وجه پایا
     const SCOPE_ISSUE_CHEQUE = 'credit:ac-sayad-issue-cheque:post'; //ثبت چک
     const SCOPE_DEPOSIT_STATEMENT = 'oak:statement:get'; //دریافت گردش حساب
+    const SCOPE_DEPOSIT_BALANCE = 'oak:balance:get'; //استعلام مانده حساب
+    const SCOPE_SMS_FACILITY_INQUIRY = 'credit:sms-facility-inquiry:get'; //استعلام تسهیلات
     const SCOPE_IBAN_OWNER_VERIFICATION = 'kyc:iban-owner-verification:get'; //تطبیق شماره شبا و کد ملی
 
 
