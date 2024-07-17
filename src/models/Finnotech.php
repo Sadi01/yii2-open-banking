@@ -68,7 +68,7 @@ class Finnotech extends Model
     const AYANDEH_BANK_CODE = '062';
     const SCOPE_TRANSFER_TO = 'oak:transfer-to:execute';
     const SCOPE_IBAN_INQUIRY = 'oak:iban-inquiry:get'; //استعلام شماره شبا
-    const SCOPE_DEPOSITS = 'oak:deposits:get'; //استعلام شماره شبا
+    const SCOPE_DEPOSITS = 'oak:deposits:get'; //استعلام حساب ها
     const SCOPE_SAYAD_CHEQUE_INQUIRY = 'credit:sms-sayady-cheque-inquiry:get'; //استعلام چک صیادی
     const SCOPE_SMS_NID_VERIFICATION = 'facility:sms-nid-verification:get'; //احراز هویت
     const SCOPE_SAYAD_ACCEPT_CHEQUE = 'credit:sms-sayad-accept-cheque:post'; //تایید چک صیاد توسط گیرنده
@@ -76,11 +76,11 @@ class Finnotech extends Model
     const SCOPE_SMS_DEBTS = 'credit:sms-facility-inquiry:get'; //استعلام پیامکی تسهیلات
     const SCOPE_FACILITY_SHAHKAR = 'facility:shahkar:get'; //استعلام پیامکی تسهیلات
     const SCOPE_FACILITY_BANK_INFO = 'facility:cc-bank-info:get'; //سرویس پایه اطلاعات بانکی
-    const SCOPE_FACILITY_DEPOSIT_TO_SHABA = 'facility:cc-deposit-iban:get'; //سرویس پایه اطلاعات بانکی
-    const SCOPE_CARD_INFO = 'card:information:get'; //سرویس پایه اطلاعات بانکی
-    const SCOPE_NID_VERIFICATION = 'facility:cc-nid-verification:get'; //سرویس پایه اطلاعات بانکی
-    const SCOPE_CARD_TO_SHABA = 'facility:card-to-iban:get'; //سرویس پایه اطلاعات بانکی
-    const SCOPE_CARD_TO_DEPOSIT = 'facility:card-to-deposit:get'; //سرویس پایه اطلاعات بانکی
+    const SCOPE_FACILITY_DEPOSIT_TO_SHABA = 'facility:cc-deposit-iban:get'; //تبدیل حساب به شبا
+    const SCOPE_CARD_INFO = 'card:information:get'; // استعلام کارت بانکی
+    const SCOPE_NID_VERIFICATION = 'facility:cc-nid-verification:get';// استعلام کد ملی
+    const SCOPE_CARD_TO_SHABA = 'facility:card-to-iban:get'; //تبدیل شماره کارت به شبا
+    const SCOPE_CARD_TO_DEPOSIT = 'facility:card-to-deposit:get'; //تبدیل شماره کارت به حساب
     const SCOPE_BACK_CHEQUES = 'credit:sms-back-cheques:get'; //استعلام پیامکی چک برگشتی
     const SCOPE_ACCEPT_CHEQUES = 'credit:sms-sayad-accept-cheque:post'; //تایید پیامکی چک صیاد
     const SCOPE_CANCEL_CHEQUES = 'credit:sms-sayad-cancel-cheque:post'; //لغو پیامکی چک صیاد
