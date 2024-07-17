@@ -1070,7 +1070,7 @@ verifyOtpCode
   </tr>
  <tr>
     <td>*track_id</td>
-    <td> کد پیگیری</td>
+    <td>trackId دریافتی در مرحله ارسال کد پیامکی</td>
 </tr>
 <tr>
     <td>*otp</td>
