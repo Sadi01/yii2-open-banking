@@ -850,7 +850,7 @@ sayadChequeInquiry
     <td rowspan="8">data</td>
   </tr>
  <tr>
-    <td>*trackId</td>
+    <td>*track_id</td>
     <td> کد پیگیری</td>
 </tr>
 <tr>
@@ -879,7 +879,10 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
     'track_id' => your track id,
-    'user' => your user
+    'user' => your user,
+    'id_code' => کدشناسایی,
+    'shahab_id' => کدشهاب,
+    'sayad_id' => شناسه صیاد,
 ])
 ```
 <br />
