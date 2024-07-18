@@ -1181,8 +1181,12 @@ facilityInquiry
     <td> کد پیگیری</td>
 </tr>
 <tr>
-    <td>*client_id</td>
-    <td>شناسه کلاینت</td>
+    <td>*code</td>
+    <td>کد دریافتی در مرحله verify</td>
+</tr>
+<tr>
+    <td>*redirect_uri</td>
+    <td>آدرس برگشتی</td>
 </tr>
 <tr>
     <td>*user</td>
