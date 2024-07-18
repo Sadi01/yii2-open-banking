@@ -517,7 +517,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function facilityInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_FACILITY_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_SMS_FACILITY_INQUIRY,true, $data['user'], $data['code'], $data['redirect_uri']));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_SMS_FACILITY_INQUIRY,true, $data['user'], $data['code'], $data['redirect_uri']));
         } else return $this->setErrors($this->model->errors);
     }
 
