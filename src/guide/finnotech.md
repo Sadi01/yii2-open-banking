@@ -1198,8 +1198,9 @@ Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY,[
 'track_id' => your track id,
-'clientId' => your client id,
 'user' => your user,
+'code' => کد مرحله verify,
+'redirect_uri' => آدرس برگشتی,
 
 ])
 ```
