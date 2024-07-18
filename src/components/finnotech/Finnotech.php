@@ -394,6 +394,8 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     /**
      * @param array $data The data array containing:
      *     - string 'user' => کد ملی
+     *     - string 'code' => ''
+     *     - string 'redirect_uri' => ''
      * @return mixed The result of the processing.
      * */
     public function sayadAcceptCheque($data)
@@ -406,12 +408,14 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     /**
      * @param array $data The data array containing:
      *     - string 'user' => کد ملی
+     *     - string 'code' => ''
+     *     - string 'redirect_uri' => ''
      * @return mixed The result of the processing.
      * */
     public function sayadCancelCheque($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_CANCEL_CHEQUE)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_CANCEL_CHEQUES));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_CANCEL_CHEQUES,true, $data['user'], $data['code'], $data['redirect_uri']));
         } else return $this->setErrors($this->model->errors);
     }
 
