@@ -301,7 +301,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function ibanOwnerVerification($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_IBAN_OWNER_VERIFICATION)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_IBAN_OWNER_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, ['clientId' => $this->client->app_key, 'birthDate' => $data['birth_date'], 'nid' => $data['national_code'], 'trackId' => $data['track_id'],'iban' => $data['iban']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_IBAN_OWNER_VERIFICATION));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_IBAN_OWNER_VERIFICATION, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_MATCH_MOBILE_NID, ['clientId' => $this->client->app_key, 'birthDate' => $data['birth_date'], 'nid' => $data['national_code'], 'trackId' => $data['track_id'], 'iban' => $data['iban']]), $data, $this->getHeaders(FinnotechBaseModel::SCOPE_IBAN_OWNER_VERIFICATION));
         } else return $this->setErrors($this->model->errors);
 
     }
@@ -399,7 +399,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function sayadAcceptCheque($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_ACCEPT_CHEQUE)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_ACCEPT_CHEQUES));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_ACCEPT_CHEQUE, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_ACCEPT_CHEQUES, true, $data['user'], $data['code'], $data['redirect_uri']));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -429,7 +429,7 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function sayadChequeInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_SAYAD_CHEQUE_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user'], 'idCode' => $data['id_code'], 'shahabId' => $data['shahab_id'], 'idType' => $data['id_type'], 'sayadId' => $data['sayad_id']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_CHEQUE_INQUIRY_BY_SMS,true));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_SAYAD_CHEQUE_INQUIRY, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user'], 'idCode' => $data['id_code'], 'shahabId' => $data['shahab_id'], 'idType' => $data['id_type'], 'sayadId' => $data['sayad_id']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_CHEQUE_INQUIRY_BY_SMS, true));
         } else return $this->setErrors($this->model->errors);
     }
 
@@ -510,11 +510,9 @@ class Finnotech extends OpenBanking implements FinnotechInterface
     public function facilityInquiry($data)
     {
         if ($this->load($data, FinnotechBaseModel::SCENARIO_FACILITY_INQUIRY)) {
-            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_SMS_FACILITY_INQUIRY, $data['user'], $data['code'], $data['redirect_uri']));
+            return Yii::$app->apiClient->get(ObOauthClients::PLATFORM_FINNOTECH, BaseOpenBanking::FINNOTECH_FACILITY_INQUIRY, BaseOpenBanking::getUrl(BaseOpenBanking::FINNOTECH_DEPOSIT_STATEMENT, ['clientId' => $this->client->app_key, 'trackId' => $data['track_id'], 'user' => $data['user']]), null, $this->getHeaders(FinnotechBaseModel::SCOPE_SMS_FACILITY_INQUIRY,true, $data['user'], $data['code'], $data['redirect_uri']));
         } else return $this->setErrors($this->model->errors);
     }
-
-
 
 
     public function load($data, $scenario)
