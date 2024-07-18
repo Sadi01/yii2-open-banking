@@ -783,6 +783,14 @@ sayadCancelCheque
     <td>*user</td>
     <td>کد ملی ۱۰ رقمی</td>
 </tr>
+<tr>
+    <td>*code</td>
+    <td>کد دریافتی در مرحله verify</td>
+</tr>
+<tr>
+    <td>*redirect_uri</td>
+    <td>آدرس برگشتی</td>
+</tr>
 </table>
 
 Usage Example:
@@ -790,6 +798,8 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
     'track_id' => your track id,
     'user' => your user
+    'code' => ''
+    'redirect_uri' => ''
 ])
 ```
 <br />
