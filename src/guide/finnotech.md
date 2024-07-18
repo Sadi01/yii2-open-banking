@@ -888,6 +888,14 @@ sayadChequeInquiry
     <td>کد ملی ۱۰ رقمی</td>
 </tr>
 <tr>
+    <td>*code</td>
+    <td>کد دریافتی در مرحله verify</td>
+</tr>
+<tr>
+    <td>*redirect_uri</td>
+    <td>آدرس برگشتی</td>
+</tr>
+<tr>
     <td>id_code</td>
     <td>کد شناسایی</td>
 </tr>
@@ -910,6 +918,8 @@ Usage Example:
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_ISSUER_INQUIRY_CHEQUE,[
     'track_id' => your track id,
     'user' => your user,
+    'code' => ''
+    'redirect_uri' => ''
     'id_code' => کدشناسایی,
     'shahab_id' => کدشهاب,
     'sayad_id' => شناسه صیاد,
