@@ -733,13 +733,23 @@ sayadAcceptCheque
     <td>*user</td>
     <td>کد ملی ۱۰ رقمی</td>
 </tr>
+<tr>
+    <td>*code</td>
+    <td>کد دریافتی در مرحله verify</td>
+</tr>
+<tr>
+    <td>*redirect_uri</td>
+    <td>آدرس برگشتی</td>
+</tr>
 </table>
 
 Usage Example:
 ```php
 Yii::$app->openBanking->call(BaseOpenBanking::PLATFORM_FINNOTECH,BaseOpenBanking::FINNOTECH_SAYAD_CANCEL_CHEQUE,[
     'track_id' => your track id,
-    'user' => your user
+    'user' => your user,
+    'code' => 'کد دریافتی در مرحله وریفای',
+    'redirect_uri' => ''
 ])
 ```
 <br />
