@@ -63,6 +63,9 @@ class Finnotech extends Model
     public $from_date;
     public $to_time;
     public $from_time;
+    public $id_type;
+    public $id_code;
+    public $shahab_id;
 
 
     const AYANDEH_BANK_CODE = '062';

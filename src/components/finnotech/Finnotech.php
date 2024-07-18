@@ -421,15 +421,14 @@ class Finnotech extends OpenBanking implements FinnotechInterface
 
     /**
      * @param array $data The data array containing:
-     *     - string 'clientId' => شناسه کلاینت
      *     - string 'user' => کد ملی کاربر
      *     - string 'code' => ''
      *     - string 'redirect_uri' => ''
-     *     - string 'idType' => نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲
-     *     - string 'sayadId' => شناسه صیاد چک
-     *     - string 'trackId' =>  کد پیگیری
-     *     - ?string 'idCode' =>  کد شناسایی
-     *     - ?string 'shahabId' => کد شهاب
+     *     - string 'id_type' => نوع کد شناسایی با ملاحظات: مشتری حقیقی ۱,مشتری حقوقی ۲
+     *     - string 'sayad_id' => شناسه صیاد چک
+     *     - string 'track_id' =>  کد پیگیری
+     *     - ?string 'id_code' =>  کد شناسایی
+     *     - ?string 'shahab_id' => کد شهاب
      * @return mixed The result of the processing.
      * */
     public function sayadChequeInquiry($data)

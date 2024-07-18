@@ -1173,10 +1173,6 @@ depositBalance
     <td> کد پیگیری</td>
 </tr>
 <tr>
-    <td>*client_id</td>
-    <td>شناسه کلاینت</td>
-</tr>
-<tr>
     <td>*deposit</td>
     <td>شماره حساب معتبر</td>
 </tr>
@@ -1272,10 +1268,6 @@ ibanOwnerVerification
  <tr>
     <td>*track_id</td>
     <td> کد پیگیری</td>
-</tr>
-<tr>
-    <td>*client_id</td>
-    <td>شناسه کلاینت</td>
 </tr>
 <tr>
     <td>*birthDate</td>
